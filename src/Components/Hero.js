@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import phoneImg from '../images/phone.svg'
 import { AppContext } from '../context'
 const Hero = () => {
   const {closeSubMenu} = useContext(AppContext);
