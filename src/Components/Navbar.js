@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import logo from '../images/logo.svg'
 import { FaBars, FaTrain } from 'react-icons/fa'
 import { AppContext } from '../context'
 const Navbar = () => {
