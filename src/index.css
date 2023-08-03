@@ -448,3 +448,25 @@ div#main {
   flex-direction: column;
   width: 100vw;
 }
+.review {
+  background: #fff;
+  padding: 1.5rem 2rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s linear;
+  text-align: center;
+}
+.review:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.route, .second-route{
+  display: flex;
+  align-items: center;
+}
+.origin, .dest, .date, .passengers{
+  display: flex;
+  margin: 1.5rem;
+}
+.welcome-text, .sub-text{
+  margin: 1rem;
+}
