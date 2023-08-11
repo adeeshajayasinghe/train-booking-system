@@ -1,8 +1,12 @@
 import React, { useContext } from 'react'
 import { FaBars, FaTrain } from 'react-icons/fa'
 import { AppContext } from '../context'
+import {Link, useNavigate} from 'react-router-dom'
+import {useCookies} from 'react-cookie'
 const Navbar = () => {
   const {openSidebar, openSubMenu, closeSubMenu} = useContext(AppContext);
+  const [cookies, setCookies] = useCookies(['access_token']);
+  const navigate = useNavigate();
   function dispalySubMenu(e){
     const page = e.target.textContent;
     const tempBtn = e.target.getBoundingClientRect();
@@ -14,6 +18,11 @@ const Navbar = () => {
     if(!e.target.classList.contains('link-btn')){
       closeSubMenu();
     }
+  }
+  function logout(){
+    setCookies("access_token", "");
+    window.localStorage.removeItem("userID");
+    navigate('/register');
   }
   return (
     <nav className='nav' onMouseOver={handleSubMenu}>
@@ -30,7 +39,12 @@ const Navbar = () => {
           <button className='btn toggle-btn' onClick={openSidebar}><FaBars/></button>
         </div>
         <ul className='nav-links'>
-          <li>
+          <Link to={'/'} className='link-btn' onMouseOver={dispalySubMenu}>Home</Link>
+          <Link to={'/gallery'} className='link-btn' onMouseOver={dispalySubMenu}>Gallery</Link>
+          <Link to={'/services'} className='link-btn' onMouseOver={dispalySubMenu}>Services</Link>
+          <Link to={'/journey'} className='link-btn' onMouseOver={dispalySubMenu}>Journey</Link>
+          <Link to={'/about'} className='link-btn' onMouseOver={dispalySubMenu}>About</Link>
+          {/* <li>
             <a className='link-btn' onMouseOver={dispalySubMenu} href='#home'>Home</a>
           </li>
           <li>
@@ -44,12 +58,30 @@ const Navbar = () => {
           </li>
           <li>
             <a className='link-btn' onMouseOver={dispalySubMenu} href='#about'>About</a>
-          </li>
+          </li> */}
         </ul>
-        <div className='register'>
-          <button className='btn signin-btn'>Sign in</button>
-          <button className='btn signin-btn'>Sign up</button>
-        </div>
+        {!cookies.access_token?(
+           <div className='register'>
+          <Link to="/login">
+            <button className='btn signin-btn'>
+              Sign in
+            </button>
+          </Link>
+          <Link to="/register">
+            <button className='btn signin-btn'>
+              Sign up
+            </button>
+          </Link>
+          </div>
+        ):(<div className='register'>
+            <button className='btn signin-btn' onClick={logout}>
+              Log out
+            </button>
+        </div>)}
+       
+          {/* <button className='btn signin-btn'>Sign in</button>
+          <button className='btn signin-btn'>Sign up</button> */}
+        
       </div>
     </nav>
   );

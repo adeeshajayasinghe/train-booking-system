@@ -19,8 +19,6 @@ const Searchbox = () => {
         slotProps={{
           button: {
             id: 'select-field-demo-button',
-            // TODO: Material UI set aria-labelledby correctly & automatically
-            // but Base UI and Joy UI don't yet.
             'aria-labelledby': 'select-field-demo-label select-field-demo-button',
           },
         }}

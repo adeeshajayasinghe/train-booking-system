@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState} from 'react'
 import sublinks from './data'
 
 const AppContext = React.createContext()
@@ -8,6 +8,27 @@ const AppProvider = ({children}) => {
     const [isSubMenuOpen, setISSubMenuOpen] = useState(false);
     const [location, setLocation] = useState({});
     const [page, setPage] = useState({page:'', links:[]});
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [mobile, setMobile] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    function handleFirstName(first){
+        setFirstName(first);
+    }
+    function handleLastName(last){
+        setLastName(last);
+    }
+    function handleMobile(mob){
+        setMobile(mob);
+    }
+    function handleEmail(mail){
+        setEmail(mail);
+    }
+    function handlePassword(pass){
+        setPassword(pass);
+    }
     function openSidebar(){
         setSidebarOpen(true);
     }
@@ -25,7 +46,7 @@ const AppProvider = ({children}) => {
     }
     return(
         <AppContext.Provider value={{
-            isSidebarOpen, isSubMenuOpen, openSidebar, openSubMenu, closeSidebar, closeSubMenu, location, page
+            isSidebarOpen, isSubMenuOpen, openSidebar, openSubMenu, closeSidebar, closeSubMenu, location, page, firstName, lastName, mobile, email, password, handleFirstName, handleLastName, handleMobile, handleEmail, handlePassword
         }}>{children}</AppContext.Provider>
     );
 }

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { AppContext } from '../context'
 import Searchbox from './Searchbox';
+import travelImg from '../images/Home-img.png';
 const Hero = () => {
   const {closeSubMenu} = useContext(AppContext);
   return (
@@ -23,9 +24,9 @@ const Hero = () => {
             <button className='btn'>Book Now</button>
           </a>
         </article>
-        {/* <article className='hero-images'>
-          <img src={phoneImg} className='phone-img' alt='phone' />
-        </article> */}
+        <article className='hero-images'>
+          <img src={travelImg} className='phone-img' alt='phone' />
+        </article>
       </div>
       <Searchbox/>
     </section>
