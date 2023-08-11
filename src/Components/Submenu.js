@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from 'react'
+import React, { useRef, useEffect, useContext } from 'react'
 import { AppContext } from '../context'
 const Submenu = () => {
   const {isSubMenuOpen, location, page:{page, links}} = useContext(AppContext);
