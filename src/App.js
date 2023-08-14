@@ -5,6 +5,8 @@ import Services from './Pages/Services';
 import Register from './Pages/Register';
 import Journey from './Pages/Journey';
 import About from './Pages/About';
+import Search from './Pages/Search';
+import Dashboard from './Pages/Dashboard';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
@@ -21,6 +23,8 @@ function App() {
         <Route path='/about' element={<About/>}></Route>
         <Route path='/register' element={<Register/>}></Route>
         <Route path='/login' element={<Login/>}></Route>
+        <Route path='/search' element={<Search/>}></Route>
+        <Route path='/dashboard' element={<Dashboard/>}></Route>
       </Routes>
     </Router>
   )
