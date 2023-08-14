@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { AppContext } from '../context'
-import Searchbox from './Searchbox';
 import travelImg from '../images/Home-img.png';
+import { Link } from 'react-router-dom';
 const Hero = () => {
   const {closeSubMenu} = useContext(AppContext);
   return (
@@ -20,15 +20,19 @@ const Hero = () => {
             Adventure awaits! Hop aboard and let the journey begin.
           </p>
           {/* <button className='btn'>Book Now</button> */}
-          <a href='#searchbox'>
+          {/* <a href='#searchbox'>
             <button className='btn'>Book Now</button>
-          </a>
+          </a> */}
+          <Link to="/search">
+            <button className='btn'>
+              Book Now
+            </button>
+          </Link>
         </article>
         <article className='hero-images'>
-          <img src={travelImg} className='phone-img' alt='phone' />
+          <img src={travelImg} className='phone-img' alt='travel-man' />
         </article>
       </div>
-      <Searchbox/>
     </section>
   );
 }
