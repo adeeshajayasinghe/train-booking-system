@@ -541,3 +541,11 @@ div#main {
   justify-content: center;
   align-items: center;
 }
+.error-msg {
+  color: #e63946;
+  padding-left: 1.3rem;
+}
+.success-msg {
+  color: #06d6a0;
+  padding-left: 1.3rem;
+}

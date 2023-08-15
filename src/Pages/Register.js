@@ -7,6 +7,7 @@ import Registerimg from '../images/register-img.png'
 import { useState } from 'react';
 import axios from 'axios';
 import { AppContext } from '../context'
+import { useNavigate } from 'react-router-dom';
 const Register = () => {
     // const [firstName, setFirstName] = useState('');
     // const [lastName, setLastName] = useState('');
@@ -15,6 +16,8 @@ const Register = () => {
     // const [password, setPassword] = useState('');
 
     const {firstName, lastName, mobile, email, password, handleFirstName, handleLastName, handleMobile, handleEmail, handlePassword} = useContext(AppContext);
+    const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -26,9 +29,12 @@ const Register = () => {
                 email,
                 password
             });
-            alert('User registered successfully');
-        }catch(err) {
-            console.log(err);
+            navigate('/login');
+        }catch(error) {
+            // console.log(err);
+            if (error.response && error.response.data && error.response.data.error) {
+                setErrorMessage(error.response.data.error);
+              }
         }
     };
 
@@ -86,6 +92,7 @@ const Register = () => {
                     </FormControl>
                 </div>
             </div>
+            {errorMessage && <p className='error-msg'>{errorMessage}</p>}
             <div className='submit-btn'>
                 <Button type="submit">Submit</Button>
             </div>

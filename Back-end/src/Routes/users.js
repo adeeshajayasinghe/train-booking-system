@@ -16,11 +16,16 @@ const jwt = require('jsonwebtoken');
 
 router.post('/', async (req, res) => {
     const {error} = validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+    if (error) {
+        return res.status(400).json({ error: error.details[0].message });
+    }
 
 
     let user = await User.findOne({email:req.body.email});
-    if (user) return res.status(400).send('User already registered!')
+    if (user) {
+        // return res.status(400).send('User already registered!')
+        return res.status(400).json({ error: 'User already registered!' });
+    }
 
     user = new User(_.pick(req.body, ['firstName', 'lastName', 'mobile', 'email', 'password']));
     // bcrypt used to hash the password
