@@ -8,10 +8,11 @@ import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context'
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 const Login = () => {
   const {email, password, handleEmail, handlePassword} = useContext(AppContext);
+  const [errorMessage, setErrorMessage] = useState('');
   const [cookies, setCookies] = useCookies(['access_token']);
   const navigate = useNavigate();
 
@@ -25,8 +26,11 @@ const Login = () => {
       setCookies('access_token', response.data.token);;
       window.localStorage.setItem("userID", response.data.userID);
       navigate('/');
-    } catch(err) {
-      console.log(err);
+    } catch(error) {
+      // console.log(err);
+      if (error.response && error.response.data && error.response.data.error) {
+        setErrorMessage(error.response.data.error);
+      }
     }
   };
   return (
@@ -61,7 +65,10 @@ const Login = () => {
                         <Input placeholder="Enter here" variant="soft" type='password' value={password} onChange={(event) => handlePassword(event.target.value)}/>
                     </FormControl>
                 </div>
+                {errorMessage && <p className='error-msg'>{errorMessage}</p>}
+                
             </div>
+            
             <div className='submit-btn'>
                 <Button type="submit">Login</Button>
             </div>
