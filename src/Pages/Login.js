@@ -23,9 +23,15 @@ const Login = () => {
         email,
         password
       })
+      const userType = response.data.userType;
       setCookies('access_token', response.data.token);;
       window.localStorage.setItem("userID", response.data.userID);
-      navigate('/');
+      if (userType === 'User') {
+        navigate('/');
+      } else if (userType === 'Admin') {
+        navigate('/admin');
+      }
+      
     } catch(error) {
       // console.log(err);
       if (error.response && error.response.data && error.response.data.error) {
