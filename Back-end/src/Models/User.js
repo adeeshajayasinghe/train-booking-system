@@ -31,10 +31,9 @@ const UserSchema = new mongoose.Schema({
         minlength: 8,
         maxlength: 1024
     },
-    userType: {
-        type: String,
-        enum: ['User', 'Admin'],
-        required: true
+    isAdmin: {
+        type: Boolean,
+        default: false
     }
     // isAdmin: {
     //     type: Boolean,
@@ -50,8 +49,7 @@ function validateGenre(user){
         lastName: Joi.string().min(5).max(255).required(),
         mobile: Joi.string().min(10).max(10).required(),
         email: Joi.string().required().email(),
-        password: Joi.string().min(8).max(255).required(),
-        userType: Joi.string().valid('User', 'Admin').required()
+        password: Joi.string().min(8).max(255).required()
         // isAdmin: Joi.boolean().required()
     });
     return schema.validate(user);
