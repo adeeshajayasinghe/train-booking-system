@@ -15,26 +15,34 @@ const Register = () => {
     // const [email, setEmail] = useState('');
     // const [password, setPassword] = useState('');
 
-    const {firstName, lastName, mobile, email, password, handleFirstName, handleLastName, handleMobile, handleEmail, handlePassword} = useContext(AppContext);
+    const {firstName, lastName, mobile, email, password, userType, handleFirstName, handleLastName, handleMobile, handleEmail, handlePassword, handleUserType} = useContext(AppContext);
     const [errorMessage, setErrorMessage] = useState('');
+    const [secretKey, setSecretKey] = useState("");
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
-        try {
-            await axios.post('http://localhost:4000/register', {
-                firstName,
-                lastName,
-                mobile,
-                email,
-                password
-            });
-            navigate('/login');
-        }catch(error) {
-            // console.log(err);
-            if (error.response && error.response.data && error.response.data.error) {
-                setErrorMessage(error.response.data.error);
-              }
+        if (userType === "Admin"  && secretKey !== 'admin3'){
+            event.preventDefault();
+            setErrorMessage("Invalid Secret Key");
+        }
+        else{
+            event.preventDefault();
+            try {
+                await axios.post('http://localhost:4000/register', {
+                    firstName,
+                    lastName,
+                    mobile,
+                    email,
+                    password,
+                    userType
+                });
+                navigate('/login');
+            }catch(error) {
+                // console.log(err);
+                if (error.response && error.response.data && error.response.data.error) {
+                    setErrorMessage(error.response.data.error);
+                }
+            }
         }
     };
 
@@ -58,6 +66,26 @@ const Register = () => {
         </article> */}
         <form className="review-reg" onSubmit={handleSubmit}>
             <h2>Register</h2>
+            <div className='radio-btn'>
+                <div className='user-radio'>
+                    <input
+                    type="radio"
+                    name="UserType"
+                    value="User"
+                    onChange={(event) => handleUserType(event.target.value)}
+                    />
+                    User
+                </div>
+                <div>
+                    <input
+                    type="radio"
+                    name="UserType"
+                    value="Admin"
+                    onChange={(event) => handleUserType(event.target.value)}
+                    />
+                    Admin
+                </div>   
+            </div>
             <div className='route'>
                 <div className='origin'>
                     <FormControl>
@@ -72,12 +100,23 @@ const Register = () => {
                     </FormControl>
                 </div>
             </div>
-            <div className='origin'>
-                <FormControl>
-                    <FormLabel>Mobile number</FormLabel>
-                    <Input placeholder="Enter here" variant="soft" value={mobile} onChange={(event) => handleMobile(event.target.value)}/>
-                </FormControl>
+            <div className='route'>
+                <div className='origin'>
+                    <FormControl>
+                        <FormLabel>Mobile number</FormLabel>
+                        <Input placeholder="Enter here" variant="soft" value={mobile} onChange={(event) => handleMobile(event.target.value)}/>
+                    </FormControl>
+                </div>
+                {userType === "Admin" ? (
+                    <div className='dest'>
+                        <FormControl>
+                            <FormLabel>Secret Key</FormLabel>
+                            <Input placeholder="Enter here" variant="soft" onChange={(event) => setSecretKey(event.target.value)}/>
+                        </FormControl>
+                    </div>
+                ) : null}
             </div>
+           
             <div className='route'>
                 <div className='origin'>
                     <FormControl>

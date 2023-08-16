@@ -13,6 +13,7 @@ const AppProvider = ({children}) => {
     const [mobile, setMobile] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [userType, setUserType] = useState('');
 
     function handleFirstName(first){
         setFirstName(first);
@@ -28,6 +29,9 @@ const AppProvider = ({children}) => {
     }
     function handlePassword(pass){
         setPassword(pass);
+    }
+    function handleUserType(type){
+        setUserType(type);
     }
     function openSidebar(){
         setSidebarOpen(true);
@@ -46,7 +50,7 @@ const AppProvider = ({children}) => {
     }
     return(
         <AppContext.Provider value={{
-            isSidebarOpen, isSubMenuOpen, openSidebar, openSubMenu, closeSidebar, closeSubMenu, location, page, firstName, lastName, mobile, email, password, handleFirstName, handleLastName, handleMobile, handleEmail, handlePassword
+            isSidebarOpen, isSubMenuOpen, openSidebar, openSubMenu, closeSidebar, closeSubMenu, location, page, firstName, lastName, mobile, email, password, userType, handleFirstName, handleLastName, handleMobile, handleEmail, handlePassword, handleUserType
         }}>{children}</AppContext.Provider>
     );
 }

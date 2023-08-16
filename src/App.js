@@ -7,6 +7,7 @@ import Journey from './Pages/Journey';
 import About from './Pages/About';
 import Search from './Pages/Search';
 import Dashboard from './Pages/Dashboard';
+import Admin from './Pages/Admin';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
@@ -25,6 +26,7 @@ function App() {
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/search' element={<Search/>}></Route>
         <Route path='/dashboard' element={<Dashboard/>}></Route>
+        <Route path='/admin' element={<Admin/>}></Route>
       </Routes>
     </Router>
   )
