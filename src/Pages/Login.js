@@ -23,13 +23,13 @@ const Login = () => {
         email,
         password
       })
-      const userType = response.data.userType;
+      const userType = response.data.isAdmin;
       setCookies('access_token', response.data.token);;
       window.localStorage.setItem("userID", response.data.userID);
-      if (userType === 'User') {
-        navigate('/');
-      } else if (userType === 'Admin') {
+      if (userType) {
         navigate('/admin');
+      } else {
+        navigate('/');
       }
       
     } catch(error) {
