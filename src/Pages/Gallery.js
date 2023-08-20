@@ -3,9 +3,13 @@ import * as React from 'react';
 
 export default function Gallery() {
   return (
-    <div className='gallery'>
-      <h1>Gallery</h1>
-    </div>
+    <section className='hero2'>
+      <div className='content-center'>
+       <div className='review'>
+        <h2>Gallery</h2>
+       </div>
+      </div>  
+    </section>
     
   );
 }

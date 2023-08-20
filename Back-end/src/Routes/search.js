@@ -3,6 +3,7 @@ const Joi = require('joi');
 const router = express.Router();
 const {Station} = require('../Models/Station');
 const {Train} = require('../Models/Train');
+const { get } = require('lodash');
 
 router.post('/', async (req, res) => {
     const {error} = validate(req.body);
@@ -34,7 +35,7 @@ router.post('/', async (req, res) => {
             return train.dates.includes('Daily') || train.dates.includes('Weekdays');
         }
     });
-    res.send(filteredTrainsByDate);
+    res.json(filteredTrainsByDate);
 })
 
 

@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import { AppContext } from '../context'
 
 const Search = () => {
     const inputRef = React.useRef(null);
@@ -22,18 +22,19 @@ const Search = () => {
     const [errorMessage, setErrorMessage] = React.useState('');
     const navigate = useNavigate();
 
-
+    const {getTrainList} = React.useContext(AppContext);
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.post('http://localhost:4000/search', {
+            const response = await axios.post('http://localhost:4000/search', {
                 from: from.label,
                 to: to.label,
                 date,
                 passengers,
                 returnDate
             });
-            navigate('/');
+            getTrainList(response.data);
+            navigate('/dashboard');
         }catch(error) {
             // console.log(err);
             if (error.response && error.response.data && error.response.data.error) {
