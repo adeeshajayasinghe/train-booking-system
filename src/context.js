@@ -1,5 +1,6 @@
-import React, { useState} from 'react'
+import React, {useState} from 'react'
 import sublinks from './data'
+// import sublinks from './data'
 
 const AppContext = React.createContext()
 
@@ -13,7 +14,7 @@ const AppProvider = ({children}) => {
     const [mobile, setMobile] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    const [trainList, setTrainList] = useState([]);
     function handleFirstName(first){
         setFirstName(first);
     }
@@ -44,9 +45,12 @@ const AppProvider = ({children}) => {
     function closeSubMenu(){
         setISSubMenuOpen(false);
     }
+    function getTrainList(trains){
+        setTrainList(trains);
+    }
     return(
         <AppContext.Provider value={{
-            isSidebarOpen, isSubMenuOpen, openSidebar, openSubMenu, closeSidebar, closeSubMenu, location, page, firstName, lastName, mobile, email, password, handleFirstName, handleLastName, handleMobile, handleEmail, handlePassword
+            isSidebarOpen, isSubMenuOpen, openSidebar, openSubMenu, closeSidebar, closeSubMenu, location, page, firstName, lastName, mobile, email, password, trainList, handleFirstName, handleLastName, handleMobile, handleEmail, handlePassword, getTrainList
         }}>{children}</AppContext.Provider>
     );
 }
