@@ -739,3 +739,24 @@ div#main {
   justify-content: start;
   align-items: center;
 }
+.centered {
+  text-align: center;
+}
+.btn-verify {
+  font-size: 1rem;
+  padding: 0.25rem 0.75rem;
+  margin-left: -1rem;
+  margin-top: 0.75rem;
+  border-radius: var(--radius);
+  border-color: transparent;
+  color: white;
+  background: var(--clr-black);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.btn-verify:hover {
+  background: var(--clr-grey-5);
+}
+.verify-text {
+  color: #00798c;
+}

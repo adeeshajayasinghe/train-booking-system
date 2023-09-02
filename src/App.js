@@ -12,6 +12,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
 import SeatView from './Pages/SeatView';
+import EmailVerify from './Pages/EmailVerify';
 import './index.css';
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path='/dashboard' element={<Dashboard/>}></Route>
         <Route path='/admin' element={<Admin/>}></Route>
         <Route path='/seatview' element={<SeatView/>}></Route>
+        <Route path='/register/:id/verify/:emailToken' element={<EmailVerify/>}></Route>
       </Routes>
     </Router>
   )
