@@ -22,7 +22,7 @@ const Search = () => {
     const [errorMessage, setErrorMessage] = React.useState('');
     const navigate = useNavigate();
 
-    const {getTrainList} = React.useContext(AppContext);
+    const {getTrainList, handlePassengerCount} = React.useContext(AppContext);
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -42,6 +42,10 @@ const Search = () => {
             }
         }
     };
+    React.useEffect(() => {
+        const totalPassengers = parseInt(passengers) + 1;
+        handlePassengerCount(totalPassengers);
+    }, [passengers]);
 
   return (
     <section className='hero'>

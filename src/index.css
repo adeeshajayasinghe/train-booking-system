@@ -645,3 +645,97 @@ div#main {
   justify-content: center;
   align-items: center;
 }
+.seating-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+
+.seat {
+  width: 30px;
+  height: 30px;
+  margin: 2px;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+
+.empty {
+  background-color: #006D77;
+  color: #000;
+}
+
+.occupied {
+  background-color: #FF4D6D;
+  color: #fff;
+}
+
+
+/* Add spacing between the third and fourth seat */
+/* .seat-row .space {
+  margin-right: 15px; 
+} */
+
+.seat-row {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  margin-bottom: 5px; /* Adjust as needed */
+}
+
+.review-des {
+  background: #fff;
+  padding: 0.25rem 1.5rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s linear;
+  text-align: center;
+  margin: 0.25rem 0;
+  background-color: #bde0fe;
+}
+.seat-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.class-type{
+  margin-right: 1rem;
+}
+.seatview-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+.seat-top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.5rem;
+}
+.seat-sub {
+  display: flex;
+
+}
+.no-sub, .name-sub {
+  padding-right: 1rem;
+}
+.seat:nth-child(2) {
+  margin-bottom: 30px; /* Adjust as needed */
+}
+.review-top {
+  display: flex;
+  justify-content: space-around;
+}
+.legend {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
