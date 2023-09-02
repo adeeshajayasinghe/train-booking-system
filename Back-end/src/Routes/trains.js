@@ -3,6 +3,12 @@ const router = express.Router();
 const {Train, validate} = require('../Models/Train');
 
 
+router.get('/:id', async (req, res) => {
+    const train = await Train.findById(req.params.id);
+    if (!train) return res.status(404).send('The train with the given ID was not found.');
+    res.send(train);
+});
+
 router.post('/', async (req, res) => {
     const {error} = validate(req.body);
     if (error) {
@@ -30,6 +36,20 @@ router.post('/', async (req, res) => {
     })
     train = await train.save();
 
+});
+
+router.put('/:id', async (req, res) => {
+    // const {error} = validate(req.body);
+    // if (error) return res.status(400).send(error.details[0].message);
+
+    const train = await Train.findByIdAndUpdate(req.params.id, {
+        $set: {
+            seatsArrangement: req.body.updatedData
+        }
+    }, {new: true});
+
+    if (!train) return res.status(404).send('The train with the given ID was not found.');
+    res.send(train);
 });
 
 module.exports = router;

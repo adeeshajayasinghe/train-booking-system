@@ -11,6 +11,7 @@ import Admin from './Pages/Admin';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
+import SeatView from './Pages/SeatView';
 import './index.css';
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path='/search' element={<Search/>}></Route>
         <Route path='/dashboard' element={<Dashboard/>}></Route>
         <Route path='/admin' element={<Admin/>}></Route>
+        <Route path='/seatview' element={<SeatView/>}></Route>
       </Routes>
     </Router>
   )

@@ -46,7 +46,7 @@ function validate(train){
         to: Joi.string().required(),
         date: Joi.string().required(),
         passengers: Joi.number().required(),
-        returnDate: Joi.string()
+        returnDate: Joi.string().optional()
     });
     return schema.validate(train);
 };
