@@ -9,6 +9,42 @@ const config = require('config');
 const {Token} = require('../Models/Token');
 const sendEmail = require('../Utils/SendEmails');
 
+router.post('/sendOTP', async (req, res) => {
+    try{
+        await sendEmail(req.body.recipient_email, 'Password Reset', req.body.OTP);
+        res.status(200).send('OTP sent successfully!');
+    } catch(error) {
+        res.status(500).send('Something went wrong!');
+    }
+})
+
+router.post('/resetPassword', async (req, res) => {
+    const { newpassword, confirmpassword } = req.body;
+
+    if (newpassword.length < 8) {
+        return res.status(400).json({ error: 'Password must be at least 8 characters long' });
+    }
+
+    // Check if the newPassword and confirmPassword match
+    if (newpassword !== confirmpassword) {
+        return res.status(400).json({ error: 'Passwords do not match' });
+    }
+
+    // Find the user by their email address
+    let user = await User.findOne({ email: req.body.email });
+    if (!user) {
+        return res.status(400).json({ error: 'User not found' });
+    }
+
+    // Hash the new password and update the user's password
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(newpassword, salt);
+    await user.save();
+
+    const token = jwt.sign({_id:user._id, isAdmin:user.isAdmin}, config.get('privateKey'));
+    res.send({token: token, isAdmin: user.isAdmin});
+});
+
 router.post('/', async (req, res) => {
     const {error} = validate(req.body);
     if (error) {
@@ -62,5 +98,6 @@ function validate(user){
     });
     return schema.validate(user);
 };
+
 
 module.exports = router;

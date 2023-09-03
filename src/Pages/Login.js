@@ -9,12 +9,14 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context'
 import { useContext, useState } from 'react';
+import {Link} from 'react-router-dom';
 
 const Login = () => {
-  const {email, password, handleEmail, handlePassword} = useContext(AppContext);
+  const {email, password, handleEmail, handlePassword, handleOTP} = useContext(AppContext);
   const [errorMessage, setErrorMessage] = useState('');
   const [cookies, setCookies] = useCookies(['access_token']);
   const navigate = useNavigate();
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -39,6 +41,26 @@ const Login = () => {
       }
     }
   };
+
+  const navigateToOtp = async () => {
+    console.log(email);
+    if (email){
+      const OTP = (Math.floor(Math.random() * 9000 + 1000)).toString();
+      console.log(OTP);
+      handleOTP(OTP);
+      try{
+        await axios.post('http://localhost:4000/login/sendOTP', {
+          OTP,
+          recipient_email: email,
+        });
+        navigate('/forgotpassword');
+      } catch(error) {
+        console.log(error);
+      }
+    } else {
+      setErrorMessage('Please enter your email');
+    }
+  }
   return (
     <section className='hero'>
       <div className='hero-center'>
@@ -77,6 +99,10 @@ const Login = () => {
             
             <div className='submit-btn'>
                 <Button type="submit">Login</Button>
+            </div>
+            <div>
+              <p className='account'>Don't have an account?<span><Link to='/register' >Sign up</Link></span></p>
+              <Link className='forgot-pass' onClick={() => navigateToOtp()}>Forgot password?</Link>
             </div>
         </form>
       </div>

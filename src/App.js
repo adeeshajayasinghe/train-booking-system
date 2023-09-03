@@ -13,6 +13,8 @@ import Home from './Pages/Home';
 import Login from './Pages/Login';
 import SeatView from './Pages/SeatView';
 import EmailVerify from './Pages/EmailVerify';
+import ForgotPassword from './Pages/ForgotPassword';
+import ResetPassword from './Pages/ResetPassword';
 import './index.css';
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
         <Route path='/admin' element={<Admin/>}></Route>
         <Route path='/seatview' element={<SeatView/>}></Route>
         <Route path='/register/:id/verify/:emailToken' element={<EmailVerify/>}></Route>
+        <Route path='/forgotpassword' element={<ForgotPassword/>}></Route>
+        <Route path='/resetpassword' element={<ResetPassword/>}></Route>
       </Routes>
     </Router>
   )

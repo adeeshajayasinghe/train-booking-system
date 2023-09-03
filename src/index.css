@@ -760,3 +760,43 @@ div#main {
 .verify-text {
   color: #00798c;
 }
+.forgot-pass {
+  margin-left: -7.8rem;
+
+}
+.account {
+  margin-top: 0.25rem;
+  margin-bottom: -0.25rem;
+}
+/* .otp-boxes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} */
+.otp-boxes {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Adjust the gap size as needed */
+}
+
+.otp-boxes input {
+  width: 40px; /* Adjust the width as needed */
+  height: 40px; /* Adjust the height as needed */
+  border: 1px solid #ccc;
+  border-radius: 5px; /* Adjust the border-radius as needed */
+  text-align: center;
+  font-size: 18px; /* Adjust the font size as needed */
+}
+.verify {
+  margin-top: 1rem;
+}
+.code {
+  margin-top: 2rem;
+  margin-bottom: -0.5rem;
+}
+.reset-fields {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
