@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
-const { Int32 } = require('mongodb');
+
 
 const UserSchema = new mongoose.Schema({
     firstName: {
@@ -35,11 +35,24 @@ const UserSchema = new mongoose.Schema({
     passenger_count: {
         type: Number,
         required: true
+    },
+    trainName:{
+        type:String,
+        require:true
+    },
+    from:{
+        type:String,
+        require:true 
+    },
+    to:{
+        type:String,
+        require:true
+    },
+    date:{
+        type: Joi.date(),
+        require:true
     }
-    // isAdmin: {
-    //     type: Boolean,
-    //     required: true
-    // }
+
 });
 
 const Booking = mongoose.model('Booking_History', UserSchema);
@@ -51,11 +64,15 @@ function validateBooking(user){
         mobile: Joi.string().min(10).max(10).required(),
         email: Joi.string().required().email(),
         NIC:Joi.string().required().min(10).max(12),
-        passenger_count:Joi.required()
-        // isAdmin: Joi.boolean().required()
+        passenger_count:Joi.required(),
+        trainName:Joi.string().required(),
+        from:Joi.string().required(),
+        to:Joi.string().required(),
+        date:Joi.date().required()
+
     });
     return schema.validate(user);
 };
 
-module.exports.User = Booking;
-module.exports.validate = validateBooking;
+module.exports.Booking = Booking;
+module.exports.validateBooking = validateBooking;
