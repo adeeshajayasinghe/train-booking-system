@@ -7,27 +7,37 @@ import FormLabel from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
 import Registerimg from '../images/register-img.png'
+import { useNavigate } from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 
 export default function Form() {
     
     const inputRef = React.useRef(null);
-    const {NIC ,firstName,lastName,email,mobile,handleEmail,passenger_count,handleMobile, handleNIC,handlePassenger_count,handleFirstName,handleLastName} = useContext(AppContext);
+    const {NIC ,firstName,lastName,email,mobile,handleEmail,passenger_count,handleMobile, from,to,date,handleNIC,handlePassenger_count,handleFirstName,handleLastName} = useContext(AppContext);
     const [errorMessage, setErrorMessage] = React.useState('');
     const userid =window.localStorage.getItem("userID") ;
-    
+    const navigate = useNavigate();
+    let registered=true;
     const data={userID:userid};
-    console.log(data.userID)
+    const params=useParams();
+    const { trainName} = params;
+    
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const res = await axios.post('http://localhost:4000/form', 
                     data,
                 );
+                if(res){
+                    handleFirstName(res.data.firstName); // Use res.data.firstName
+                    handleLastName(res.data.lastName);
+                    handleMobile(res.data.mobile);
+                    handleEmail(res.data.email);
+                }
+                else{
+                    registered=false;
+                }
 
-                handleFirstName(res.data.firstName); // Use res.data.firstName
-                handleLastName(res.data.lastName);
-                handleMobile(res.data.mobile);
-                handleEmail(res.data.email);
             } catch (error) {
                 if (error.response && error.response.data && error.response.data.error) {
                     setErrorMessage(error.response.data.error);
@@ -38,9 +48,28 @@ export default function Form() {
         fetchData();
     }, []); // Run only once when the component mounts
 
-    const handleSubmit = ()=>{
-        console.log("nice");
-        console.log(firstName);
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            await axios.post('http://localhost:4000/booking', {
+                firstName,
+                lastName,
+                mobile,
+                email,
+                NIC,
+                passenger_count,
+                trainName,
+                from:from.label,
+                to:to.label,
+                date
+            });
+            navigate('/payment');
+        }catch(error) {
+            // console.log(err);
+            if (error.response && error.response.data && error.response.data.error) {
+                setErrorMessage(error.response.data.error);
+            }
+        }
     };
   return (
     
@@ -90,7 +119,7 @@ export default function Form() {
                 <div className='origin'>
                     <FormControl>
                         <FormLabel>NIC</FormLabel>
-                        <Input placeholder="Enter here" type="email" variant="soft"  value={NIC} onChange={(event) => handleNIC(event.target.value)}/>
+                        <Input   variant="soft"  value={NIC} onChange={(event) => handleNIC(event.target.value)}/>
                     </FormControl>
                 </div>
             
