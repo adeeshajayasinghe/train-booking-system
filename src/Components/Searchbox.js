@@ -1,114 +1,185 @@
 import * as React from 'react';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
-import Select from '@mui/joy/Select';
-import Option from '@mui/joy/Option';
 import Input from '@mui/joy/Input';
-const Searchbox = () => {
+import Button from '@mui/joy/Button';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { AppContext } from '../context'
+import stations from './stationData';
+import  { useContext } from 'react';
+const Search = () => {
     const inputRef = React.useRef(null);
+    
+    const [inputFrom, setInputFrom] = React.useState('');
+   
+    const [inputTo, setInputTo] = React.useState('');
+    const [dest, setDest] = React.useState('');
+    const {from,to,date,setDate,setFrom,setTo}=useContext(AppContext);
+    const [passengers, setPassengers] = React.useState('');
+    const [returnDate, setReturnDate] = React.useState('');
+    const [errorMessage, setErrorMessage] = React.useState('');
+    const navigate = useNavigate();
+
+    const {getTrainList} = React.useContext(AppContext);
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:4000/search', {
+                from: from.label,
+                to: to.label,
+                date,
+                passengers,
+                returnDate
+            });
+            getTrainList(response.data);
+            navigate('/dashboard');
+        }catch(error) {
+            // console.log(err);
+            if (error.response && error.response.data && error.response.data.error) {
+                setErrorMessage(error.response.data.error);
+            }
+        }
+    };
+
   return (
-    <article className='review' id='searchbox'>
-        <div className='route'>
-            <div className='origin'>
+    <section className='hero'>
+      <div className='hero-center'>
+        <article className='hero-info'>
+          <br />    
+          <br />
+          <br />
+          <br />
+        </article>
+        <form className="review-search" onSubmit={handleSubmit}>
+            <h2>Search Trains</h2>
+           
+            <div className='search-fields'>
+                <div className='origin'>
                 <FormControl sx={{ width: 240 }}>
-      <FormLabel id="select-field-demo-label" htmlFor="select-field-demo-button">
-        From
-      </FormLabel>
-      <Select
-        placeholder="Choose station"
-        slotProps={{
-          button: {
-            id: 'select-field-demo-button',
-            'aria-labelledby': 'select-field-demo-label select-field-demo-button',
-          },
-        }}
-      >
-        <Option value="dog">Dog</Option>
-        <Option value="cat">Cat</Option>
-        <Option value="fish">Fish</Option>
-        <Option value="bird">Bird</Option>
-      </Select>
-    </FormControl>
+                <FormLabel id="select-field-demo-label" htmlFor="select-field-demo-button" size="sm">
+                        From
+                </FormLabel>
+                <Autocomplete
+                    value={from}
+                    onChange={(event, newValue) => {
+                        setFrom(newValue);
+                    }}
+                    inputValue={inputFrom}
+                    onInputChange={(event, newInputValue) => {
+                        setInputFrom(newInputValue);
+                    }}
+                    // disablePortal
+                    id="combo-box-demo"
+                    options={stations}
+                    sx={{ width: 240 }}
+                    renderInput={(params) => <TextField {...params}  size="small" label="Choose here" /> }
+                />
+                </FormControl>
+               
+                </div>
+                <div className='dest'>
+                <FormControl sx={{ width: 240 }}>
+                <FormLabel id="select-field-demo-label" htmlFor="select-field-demo-button" size="sm">
+                        To
+                </FormLabel>
+                <Autocomplete
+                    value={to}
+                    onChange={(event, newValue) => {
+                        setTo(newValue);
+                    }}
+                    inputValue={inputTo}
+                    onInputChange={(event, newInputValue) => {
+                        setInputTo(newInputValue);
+                    }}
+                    // disablePortal
+                    id="combo-box-demo"
+                    options={stations}
+                    sx={{ width: 240 }}
+                    renderInput={(params) => <TextField {...params}  size="small" label="Choose here" /> }
+                />
+                </FormControl>
+                </div>
+                <div className='dest'>
+                <FormControl sx={{ width: 240 }}>
+                <FormLabel id="select-field-demo-label" htmlFor="select-field-demo-button" >
+                    Date
+                </FormLabel>
+                <Input
+                type="date"
+                
+                    slotProps={{
+                    input: {
+                        min: '2018-06-07T00:00',
+                        max: '2018-06-14T00:00',
+                    },
+                    }}
+                    value={date} onChange={(event) => setDate(event.target.value)}
+                />
+                </FormControl>
+                </div>
+            </div>
+            <div className='route'>
+            <div className='origin'>
+            <FormControl sx={{ width: 240 }}>
+            <FormLabel id="select-field-demo-label" htmlFor="select-field-demo-button" size="sm">
+            Passengers
+            </FormLabel>
+            <Input
+            type="number"
+            placeholder='Choose a value'
+            slotProps={{
+            input: {
+                ref: inputRef,
+                min: 1,
+                step: 1,
+            },
+    
+            }}
+            value={passengers} onChange={(event) => setPassengers(event.target.value)}
+            />
+            </FormControl>
             </div>
             <div className='dest'>
-                <FormControl sx={{ width: 240 }}>
-      <FormLabel id="select-field-demo-label" htmlFor="select-field-demo-button">
-        To
-      </FormLabel>
-      <Select
-        placeholder="Choose station"
-        slotProps={{
-          button: {
-            id: 'select-field-demo-button',
-            'aria-labelledby': 'select-field-demo-label select-field-demo-button',
-          },
-        }}
-      >
-        <Option value="dog">Dog</Option>
-        <Option value="cat">Cat</Option>
-        <Option value="fish">Fish</Option>
-        <Option value="bird">Bird</Option>
-      </Select>
-    </FormControl>
-            </div>
-            <div className='date'>
             <FormControl sx={{ width: 240 }}>
-      <FormLabel id="select-field-demo-label" htmlFor="select-field-demo-button">
-        Date
-      </FormLabel>
-      <Input
-          	type="date"
-                slotProps={{
-                input: {
-                    min: '2018-06-07T00:00',
-                    max: '2018-06-14T00:00',
-                },
-                }}
+                <FormLabel id="select-field-demo-label" htmlFor="select-field-demo-button" size="sm">
+                    Return date(optional)
+                </FormLabel>
+            <Input
+                type="date"
+                    slotProps={{
+                    input: {
+                        min: '2018-06-07T00:00',
+                        max: '2018-06-14T00:00',
+                    },
+                    }}
+                    value={returnDate} onChange={(event) => setReturnDate(event.target.value)}
             />
-</FormControl>
+            </FormControl>
             </div>
-
+            </div>
+            {errorMessage && <p className='error-msg'>{errorMessage}</p>}
+            <div className='route'>
+            <div className='submit-btn'>
+                <Button type="submit">Search</Button>
+            </div>
+            <div className='submit-btn'>
+                <Button>Reset</Button>
+            </div>
+            </div>
             
-        </div>
-        <div className='second-route'>
-            <div className='passengers'>
-            <FormControl sx={{ width: 240 }}>
-      <FormLabel id="select-field-demo-label" htmlFor="select-field-demo-button">
-        Passengers
-      </FormLabel>
-      <Input
-        type="number"
-        placeholder='Choose a value'
-        slotProps={{
-          input: {
-            ref: inputRef,
-            min: 1,
-            step: 1,
-          },
-        }}
-      />
-</FormControl>
-            </div>
-            <div className='date'>
-            <FormControl sx={{ width: 240 }}>
-      <FormLabel id="select-field-demo-label" htmlFor="select-field-demo-button">
-        Return date(optional)
-      </FormLabel>
-      <Input
-          	type="date"
-                slotProps={{
-                input: {
-                    min: '2018-06-07T00:00',
-                    max: '2018-06-14T00:00',
-                },
-                }}
-            />
-</FormControl>
-            </div>
-        </div>
-          
-    </article>
+        </form>
+        {/* <article className='hero-images'>
+            <img src={loginimg} className='login-img' alt='login' />
+        </article> */}
+      </div>
+      
+    </section>
   )
 };
 
-export default Searchbox
+
+
+export default Search;
