@@ -13,7 +13,7 @@ const sendEmail = require('../Utils/SendEmails');
 //     const user = await User.findById(req.user._id).select('-password');
 //     res.send(user);
 // })
-
+//https:localhost:4000/register//:id/verify/:emailToken
 router.get('/:id/verify/:emailToken', async (req, res) => {
     try{
         const user = await User.findById(req.params.id);

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@mui/joy';
 
 
-const ClassMenus = ({ trainName, trainNo, classes, seatsAvailability, trainID }) => {
+const ClassMenus = ({ trainName, trainNo, classes, priceList, seatsAvailability, trainID }) => {
   const {handleTrainID, handleTrainName, handleClassIndex, handleTrainNo} = useContext(AppContext);
   return (
     <div>
@@ -14,8 +14,9 @@ const ClassMenus = ({ trainName, trainNo, classes, seatsAvailability, trainID })
         <div key={className} className="review-des">
           <div className='seat-text'>
             <p className='class-type'>{className}</p>
-            <p className='avail-text'>Available: {seatsAvailability[index]}</p>
-            <Link to={`/seatview`} >
+            <p className='class-type-avail'>Available: {seatsAvailability[index]}</p>
+            <p className='class-type-avail'>Price: LKR.{priceList[index]}</p>
+            <Link to={`/seatview`} className='select-btn' >
             <Button onClick={() => {
               handleTrainID(trainID);
               handleTrainName(trainName);
@@ -34,7 +35,7 @@ const ClassMenus = ({ trainName, trainNo, classes, seatsAvailability, trainID })
 };
 
 const Dashboard = () => {
-  const {trainList} = useContext(AppContext);
+  const {trainList, priceList} = useContext(AppContext);
   return (
     <section className='hero'>
       <div className='content-center'>
@@ -49,7 +50,7 @@ const Dashboard = () => {
           <p>Origin: {train.origin}</p>
           <p>Destination: {train.destination}</p>
           <p>Dates: {train.dates}</p>
-          <ClassMenus trainName={train.trainName} trainNo={train.trainNo} classes={train.class} seatsAvailability={train.seatsAvailability} trainID = {train._id}/>
+          <ClassMenus trainName={train.trainName} trainNo={train.trainNo} classes={train.class} priceList={priceList} seatsAvailability={train.seatsAvailability} trainID = {train._id}/>
           {/* <Link to={`/seatview`}>
             <Button onClick={() => handleTrainNo(train._id)}>Search</Button>
           </Link> */}

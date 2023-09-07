@@ -11,6 +11,10 @@ const StationSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    prices: {
+        type: [Number],
+        required: true
+    },
     route_id: {
         type: Number,
         required: true
@@ -23,6 +27,7 @@ function validateStation(station){
     const schema = Joi.object({
         _id: Joi.number().required(),
         station: Joi.string().required(),
+        prices: Joi.array().items(Joi.number()).required(),
         route_id: Joi.number().required()
     });
     return schema.validate(station);

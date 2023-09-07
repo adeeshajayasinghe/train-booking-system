@@ -15,6 +15,7 @@ const AppProvider = ({children}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [trainList, setTrainList] = useState([]);
+    const [priceList, setPriceList] = useState([]);
     const [trainName, setTrainName] = useState('');
     const [trainID, setTrainID] = useState(null);
     const [classIndex, setClassIndex] = useState(null);
@@ -51,8 +52,9 @@ const AppProvider = ({children}) => {
     function closeSubMenu(){
         setISSubMenuOpen(false);
     }
-    function getTrainList(trains){
-        setTrainList(trains);
+    function getTrainList(details){
+        setTrainList(details[0]);
+        setPriceList(details[1]);
     }
     function handleTrainName(trainName){
         setTrainName(trainName);
@@ -74,7 +76,7 @@ const AppProvider = ({children}) => {
     }
     return(
         <AppContext.Provider value={{
-            isSidebarOpen, isSubMenuOpen, openSidebar, openSubMenu, closeSidebar, closeSubMenu, location, page, firstName, lastName, mobile, email, password, trainList, trainID, classIndex, trainName, trainNo, passengerCount, OTP,  handleFirstName, handleLastName, handleMobile, handleEmail, handlePassword, getTrainList, handleTrainID, handleClassIndex, handleTrainName, handleTrainNo, handlePassengerCount, handleOTP
+            isSidebarOpen, isSubMenuOpen, openSidebar, openSubMenu, closeSidebar, closeSubMenu, location, page, firstName, lastName, mobile, email, password, trainList, priceList, trainID, classIndex, trainName, trainNo, passengerCount, OTP,  handleFirstName, handleLastName, handleMobile, handleEmail, handlePassword, getTrainList, handleTrainID, handleClassIndex, handleTrainName, handleTrainNo, handlePassengerCount, handleOTP
         }}>{children}</AppContext.Provider>
     );
 }
