@@ -705,7 +705,12 @@ div#main {
   align-items: center;
 }
 .class-type{
-  margin-right: 1rem;
+  font-weight: bolder;
+  margin-right: 0.51rem;
+  margin-left: -1.2rem;
+}
+.class-type-avail {
+  margin-left: 0.25rem;
 }
 .seatview-btn {
   display: flex;
@@ -799,4 +804,7 @@ div#main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.select-btn {
+  margin-right: -2rem;
 }

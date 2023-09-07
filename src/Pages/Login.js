@@ -46,7 +46,6 @@ const Login = () => {
     console.log(email);
     if (email){
       const OTP = (Math.floor(Math.random() * 9000 + 1000)).toString();
-      console.log(OTP);
       handleOTP(OTP);
       try{
         await axios.post('http://localhost:4000/login/sendOTP', {
@@ -55,7 +54,9 @@ const Login = () => {
         });
         navigate('/forgotpassword');
       } catch(error) {
-        console.log(error);
+        if (error.response && error.response.data && error.response.data.error) {
+          setErrorMessage(error.response.data.error);
+        }
       }
     } else {
       setErrorMessage('Please enter your email');
@@ -94,7 +95,6 @@ const Login = () => {
                     </FormControl>
                 </div>
                 {errorMessage && <p className='error-msg'>{errorMessage}</p>}
-                
             </div>
             
             <div className='submit-btn'>

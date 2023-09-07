@@ -2,6 +2,7 @@ const express = require('express');
 const Joi = require('joi');
 const router = express.Router();
 const {Station} = require('../Models/Station');
+const {Route} = require('../Models/Route');
 const {Train} = require('../Models/Train');
 const { get } = require('lodash');
 
@@ -18,6 +19,21 @@ router.post('/', async (req, res) => {
 
     // Get Route Numbers for From and To Stations
     const routeNumbers = await Station.find({ station: { $in: [req.body.from, req.body.to] } });
+    // Get the class prices that belongs to origin and destinatio
+    const originClassPrices = routeNumbers[0].prices;
+    const destinationClassPrices = routeNumbers[1].prices;
+    // Get the route that belongs to origin and destination
+    const route = routeNumbers[0].route_id;
+    // Fetch the route from the database
+    // Calculate the prices of three classes
+    const routeDetails = await Route.findOne({ routeNo: route });
+    const firstClassPriceIndex = Math.abs(parseInt(routeDetails.prices[0].indexOf(destinationClassPrices[0])) - parseInt(routeDetails.prices[0].indexOf(originClassPrices[0])));
+    const secondClassPriceIndex = Math.abs(parseInt(routeDetails.prices[1].indexOf(destinationClassPrices[1])) - parseInt(routeDetails.prices[1].indexOf(originClassPrices[1])));
+    const thirdClassPriceIndex = Math.abs(parseInt(routeDetails.prices[2].indexOf(destinationClassPrices[2])) - parseInt(routeDetails.prices[2].indexOf(originClassPrices[2])));
+    const firstClassPrice = routeDetails.prices[0][firstClassPriceIndex];
+    const secondClassPrice = routeDetails.prices[1][secondClassPriceIndex];
+    const thirdClassPrice = routeDetails.prices[2][thirdClassPriceIndex];
+    const classPrices = [firstClassPrice, secondClassPrice, thirdClassPrice];
     // Filter Trains by Route
     const trains = await Train.find({ routes: { $all: [routeNumbers[0].route_id, routeNumbers[1].route_id] } });
     const filteredTrains = trains.filter(train =>
@@ -35,7 +51,7 @@ router.post('/', async (req, res) => {
             return train.dates.includes('Daily') || train.dates.includes('Weekdays');
         }
     });
-    res.json(filteredTrainsByDate);
+    res.json([filteredTrainsByDate, classPrices]);
 })
 
 
