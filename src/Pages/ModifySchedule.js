@@ -1,20 +1,17 @@
 import React from 'react'
 import AdminSidebar from '../Components/AdminSidebar';
-import AddTrain from './AddTrain';
 
-const Admin= () => {
- 
+const ModifySchedule = () => {
   return (
     <div className='admin-layout'>
       <div className="sidebar-section">
         <AdminSidebar />
       </div>
       <div>
-        <AddTrain />
+        <h2>Modify Schedule</h2>
       </div>
     </div>
-    
   )
 }
 
-export default Admin;
+export default ModifySchedule;

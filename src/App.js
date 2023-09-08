@@ -15,6 +15,7 @@ import SeatView from './Pages/SeatView';
 import EmailVerify from './Pages/EmailVerify';
 import ForgotPassword from './Pages/ForgotPassword';
 import ResetPassword from './Pages/ResetPassword';
+import ModifySchedule from './Pages/ModifySchedule';
 import './index.css';
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path='/register/:id/verify/:emailToken' element={<EmailVerify/>}></Route>
         <Route path='/forgotpassword' element={<ForgotPassword/>}></Route>
         <Route path='/resetpassword' element={<ResetPassword/>}></Route>
+        <Route path='/modify-schedules' element={<ModifySchedule/>}></Route>
       </Routes>
     </Router>
   )

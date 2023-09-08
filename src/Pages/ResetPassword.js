@@ -15,7 +15,7 @@ const ResetPassword = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [cookies, setCookies] = useCookies(['access_token']);
     const navigate = useNavigate();
-    const {email} = useContext(AppContext);
+    const {email, handleAdmin} = useContext(AppContext);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -29,6 +29,7 @@ const ResetPassword = () => {
           setCookies('access_token', response.data.token);;
           window.localStorage.setItem("userID", response.data.userID);
           if (userType) {
+            handleAdmin(true);
             navigate('/admin');
           } else {
             navigate('/');

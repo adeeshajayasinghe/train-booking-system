@@ -12,7 +12,7 @@ import { useContext, useState } from 'react';
 import {Link} from 'react-router-dom';
 
 const Login = () => {
-  const {email, password, handleEmail, handlePassword, handleOTP} = useContext(AppContext);
+  const {email, password, handleEmail, handlePassword, handleOTP, handleAdmin} = useContext(AppContext);
   const [errorMessage, setErrorMessage] = useState('');
   const [cookies, setCookies] = useCookies(['access_token']);
   const navigate = useNavigate();
@@ -29,6 +29,7 @@ const Login = () => {
       setCookies('access_token', response.data.token);;
       window.localStorage.setItem("userID", response.data.userID);
       if (userType) {
+        handleAdmin(true);
         navigate('/admin');
       } else {
         navigate('/');
