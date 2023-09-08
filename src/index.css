@@ -154,6 +154,16 @@ Stripe Styles
   position: relative;
   z-index: 1;
 }
+.nav-admin {
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #005F73;
+  /* background: transparent; */
+  position: relative;
+  z-index: 1;
+}
 .nav-center {
   width: 90vw;
   max-width: var(--max-width);
@@ -276,6 +286,17 @@ Stripe Styles
     border-color: transparent;
     font-size: 1.1rem;
     color: black;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    width: 10rem;
+    padding: 1rem;
+  }
+  .admin-link-btn {
+    height: 100%;
+    background: transparent;
+    border-color: transparent;
+    font-size: 1.1rem;
+    color: white;
     text-transform: capitalize;
     letter-spacing: 1px;
     width: 10rem;
@@ -807,4 +828,85 @@ div#main {
 }
 .select-btn {
   margin-right: -2rem;
+}
+.sidebar-section {
+  width: 300px;
+  height: 100vh;
+}
+
+.admin-sidebar {
+  height: 100%;
+  width: 300px;
+  background-color: #005F73;
+  overflow: auto;
+}
+.icon-text {
+  display: flex;
+  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
+  padding-left: 0.5rem;
+  /* padding: 1rem; */
+}
+.menu-text {
+  margin-left: 0.75rem;
+  /* margin-top: 1.1rem; */
+  font-weight: bold;
+  color: white;
+}
+.sidebar-item {
+  padding-top: 1rem;
+  padding-bottom: -1rem;
+  display: block;
+  transition: #124559 0.15s ;
+
+}
+.sidebar-item:hover {
+  /* background-color: rgba(255, 255, 255, 0.1); */
+  background-color: #124559;
+}
+.sidebar-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2em;
+  /* padding: -1rem; */
+}
+.drop-down {
+  color: white;
+  margin-top: -1rem;
+  margin-right: 2rem;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.sidebar-item.open .drop-down {
+  color: white;
+  margin-top: -1rem;
+  margin-right: 2rem;
+  cursor: pointer;
+  transform: rotate(180deg);
+}
+.admin-icon {
+  color: white;
+  margin-top: -1rem;
+}
+.sidebar-content {
+  padding-top: 0.25em;
+  height: 0;
+  overflow: hidden;
+}
+.sidebar-item.open .sidebar-content {
+  height: auto;
+}
+.admin-link{
+  margin-top: -1rem;
+}
+.sidebar-subitem {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+.admin-layout {
+  display: flex;
+  justify-content: flex-start;
 }

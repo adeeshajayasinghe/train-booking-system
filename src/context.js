@@ -22,6 +22,7 @@ const AppProvider = ({children}) => {
     const [trainNo, setTrainNo] = useState(null);
     const [passengerCount, setPassengerCount] = useState(1);
     const [OTP, setOTP] = useState('');
+    const [adminEnable, setAdminEnable] = useState(false);
     function handleFirstName(first){
         setFirstName(first);
     }
@@ -74,9 +75,12 @@ const AppProvider = ({children}) => {
     function handleOTP(otp){
         setOTP(otp);
     }
+    function handleAdmin(bool){
+        setAdminEnable(bool);
+    }
     return(
         <AppContext.Provider value={{
-            isSidebarOpen, isSubMenuOpen, openSidebar, openSubMenu, closeSidebar, closeSubMenu, location, page, firstName, lastName, mobile, email, password, trainList, priceList, trainID, classIndex, trainName, trainNo, passengerCount, OTP,  handleFirstName, handleLastName, handleMobile, handleEmail, handlePassword, getTrainList, handleTrainID, handleClassIndex, handleTrainName, handleTrainNo, handlePassengerCount, handleOTP
+            isSidebarOpen, isSubMenuOpen, openSidebar, openSubMenu, closeSidebar, closeSubMenu, location, page, firstName, lastName, mobile, email, password, trainList, priceList, trainID, classIndex, trainName, trainNo, passengerCount, OTP, adminEnable,  handleFirstName, handleLastName, handleMobile, handleEmail, handlePassword, getTrainList, handleTrainID, handleClassIndex, handleTrainName, handleTrainNo, handlePassengerCount, handleOTP, handleAdmin
         }}>{children}</AppContext.Provider>
     );
 }

@@ -4,7 +4,7 @@ import { AppContext } from '../context'
 import {Link, useNavigate} from 'react-router-dom'
 import {useCookies} from 'react-cookie'
 const Navbar = () => {
-  const {openSidebar, openSubMenu, closeSubMenu} = useContext(AppContext);
+  const {openSidebar, openSubMenu, closeSubMenu, adminEnable, handleAdmin} = useContext(AppContext);
   const [cookies, setCookies] = useCookies(['access_token']);
   const navigate = useNavigate();
   function dispalySubMenu(e){
@@ -22,10 +22,11 @@ const Navbar = () => {
   function logout(){
     setCookies("access_token", "");
     window.localStorage.removeItem("userID");
+    handleAdmin(false);
     navigate('/register');
   }
   return (
-    <nav className='nav' onMouseOver={handleSubMenu}>
+    <nav className={adminEnable?'nav-admin':'nav'} onMouseOver={handleSubMenu}>
       <div className="nav-center">
         <div className="nav-header">
           {/* <img src={logo} alt='stripe' className='nav-logo'/> */}
@@ -39,11 +40,12 @@ const Navbar = () => {
           <button className='btn toggle-btn' onClick={openSidebar}><FaBars/></button>
         </div>
         <ul className='nav-links'>
-          <Link to={'/'} className='link-btn' onMouseOver={dispalySubMenu}>Home</Link>
-          <Link to={'/gallery'} className='link-btn' onMouseOver={dispalySubMenu}>Gallery</Link>
-          <Link to={'/services'} className='link-btn' onMouseOver={dispalySubMenu}>Services</Link>
-          <Link to={'/journey'} className='link-btn' onMouseOver={dispalySubMenu}>Journey</Link>
-          <Link to={'/about'} className='link-btn' onMouseOver={dispalySubMenu}>About</Link>
+          <Link to={'/'} className={adminEnable?'admin-link-btn':'link-btn'} onMouseOver={dispalySubMenu}>Home</Link>
+          <Link to={'/gallery'} className={adminEnable?'admin-link-btn':'link-btn'} onMouseOver={dispalySubMenu}>Gallery</Link>
+          <Link to={'/services'} className={adminEnable?'admin-link-btn':'link-btn'} onMouseOver={dispalySubMenu}>Services</Link>
+          <Link to={'/journey'} className={adminEnable?'admin-link-btn':'link-btn'} onMouseOver={dispalySubMenu}>Journey</Link>
+          <Link to={'/about'} className={adminEnable?'admin-link-btn':'link-btn'} onMouseOver={dispalySubMenu}>About</Link>
+          {adminEnable?(<Link to={'/admin'} className={adminEnable?'admin-link-btn':'link-btn'}>Admin</Link>):(null)}
           {/* <li>
             <a className='link-btn' onMouseOver={dispalySubMenu} href='#home'>Home</a>
           </li>
