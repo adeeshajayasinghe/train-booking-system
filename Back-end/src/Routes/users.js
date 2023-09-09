@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
         return res.status(400).json({ error: 'User already registered!' });
     }
 
-    user = new User(_.pick(req.body, ['firstName', 'lastName', 'mobile', 'email', 'password', 'isAdmin']));
+    user = new User(_.pick(req.body, ['firstName', 'lastName', 'mobile', 'NIC', 'email', 'password', 'isAdmin']));
     // bcrypt used to hash the password
     // salt is like a key. Without salt we cannot decrypt the hashed password. salt is included in the password.
     const salt = await bcrypt.genSalt(10);

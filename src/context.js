@@ -12,6 +12,7 @@ const AppProvider = ({children}) => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [mobile, setMobile] = useState('');
+    const [NIC, setNIC] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [trainList, setTrainList] = useState([]);
@@ -23,6 +24,10 @@ const AppProvider = ({children}) => {
     const [passengerCount, setPassengerCount] = useState(1);
     const [OTP, setOTP] = useState('');
     const [adminEnable, setAdminEnable] = useState(false);
+    const [openPopup, setOpenPopup] = useState(false);
+    const [date, setDate] = useState('');
+    const [from, setFrom] = useState('');
+    const [to, setTo] = useState('');
     function handleFirstName(first){
         setFirstName(first);
     }
@@ -31,6 +36,9 @@ const AppProvider = ({children}) => {
     }
     function handleMobile(mob){
         setMobile(mob);
+    }
+    function handleNIC(nic){
+        setNIC(nic);
     }
     function handleEmail(mail){
         setEmail(mail);
@@ -78,9 +86,21 @@ const AppProvider = ({children}) => {
     function handleAdmin(bool){
         setAdminEnable(bool);
     }
+    function handlePopup(bool){
+        setOpenPopup(bool);
+    }
+    function handleDate(date){
+        setDate(date);
+    }
+    function handleFrom(from){
+        setFrom(from);
+    }
+    function handleTo(to){
+        setTo(to);
+    }
     return(
         <AppContext.Provider value={{
-            isSidebarOpen, isSubMenuOpen, openSidebar, openSubMenu, closeSidebar, closeSubMenu, location, page, firstName, lastName, mobile, email, password, trainList, priceList, trainID, classIndex, trainName, trainNo, passengerCount, OTP, adminEnable,  handleFirstName, handleLastName, handleMobile, handleEmail, handlePassword, getTrainList, handleTrainID, handleClassIndex, handleTrainName, handleTrainNo, handlePassengerCount, handleOTP, handleAdmin
+            isSidebarOpen, isSubMenuOpen, openSidebar, openSubMenu, closeSidebar, closeSubMenu, location, page, firstName, lastName, mobile, NIC, email, password, trainList, priceList, trainID, classIndex, trainName, trainNo, passengerCount, OTP, adminEnable, openPopup, date, from, to,  handleFirstName, handleLastName, handleMobile, handleNIC, handleEmail, handlePassword, getTrainList, handleTrainID, handleClassIndex, handleTrainName, handleTrainNo, handlePassengerCount, handleOTP, handleAdmin, handlePopup, handleDate, handleFrom, handleTo
         }}>{children}</AppContext.Provider>
     );
 }

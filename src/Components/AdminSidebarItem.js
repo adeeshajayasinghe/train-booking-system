@@ -30,14 +30,6 @@ const AdminSidebarItem = ({item}) => {
     )
   } else {
     return (
-      // <div className='sidebar-item'>
-      //   <div className="sidebar-title">
-      //     <div className='icon-text'>
-      //       {item.icon && <i className='admin-icon'>{item.icon}</i>}
-      //       <p className='menu-text'>{item.title}</p>
-      //     </div>
-      //   </div>
-      // </div>
       <Link to={item.path} className='sidebar-subitem'>
         <div className='sidebar-item'>
           <div className="sidebar-title">

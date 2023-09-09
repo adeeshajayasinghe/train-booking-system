@@ -95,7 +95,7 @@ router.post('/', async (req, res) => {
         the server from the token)*/
     // In powershell use $env:variablename = "value" to set environment variables. 'set' will not work.
    const token = jwt.sign({_id:user._id, isAdmin:user.isAdmin}, config.get('privateKey'));
-   res.send({token: token, isAdmin: user.isAdmin});
+   res.send({token: token, isAdmin: user.isAdmin, userID: user._id});
 });
 
 function validate(user){

@@ -4,15 +4,19 @@ import { AppContext } from '../context';
 import { useContext } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import UserDetailsForm from '../Components/UserDetailsForm';
+import { useNavigate } from 'react-router-dom';
 
 const SeatView = () => {
   const [seatingData, setSeatingData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [clickedSeats, setClickedSeats] = useState([]);
   const [submitted, setSubmitted] = useState(false); // Track form submission
-  const { trainName, trainNo, classIndex, trainID, passengerCount } = useContext(AppContext);
+  const {trainNo, classIndex, trainID, handlePopup, passengerCount, trainName} = useContext(AppContext);
   const [fullArray, setFullArray] = useState([]); 
   const [originalSeatingData, setOriginalSeatingData] = useState([]);
+  const navigate = useNavigate();
+  
 
   useEffect(() => {
     const fetchSeats = async () => {
@@ -44,21 +48,25 @@ const SeatView = () => {
       }
     }
   };
-
-  const handleSubmit = () => {
-    const updatedFullArray = fullArray;
-    updatedFullArray[classIndex] = seatingData;
-    axios
-      .put(`http://localhost:4000/trains/${trainID}`, { updatedData: updatedFullArray })
-      .then((response) => {
-        console.log('Data updated successfully:', response.data);
-        setClickedSeats([]); // Clear clicked seats
-        setSubmitted(true); // Mark the form as submitted
-      })
-      .catch((error) => {
-        console.error('Error updating data:', error);
-      });
+  const handlePoppup = () => {
+    handlePopup(true);
   };
+
+  // const handleSubmit = async (event) => {
+  //   // const updatedFullArray = fullArray;
+  //   // updatedFullArray[classIndex] = seatingData;
+  //   // axios
+  //   //   .put(`http://localhost:4000/trains/${trainID}`, { updatedData: updatedFullArray })
+  //   //   .then((response) => {
+  //   //     console.log('Data updated successfully:', response.data);
+  //   //     setClickedSeats([]); // Clear clicked seats
+  //   //     setSubmitted(true); // Mark the form as submitted
+  //   //   })
+  //   //   .catch((error) => {
+  //   //     console.error('Error updating data:', error);
+  //   //   });
+    
+  // };
 
   const handleRevertChanges = () => {
    setSeatingData(originalSeatingData);
@@ -150,9 +158,20 @@ const SeatView = () => {
                     margin: '0 10px 10px 0', 
                   }}
                   variant='contained'
-                  onClick={handleSubmit}>
-                Proceed
+                  onClick={handlePoppup}>
+                Book
               </Button>
+              {/* <Button sx={{
+                    width: 170,
+                    height: 40,
+                    borderRadius: '5px',
+                    margin: '0 10px 10px 0', 
+                  }}
+                  variant='contained'
+                  onClick={handleSubmit}
+                  disabled={!enablePayment}>
+                Proceed
+              </Button> */}
               <Button sx={{
                     width: 170,
                     height: 40,
@@ -165,7 +184,7 @@ const SeatView = () => {
               </Button>
             </div>
             </div>
-            
+            <UserDetailsForm />
           </div>
         </article>
       </div>

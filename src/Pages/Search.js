@@ -16,15 +16,17 @@ const Search = () => {
     const [to, setTo] = React.useState(stations[0]);
     const [inputTo, setInputTo] = React.useState('');
     const [dest, setDest] = React.useState('');
-    const [date, setDate] = React.useState('');
+    // const [date, setDate] = React.useState('');
     const [passengers, setPassengers] = React.useState('');
     const [returnDate, setReturnDate] = React.useState('');
     const [errorMessage, setErrorMessage] = React.useState('');
     const navigate = useNavigate();
 
-    const {getTrainList, handlePassengerCount} = React.useContext(AppContext);
+    const {date, getTrainList, handlePassengerCount, handleDate, handleFrom, handleTo} = React.useContext(AppContext);
     const handleSubmit = async (event) => {
         event.preventDefault();
+        handleFrom(from.label);
+        handleTo(to.label);
         try {
             const response = await axios.post('http://localhost:4000/search', {
                 from: from.label,
@@ -120,7 +122,7 @@ const Search = () => {
                         max: '2018-06-14T00:00',
                     },
                     }}
-                    value={date} onChange={(event) => setDate(event.target.value)}
+                    value={date} onChange={(event) => handleDate(event.target.value)}
                 />
                 </FormControl>
                 </div>

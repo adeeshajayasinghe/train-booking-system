@@ -11,7 +11,7 @@ import { AppContext } from '../context'
 // import { useNavigate } from 'react-router-dom';
 const Register = () => {
 
-    const {firstName, lastName, mobile, email, password, handleFirstName, handleLastName, handleMobile, handleEmail, handlePassword} = useContext(AppContext);
+    const {firstName, lastName, mobile, NIC, email, password, handleFirstName, handleLastName, handleMobile, handleNIC, handleEmail, handlePassword} = useContext(AppContext);
     const [errorMessage, setErrorMessage] = useState('');
     const [message, setMessage] = useState('');
     // const navigate = useNavigate();
@@ -23,6 +23,7 @@ const Register = () => {
                 firstName,
                 lastName,
                 mobile,
+                NIC,
                 email,
                 password
             });
@@ -60,13 +61,20 @@ const Register = () => {
                     </FormControl>
                 </div>
             </div>
+            <div className='route'>
                 <div className='origin'>
-                    <FormControl>
-                        <FormLabel>Mobile number</FormLabel>
-                        <Input placeholder="Enter here" variant="soft" value={mobile} onChange={(event) => handleMobile(event.target.value)}/>
-                    </FormControl>
+                        <FormControl>
+                            <FormLabel>Mobile number</FormLabel>
+                            <Input placeholder="Enter here" variant="soft" value={mobile} onChange={(event) => handleMobile(event.target.value)}/>
+                        </FormControl>
+                    </div>
+                    <div className='dest'>
+                        <FormControl>
+                            <FormLabel>NIC</FormLabel>
+                            <Input placeholder="Enter here" variant="soft" value={NIC} onChange={(event) => handleNIC(event.target.value)}/>
+                        </FormControl>
                 </div>
-           
+            </div>
             <div className='route'>
                 <div className='origin'>
                     <FormControl>
