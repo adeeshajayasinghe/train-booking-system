@@ -7,7 +7,7 @@ const ModifySchedule = () => {
       <div className="sidebar-section">
         <AdminSidebar />
       </div>
-      <div>
+      <div className='review'>
         <h2>Modify Schedule</h2>
       </div>
     </div>
