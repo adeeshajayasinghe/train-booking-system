@@ -7,6 +7,8 @@ import Registerimg from '../images/register-img.png'
 import { useState } from 'react';
 import axios from 'axios';
 import { AppContext } from '../context'
+import Alert from '@mui/material/Alert';
+import { useEffect } from 'react';
 // import { response } from 'express';
 // import { useNavigate } from 'react-router-dom';
 const Register = () => {
@@ -15,6 +17,12 @@ const Register = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [message, setMessage] = useState('');
     // const navigate = useNavigate();
+
+    useEffect(() => {
+        if(message){
+            setErrorMessage(false);
+        }
+    }, [message]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -45,6 +53,7 @@ const Register = () => {
           </article>
          
         </article>
+        
         <form className="review-reg" onSubmit={handleSubmit}>
             <h2>Register</h2>
             <div className='route'>
@@ -89,8 +98,10 @@ const Register = () => {
                     </FormControl>
                 </div>
             </div>
-            {errorMessage && <p className='error-msg'>{errorMessage}</p>}
-            {message && <p className='success-msg'>{message}</p>}
+            {/* {errorMessage && <p className='error-msg'>{errorMessage}</p>} */}
+            {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
+            {/* {message && <p className='success-msg'>{message}</p>} */}
+            {message && <Alert severity="success">{message}</Alert>}
             <div className='submit-btn'>
                 <Button type="submit">Submit</Button>
             </div>

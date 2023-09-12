@@ -7,7 +7,7 @@ import { Button } from '@mui/joy';
 
 
 const ClassMenus = ({ trainName, trainNo, classes, priceList, seatsAvailability, trainID }) => {
-  const {handleTrainID, handleTrainName, handleClassIndex, handleTrainNo} = useContext(AppContext);
+  const {handleTrainID, handleTrainName, handleClassIndex, handleTrainNo, handleClassPrice} = useContext(AppContext);
   return (
     <div>
       {classes.map((className, index) => (
@@ -21,6 +21,7 @@ const ClassMenus = ({ trainName, trainNo, classes, priceList, seatsAvailability,
               handleTrainID(trainID);
               handleTrainName(trainName);
               handleTrainNo(trainNo);
+              handleClassPrice(priceList[index]);
               if (className === "First class") handleClassIndex(0);
               else if (className === "Second class") handleClassIndex(1);
               else if (className === "Third class") handleClassIndex(2);

@@ -28,6 +28,7 @@ const AppProvider = ({children}) => {
     const [date, setDate] = useState('');
     const [from, setFrom] = useState('');
     const [to, setTo] = useState('');
+    const [classPrice, setClassPrice] = useState(0);
     function handleFirstName(first){
         setFirstName(first);
     }
@@ -98,9 +99,12 @@ const AppProvider = ({children}) => {
     function handleTo(to){
         setTo(to);
     }
+    function handleClassPrice(price){
+        setClassPrice(price);
+    }
     return(
         <AppContext.Provider value={{
-            isSidebarOpen, isSubMenuOpen, openSidebar, openSubMenu, closeSidebar, closeSubMenu, location, page, firstName, lastName, mobile, NIC, email, password, trainList, priceList, trainID, classIndex, trainName, trainNo, passengerCount, OTP, adminEnable, openPopup, date, from, to,  handleFirstName, handleLastName, handleMobile, handleNIC, handleEmail, handlePassword, getTrainList, handleTrainID, handleClassIndex, handleTrainName, handleTrainNo, handlePassengerCount, handleOTP, handleAdmin, handlePopup, handleDate, handleFrom, handleTo
+            isSidebarOpen, isSubMenuOpen, openSidebar, openSubMenu, closeSidebar, closeSubMenu, location, page, firstName, lastName, mobile, NIC, email, password, trainList, priceList, trainID, classIndex, trainName, trainNo, passengerCount, OTP, adminEnable, openPopup, date, from, to, classPrice, handleFirstName, handleLastName, handleMobile, handleNIC, handleEmail, handlePassword, getTrainList, handleTrainID, handleClassIndex, handleTrainName, handleTrainNo, handlePassengerCount, handleOTP, handleAdmin, handlePopup, handleDate, handleFrom, handleTo, handleClassPrice
         }}>{children}</AppContext.Provider>
     );
 }

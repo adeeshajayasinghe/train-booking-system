@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { AppContext } from '../context'
 import travelImg from '../images/Home-img.png';
 import { Link } from 'react-router-dom';
+
 const Hero = () => {
   const {closeSubMenu} = useContext(AppContext);
   return (
@@ -30,7 +31,7 @@ const Hero = () => {
           </Link>
         </article>
         <article className='hero-images'>
-          <img src={travelImg} className='phone-img' alt='travel-man' />
+          <img src={travelImg} className='phone-img' alt='travel-man'/>
         </article>
       </div>
     </section>

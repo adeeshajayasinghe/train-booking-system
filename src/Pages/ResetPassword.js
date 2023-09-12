@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context'
 import { useContext } from 'react';
+import Alert from '@mui/material/Alert';
 
 const ResetPassword = () => {
     const [newpassword, setNewPassword] = useState('');
@@ -62,7 +63,8 @@ const ResetPassword = () => {
                                 <Input placeholder="Enter here" variant="soft" type='password' value={confirmpassword} onChange={(event) => setConfirmPassword(event.target.value)}/>
                             </FormControl>
                         </div>
-                        {errorMessage && <p className='error-msg'>{errorMessage}</p>}
+                        {/* {errorMessage && <p className='error-msg'>{errorMessage}</p>} */}
+                        {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
                         <div className='submit-btn'>
                             <Button type="submit">Login</Button>
                         </div>

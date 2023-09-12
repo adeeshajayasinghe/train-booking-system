@@ -12,6 +12,7 @@ import FormLabel from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Alert from '@mui/material/Alert';
 
 const UserDetailsForm = () => {
     const inputRef = React.useRef(null);
@@ -138,8 +139,10 @@ const UserDetailsForm = () => {
                     </FormControl>
                 </div>
             </div>
-            {errorMessage && <p className='error-msg'>{errorMessage}</p>}
-            {message && <p className='success-msg'>{message}</p>}
+            {/* {errorMessage && <p className='error-msg'>{errorMessage}</p>} */}
+            {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
+            {/* {message && <p className='success-msg'>{message}</p>} */}
+            {message && <Alert severity="success">{message}</Alert>}
             <div className='submit-btn'>
                 <DialogActions>
                     <Button onClick={()=>{handleSubmit()}}>Submit</Button>
