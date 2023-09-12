@@ -6,9 +6,12 @@ import Button from '@mui/material/Button';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
+import { AppContext } from '../context';
+import { useContext } from 'react';
 
 const Payment = () => {
   const [selectedCard, setSelectedCard] = useState(null);
+  const {classPrice, passengerCount} = useContext(AppContext);
   const handleCardSelect = (cardType) => {
     setSelectedCard(cardType);
   };
@@ -63,6 +66,7 @@ const Payment = () => {
                     </FormControl>
                 </div>
             </div>
+            <p>Total payment: LKR {classPrice * passengerCount}</p>
           <Button sx={{
                     width: 170,
                     height: 40,

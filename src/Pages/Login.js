@@ -8,8 +8,10 @@ import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context'
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
+import Alert from '@mui/material/Alert';
+
 
 const Login = () => {
   const {email, password, handleEmail, handlePassword, handleOTP, handleAdmin} = useContext(AppContext);
@@ -76,6 +78,8 @@ const Login = () => {
           <br />
           <br />
           <br />
+          <br />
+          <br />
           <article className='hero-images'>
             <img src={loginimg} className='login-img' alt='login' />
           </article>
@@ -95,7 +99,9 @@ const Login = () => {
                         <Input placeholder="Enter here" variant="soft" type='password' value={password} onChange={(event) => handlePassword(event.target.value)}/>
                     </FormControl>
                 </div>
-                {errorMessage && <p className='error-msg'>{errorMessage}</p>}
+                {/* {errorMessage && <p className='error-msg'>{errorMessage}</p>} */}
+                {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
+                
             </div>
             
             <div className='submit-btn'>

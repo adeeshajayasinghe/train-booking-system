@@ -52,6 +52,7 @@ const SeatView = () => {
     handlePopup(true);
   };
 
+
   // const handleSubmit = async (event) => {
   //   // const updatedFullArray = fullArray;
   //   // updatedFullArray[classIndex] = seatingData;

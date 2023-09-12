@@ -8,6 +8,8 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AppContext } from '../context'
+import Alert from '@mui/material/Alert';
+
 
 const Search = () => {
     const inputRef = React.useRef(null);
@@ -166,7 +168,8 @@ const Search = () => {
             </FormControl>
             </div>
             </div>
-            {errorMessage && <p className='error-msg'>{errorMessage}</p>}
+            {/* {errorMessage && <p className='error-msg'>{errorMessage}</p>} */}
+            {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
             <div className='route'>
             <div className='submit-btn'>
                 <Button type="submit">Search</Button>
