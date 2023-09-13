@@ -8,10 +8,13 @@ import FormLabel from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
 import { AppContext } from '../context';
 import { useContext } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Payment = () => {
   const [selectedCard, setSelectedCard] = useState(null);
-  const {classPrice, passengerCount} = useContext(AppContext);
+  const {classPrice, passengerCount, fullArray, clickedSeats, classIndex, seatingData, trainID, handleClickedSeats} = useContext(AppContext);
+  const navigate = useNavigate();
   const handleCardSelect = (cardType) => {
     setSelectedCard(cardType);
   };
@@ -20,6 +23,22 @@ const Payment = () => {
       border: selectedCard === cardType ? '2px solid #007bff' : '2px solid transparent',
     };
   };
+
+  const handlePay = () => {
+    const updatedFullArray = fullArray;
+    updatedFullArray[classIndex] = seatingData;
+    axios
+      .put(`http://localhost:4000/trains/${trainID}`, { updatedData: updatedFullArray })
+      .then((response) => {
+        console.log('Data updated successfully:', response.data);
+        handleClickedSeats([]); // Clear clicked seats
+        // setSubmitted(true); // Mark the form as submitted
+      })
+      .catch((error) => {
+        console.error('Error updating data:', error);
+      });
+  };
+
   return (
     <section className='hero'>
       <div className='hero-center'>
@@ -74,6 +93,7 @@ const Payment = () => {
                     margin: '0 10px 10px 0', 
                   }}
                   variant='contained'
+                  onClick={()=> handlePay()}
                   >
                 Pay Now
           </Button>
@@ -84,6 +104,7 @@ const Payment = () => {
                     margin: '0 10px 10px 0', 
                   }}
                   variant='outlined' 
+                  onClick={() => navigate('/seatview')}
                   >
                 Cancel
               </Button>

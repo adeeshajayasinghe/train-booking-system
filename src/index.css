@@ -942,3 +942,15 @@ div#main {
   flex-direction: column;
   justify-content: flex-start;
 }
+.train-times {
+  display: flex;
+  /* justify-content: space-around; */
+  gap: 3.8rem;
+}
+.time-wrapper {
+  padding: 0.15rem 0.25rem;
+  color: white;
+  background: var(--clr-black);
+  border-radius: var(--radius);
+  border-color: transparent;
+}
