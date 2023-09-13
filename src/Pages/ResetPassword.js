@@ -27,7 +27,7 @@ const ResetPassword = () => {
             email
           })
           const userType = response.data.isAdmin;
-          setCookies('access_token', response.data.token);;
+          setCookies('access_token', response.data.token);
           window.localStorage.setItem("userID", response.data.userID);
           if (userType) {
             handleAdmin(true);

@@ -579,6 +579,10 @@ div#main {
   margin-left: 1.5rem;
   margin-top: 0.75rem;
 }
+.sumary-submit-btn {
+  display: flex;
+  justify-content: center;
+}
 
 .gallery, .services, .about, .journey, .dashboard{
   display: flex;
@@ -949,8 +953,27 @@ div#main {
 }
 .time-wrapper {
   padding: 0.15rem 0.25rem;
-  color: white;
-  background: var(--clr-black);
+  color: black;
+  background: #bde0fe;
+  border-radius: var(--radius);
+  border-color: transparent;
+}
+.summary-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 4rem;
+  /* padding-left: 2rem; */
+}
+.success-icon {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
+.summary-txt {
+  padding: 0.15rem 0.25rem;
+  width: 8rem;
+  color: black;
+  background: #bde0fe;
   border-radius: var(--radius);
   border-color: transparent;
 }

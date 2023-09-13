@@ -3,6 +3,11 @@ const Joi = require('joi');
 
 
 const BookingSchema = new mongoose.Schema({
+    ReferenceNo: {
+        type: String,
+        default: "",
+        require: true,
+    },
     firstName: {
         type: String,
         required: true,
@@ -50,6 +55,31 @@ const BookingSchema = new mongoose.Schema({
     date:{
         type: String,
         require:true
+    },
+    price:{
+        type: String,
+        require:true
+    },
+    seat_numbers: {
+        type: Array,
+        require:true
+    },
+    class: {
+        type: String,
+        require:true
+    },
+    timeFrom: {
+        type: String,
+        require:true
+    },
+    timeTo: {
+        type: String,
+        require:true
+    },
+    Status: { 
+        type: String,
+        default: "Pending",
+        require: true
     }
 
 });
@@ -67,7 +97,12 @@ function validateBooking(booking){
         trainName:Joi.string().required(),
         from:Joi.string().required(),
         to:Joi.string().required(),
-        date:Joi.string().required()
+        date:Joi.string().required(),
+        price:Joi.string().required(),
+        seat_numbers:Joi.array().required(),
+        class:Joi.string().required(),
+        timeFrom:Joi.string().required(),
+        timeTo:Joi.string().required()
 
     });
     return schema.validate(booking);

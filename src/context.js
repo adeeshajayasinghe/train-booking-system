@@ -32,6 +32,11 @@ const AppProvider = ({children}) => {
     const [fullArray, setFullArray] = useState([]);
     const [clickedSeats, setClickedSeats] = useState([]);
     const [seatingData, setSeatingData] = useState([]);
+    const [seatNumbers, setSeatNumbers] = useState([]);
+    const [timeFrom, setTimeFrom] = useState('');
+    const [timeTo, setTimeTo] = useState('');
+    const [refNumber, setRefNumber] = useState('');
+    const [className, setClassName] = useState('');
     function handleFirstName(first){
         setFirstName(first);
     }
@@ -114,9 +119,24 @@ const AppProvider = ({children}) => {
     function handleSeatingData(data){
         setSeatingData(data);
     }
+    function handleSeatNumbers(seatNumbers){
+        setSeatNumbers(seatNumbers);
+    }
+    function handleDepartTime(time){
+        setTimeFrom(time);
+    }
+    function handleArrivalTime(time){
+        setTimeTo(time);
+    }
+    function handleRefNumber(ref){
+        setRefNumber(ref);
+    }
+    function handleClassName(className){
+        setClassName(className);
+    }
     return(
         <AppContext.Provider value={{
-            isSidebarOpen, isSubMenuOpen, openSidebar, openSubMenu, closeSidebar, closeSubMenu, location, page, firstName, lastName, mobile, NIC, email, password, trainList, priceList, trainID, classIndex, trainName, trainNo, passengerCount, OTP, adminEnable, openPopup, date, from, to, classPrice, fullArray, clickedSeats, seatingData, handleFirstName, handleLastName, handleMobile, handleNIC, handleEmail, handlePassword, getTrainList, handleTrainID, handleClassIndex, handleTrainName, handleTrainNo, handlePassengerCount, handleOTP, handleAdmin, handlePopup, handleDate, handleFrom, handleTo, handleClassPrice, handleFullArray, handleClickedSeats, handleSeatingData
+            isSidebarOpen, isSubMenuOpen, openSidebar, openSubMenu, closeSidebar, closeSubMenu, location, page, firstName, lastName, mobile, NIC, email, password, trainList, priceList, trainID, classIndex, trainName, trainNo, passengerCount, OTP, adminEnable, openPopup, date, from, to, classPrice, fullArray, clickedSeats, seatingData, seatNumbers, timeFrom, timeTo, refNumber, className, handleFirstName, handleLastName, handleMobile, handleNIC, handleEmail, handlePassword, getTrainList, handleTrainID, handleClassIndex, handleTrainName, handleTrainNo, handlePassengerCount, handleOTP, handleAdmin, handlePopup, handleDate, handleFrom, handleTo, handleClassPrice, handleFullArray, handleClickedSeats, handleSeatingData, handleSeatNumbers, handleDepartTime, handleArrivalTime, handleRefNumber, handleClassName
         }}>{children}</AppContext.Provider>
     );
 }
