@@ -16,7 +16,7 @@ import Alert from '@mui/material/Alert';
 
 const UserDetailsForm = () => {
     const inputRef = React.useRef(null);
-    const {openPopup, handlePopup, firstName, lastName, mobile, NIC, email, passengerCount, date, from, to, handleFirstName, handleLastName, handleMobile, handleNIC, handleEmail, handlePassengerCount, trainName} = useContext(AppContext);
+    const {openPopup, handlePopup, firstName, lastName, mobile, NIC, email, passengerCount, date, from, to, handleFirstName, handleLastName, handleMobile, handleNIC, handleEmail, handlePassengerCount, handleRefNumber, trainName, classIndex, classPrice, seatNumbers, timeFrom, timeTo, handleClassName } = useContext(AppContext);
     const [errorMessage, setErrorMessage] = useState('');
     const [message, setMessage] = useState('');
     const userid=window.localStorage.getItem("userID") ;
@@ -53,7 +53,17 @@ const UserDetailsForm = () => {
 
     const handleSubmit = async () => {
         try {
-            await axios.post('http://localhost:4000/booking', {
+            const totalPayment = (classPrice * passengerCount).toString();
+            let className = '';
+            if (classIndex === 0) {
+                className = 'First Class';
+            } else if (classIndex === 1) {
+                className = 'Second Class';
+            } else {
+                className = 'Third Class';
+            }
+            handleClassName(className);
+            const response = await axios.post('http://localhost:4000/booking', {
                 firstName,
                 lastName,
                 mobile,
@@ -63,9 +73,14 @@ const UserDetailsForm = () => {
                 trainName,
                 from,
                 to,
-                date
+                date,
+                price: totalPayment,
+                seat_numbers: seatNumbers,
+                class: className,
+                timeFrom,
+                timeTo
             });
-            
+            handleRefNumber(response.data);
             handlePopup(false);
             navigate('/payment');
         }catch(error) {

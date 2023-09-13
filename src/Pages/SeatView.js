@@ -12,7 +12,7 @@ const SeatView = () => {
   const [loading, setLoading] = useState(true);
   // const [clickedSeats, setClickedSeats] = useState([]);
   const [submitted, setSubmitted] = useState(false); // Track form submission
-  const {trainNo, classIndex, trainID, handlePopup, passengerCount, trainName, handleFullArray, handleClickedSeats, handleSeatingData, fullArray, clickedSeats, seatingData} = useContext(AppContext);
+  const {trainNo, classIndex, trainID, handlePopup, passengerCount, trainName, seatNumbers, handleFullArray, handleClickedSeats, handleSeatingData, handleSeatNumbers, fullArray, clickedSeats, seatingData} = useContext(AppContext);
   // const [fullArray, setFullArray] = useState([]); 
   const [originalSeatingData, setOriginalSeatingData] = useState([]);
   const navigate = useNavigate();
@@ -35,6 +35,10 @@ const SeatView = () => {
   }, []);
 
   const handleSeatClick = (seatIndex) => {
+    // handleSeatNumbers([...seatNumbers, seatIndex]);
+    if (!(seatNumbers.includes(seatIndex))) {
+      handleSeatNumbers([...seatNumbers, seatIndex]);
+    }
     if (!submitted) {
       if (clickedSeats.length < passengerCount) {
         const updatedClickedSeats = [...clickedSeats, seatIndex];
@@ -75,6 +79,7 @@ const SeatView = () => {
   const handleRevertChanges = () => {
    handleSeatingData(originalSeatingData);
    handleClickedSeats([]);
+   handleSeatNumbers([]);
   };
 
   if (loading) {
