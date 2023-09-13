@@ -10,13 +10,13 @@ const BookingSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: true,
-        minlength: 5,
+        minlength: 2,
         maxlenght: 255
     },
     lastName: {
         type: String,
         required: true,
-        minlength: 5,
+        minlength: 2,
         maxlenght: 255
     },
     mobile: {
@@ -32,8 +32,8 @@ const BookingSchema = new mongoose.Schema({
     NIC: {
         type: String,
         required: true,
-        minlength:10,
-        maxlength: 10
+        minlength:9,
+        maxlength: 12
     },
     passengerCount: {
         type: Number,
@@ -74,7 +74,12 @@ const BookingSchema = new mongoose.Schema({
     timeTo: {
         type: String,
         require:true
+    },
+    Status: { 
+        type: String,
+        require: true
     }
+    
 
 });
 
@@ -82,12 +87,12 @@ const Booking = mongoose.model('BookingHistory', BookingSchema);
 
 function validateBooking(booking){
     const schema = Joi.object({
-        ReferenceNo: Joi.string().required(),
+        ReferenceNo: Joi.string().valid('').required(),
         firstName: Joi.string().min(5).max(255).required(),
         lastName: Joi.string().min(5).max(255).required(),
         mobile: Joi.string().min(10).max(10).required(),
         email: Joi.string().required().email(),
-        NIC:Joi.string().required().min(10).max(10),
+        NIC:Joi.string().required().min(9).max(12),
         passengerCount:Joi.required(),
         trainName: Joi.string().required(),
         trainNo:Joi.string().required(),
@@ -98,7 +103,8 @@ function validateBooking(booking){
         seat_numbers: Joi.array().required(),
         class: Joi.string().required(),
         timeFrom: Joi.string().required(),
-        timeTo: Joi.string().required()
+        timeTo: Joi.string().required(),
+        Status: Joi.string().valid('Pending').required()
         
 
     });
