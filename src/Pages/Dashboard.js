@@ -36,7 +36,7 @@ const ClassMenus = ({ trainName, trainNo, classes, priceList, seatsAvailability,
 };
 
 const Dashboard = () => {
-  const {trainList, priceList} = useContext(AppContext);
+  const {trainList, priceList, from, to} = useContext(AppContext);
   return (
     <section className='hero'>
       <div className='content-center'>
@@ -47,6 +47,10 @@ const Dashboard = () => {
           <div className='train-img'>
             <img src={Train} alt={train.trainName}/>
           </div>
+          <div className='train-times'>
+            <p className='time-wrapper'>Departs: {train.departureTimes[train.stations.indexOf(from)]}</p>
+            <p className='time-wrapper'>Arrives: {train.arrivalTimes[train.stations.indexOf(to)]}</p>
+          </div> 
           <p>Train No: {train.trainNo}</p>
           <p>Origin: {train.origin}</p>
           <p>Destination: {train.destination}</p>

@@ -29,6 +29,9 @@ const AppProvider = ({children}) => {
     const [from, setFrom] = useState('');
     const [to, setTo] = useState('');
     const [classPrice, setClassPrice] = useState(0);
+    const [fullArray, setFullArray] = useState([]);
+    const [clickedSeats, setClickedSeats] = useState([]);
+    const [seatingData, setSeatingData] = useState([]);
     function handleFirstName(first){
         setFirstName(first);
     }
@@ -102,9 +105,18 @@ const AppProvider = ({children}) => {
     function handleClassPrice(price){
         setClassPrice(price);
     }
+    function handleFullArray(array){
+        setFullArray(array);
+    }
+    function handleClickedSeats(seats){
+        setClickedSeats(seats);
+    }
+    function handleSeatingData(data){
+        setSeatingData(data);
+    }
     return(
         <AppContext.Provider value={{
-            isSidebarOpen, isSubMenuOpen, openSidebar, openSubMenu, closeSidebar, closeSubMenu, location, page, firstName, lastName, mobile, NIC, email, password, trainList, priceList, trainID, classIndex, trainName, trainNo, passengerCount, OTP, adminEnable, openPopup, date, from, to, classPrice, handleFirstName, handleLastName, handleMobile, handleNIC, handleEmail, handlePassword, getTrainList, handleTrainID, handleClassIndex, handleTrainName, handleTrainNo, handlePassengerCount, handleOTP, handleAdmin, handlePopup, handleDate, handleFrom, handleTo, handleClassPrice
+            isSidebarOpen, isSubMenuOpen, openSidebar, openSubMenu, closeSidebar, closeSubMenu, location, page, firstName, lastName, mobile, NIC, email, password, trainList, priceList, trainID, classIndex, trainName, trainNo, passengerCount, OTP, adminEnable, openPopup, date, from, to, classPrice, fullArray, clickedSeats, seatingData, handleFirstName, handleLastName, handleMobile, handleNIC, handleEmail, handlePassword, getTrainList, handleTrainID, handleClassIndex, handleTrainName, handleTrainNo, handlePassengerCount, handleOTP, handleAdmin, handlePopup, handleDate, handleFrom, handleTo, handleClassPrice, handleFullArray, handleClickedSeats, handleSeatingData
         }}>{children}</AppContext.Provider>
     );
 }

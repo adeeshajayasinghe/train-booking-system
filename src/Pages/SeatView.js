@@ -8,12 +8,12 @@ import UserDetailsForm from '../Components/UserDetailsForm';
 import { useNavigate } from 'react-router-dom';
 
 const SeatView = () => {
-  const [seatingData, setSeatingData] = useState([]);
+  // const [seatingData, setSeatingData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [clickedSeats, setClickedSeats] = useState([]);
+  // const [clickedSeats, setClickedSeats] = useState([]);
   const [submitted, setSubmitted] = useState(false); // Track form submission
-  const {trainNo, classIndex, trainID, handlePopup, passengerCount, trainName} = useContext(AppContext);
-  const [fullArray, setFullArray] = useState([]); 
+  const {trainNo, classIndex, trainID, handlePopup, passengerCount, trainName, handleFullArray, handleClickedSeats, handleSeatingData, fullArray, clickedSeats, seatingData} = useContext(AppContext);
+  // const [fullArray, setFullArray] = useState([]); 
   const [originalSeatingData, setOriginalSeatingData] = useState([]);
   const navigate = useNavigate();
   
@@ -22,9 +22,9 @@ const SeatView = () => {
     const fetchSeats = async () => {
       try {
         const response = await axios.get(`http://localhost:4000/trains/${trainID}`);
-        setFullArray(response.data.seatsArrangement);
+        handleFullArray(response.data.seatsArrangement);
         setOriginalSeatingData(response.data.seatsArrangement[classIndex]);
-        setSeatingData(response.data.seatsArrangement[classIndex]);
+        handleSeatingData(response.data.seatsArrangement[classIndex]);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching seats:', error);
@@ -38,17 +38,20 @@ const SeatView = () => {
     if (!submitted) {
       if (clickedSeats.length < passengerCount) {
         const updatedClickedSeats = [...clickedSeats, seatIndex];
-        setClickedSeats(updatedClickedSeats);
+        handleClickedSeats(updatedClickedSeats);
   
         const updatedSeatingData = [...seatingData];
         updatedSeatingData[seatIndex] = updatedSeatingData[seatIndex] === 0 ? 1 : 0;
-        setSeatingData(updatedSeatingData);
+        handleSeatingData(updatedSeatingData);
       } else {
         alert(`You can only select ${passengerCount} seats.`);
       }
     }
   };
   const handlePoppup = () => {
+    handleFullArray(fullArray);
+    handleClickedSeats([]);
+    handleSeatingData(seatingData);
     handlePopup(true);
   };
 
@@ -70,8 +73,8 @@ const SeatView = () => {
   // };
 
   const handleRevertChanges = () => {
-   setSeatingData(originalSeatingData);
-   setClickedSeats([]);
+   handleSeatingData(originalSeatingData);
+   handleClickedSeats([]);
   };
 
   if (loading) {
