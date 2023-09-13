@@ -970,10 +970,20 @@ div#main {
   padding-bottom: 1rem;
 }
 .summary-txt {
-  padding: 0.15rem 0.25rem;
-  width: 8rem;
+  padding: 0.01rem 0.25rem;
+  width: 12rem;
   color: black;
   background: #bde0fe;
   border-radius: var(--radius);
   border-color: transparent;
+}
+.gallery-content-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.qr-code-image {
+  width: 80px;
+  height: 80px;
 }

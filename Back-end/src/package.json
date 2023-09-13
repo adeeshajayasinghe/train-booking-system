@@ -19,7 +19,8 @@
     "lodash": "^4.17.21",
     "mongodb": "^5.7.0",
     "mongoose": "^7.4.2",
-    "nodemailer": "^6.9.4"
+    "nodemailer": "^6.9.4",
+    "qrcode": "^1.5.3"
   },
   "devDependencies": {
     "jest": "^29.6.4"
