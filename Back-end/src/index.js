@@ -14,7 +14,7 @@ const router3 = require('./Routes/trains');
 const router4 = require('./Routes/search');
 const router5 = require('./Routes/popupform');
 const router6 = require('./Routes/booking');
-const router7 = require('./Routes/cancel');
+const router7 = require('./Routes/Cancel');
 
 
 // Connect to monogoDB
