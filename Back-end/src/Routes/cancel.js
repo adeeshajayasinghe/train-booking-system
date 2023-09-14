@@ -14,22 +14,22 @@ router.post('/', async (req, res) => {
     return res.status(400).json({ message: 'ReferenceNo is required in the request body' });
   }
 
-  const booking = await Booking.find({ ReferenceNo: referenceNo });  //find the booking by reference number
+  const booking = await Booking.findOne({ ReferenceNo: referenceNo });  //find the booking by reference number
 
   if (booking.length === 0) {
     return res.status(404).json({ message: 'Booking not found! Enter a valid ref.no' });
   }
-  if (booking[0].Status === "Cancelled") {
+  if (booking.Status === "Cancelled") {
     return res.status(400).json({ message: 'Booking already cancelled' });
   }
 
-  if (booking[0].Status === 'Completed') {
+  if (booking.Status === 'Completed') {
     return res.status(400).json({ message: 'Booking already completed' });
   }
 
 
  
-  const bookdate = booking[0].date;  //gt the booked date
+  const bookdate = booking.date;  //gt the booked date
   const date = new Date();
   const today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();  //get today date
 
@@ -46,25 +46,28 @@ router.post('/', async (req, res) => {
 
   let refund = 0;
   if (daysDifference >= 7) {
-    refund = 0.75 * booking[0].price;
+    refund = 0.75 * booking.price;
   }
   else if (daysDifference >= 2 && daysDifference < 7) {
-    refund = 0.5 * booking[0].price;
+    refund = 0.5 * booking.price;
   }
   else {
     refund = 0;
   }
 
-  console.log(booking[0].price);
+  console.log(booking.price);
   //deducting the booking fee
-  refund = refund - booking[0].price * 0.03;
+  if (refund !== 0){
+    refund = refund - booking.price * 0.03;
+  }
+  
 
   console.log(refund);
 
 
   console.log(`The difference in days is: ${daysDifference}`);
     
-  const response = { refund: refund, daysRemaining: daysDifference, booking: booking[0] };
+  const response = { refund: refund, daysRemaining: daysDifference, booking: booking };
 
    res.status(200).send(response);
   //res.send({ response });
@@ -77,18 +80,19 @@ router.post('/cancel-booking', async (req, res) => {
   const { referenceNo } = req.body.ReferenceNo;
 
   // Update the document based on the referenceNo
-  const result = await Booking.updateOne(
-    { referenceNo },
-    { $set: { Status: 'Cancelled' } }
+  const result = await Booking.findOneAndUpdate(
+    {ReferenceNo: referenceNo},
+    { $set: { Status: 'Cancelled' } },
+    { new: true }
   );
+  res.json({ success: true, message: 'Booking cancelled successfully.' });
+  // if (result.matchedCount === 1 && result.modifiedCount === 1) {
+  //   res.json({ success: true, message: 'Booking cancelled successfully.' });
+  // } else {
+  //   res.status(500).json({ success: false, message: 'An error occurred while cancelling the booking.' });
+  // }
 
-  if (result.matchedCount === 1 && result.modifiedCount === 1) {
-    res.json({ success: true, message: 'Booking cancelled successfully.' });
-  } else {
-    res.status(500).json({ success: false, message: 'An error occurred while cancelling the booking.' });
-  }
-
-  console.error('Error cancelling booking:', error);
+  console.error('Error cancelling booking:');
 
 
   
