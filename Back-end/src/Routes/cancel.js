@@ -6,71 +6,75 @@ const { Booking } = require('../Models/Booking'); // Import your Booking model
 
 router.post('/', async (req, res) => {
   
-  console.log(req.body);
-  const referenceNo = req.body.ReferenceNo;
-  console.log(referenceNo);
+    console.log(req.body);
+    const referenceNo = req.body.ReferenceNo;
+    console.log(referenceNo);
         
-  if (!referenceNo) {
-    return res.status(400).json({ message: 'ReferenceNo is required in the request body' });
-  }
+    if (!referenceNo) {
+        return res.status(400).json({ message: 'ReferenceNo is required in the request body' });
+    }
 
-  const booking = await Booking.findOne({ ReferenceNo: referenceNo });  //find the booking by reference number
+    const booking = await Booking.findOne({ ReferenceNo: referenceNo });  //find the booking by reference number
 
-  if (booking.length === 0) {
-    return res.status(404).json({ message: 'Booking not found! Enter a valid ref.no' });
-  }
-  if (booking.Status === "Cancelled") {
-    return res.status(400).json({ message: 'Booking already cancelled' });
-  }
+    if (booking.length === 0) {
+        return res.status(404).json({ message: 'Booking not found! Enter a valid ref.no' });
+    }
+    if (booking.Status === "Cancelled") {
+        return res.status(400).json({ message: 'Booking already cancelled' });
+    }
 
-  if (booking.Status === 'Completed') {
-    return res.status(400).json({ message: 'Booking already completed' });
-  }
+    if (booking.Status === 'Completed') {
+        return res.status(400).json({ message: 'Booking already completed' });
+    }
 
 
  
-  const bookdate = booking.date;  //gt the booked date
-  const date = new Date();
-  const today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();  //get today date
+    const bookdate = booking.date;  //gt the booked date
+    const date = new Date();
+    const today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();  //get today date
 
-  // Parse the date strings into Date objects
-  const date1 = new Date(bookdate);
-  const date2 = new Date(today);
+    // Parse the date strings into Date objects
+    const date1 = new Date(bookdate);
+    const date2 = new Date(today);
 
-  // Calculate the difference in milliseconds
-  const millisecondsDefference = date1 - date2;  //find the difference between two dates
+    // Calculate the difference in milliseconds
+    const millisecondsDefference = date1 - date2;  //find the difference between two dates
 
-  //convert milliseconds to days
-  const daysDifference = Math.floor(millisecondsDefference / (1000 * 60 * 60 * 24)); //convert milliseconds to days
+    //convert milliseconds to days
+    let daysDifference = Math.floor(millisecondsDefference / (1000 * 60 * 60 * 24)); //convert milliseconds to days
           
+    if (daysDifference < 0) {
+        daysDifference = 0;
+    }
 
-  let refund = 0;
-  if (daysDifference >= 7) {
-    refund = 0.75 * booking.price;
-  }
-  else if (daysDifference >= 2 && daysDifference < 7) {
-    refund = 0.5 * booking.price;
-  }
-  else {
-    refund = 0;
-  }
+    let refund = 0;
+    if (daysDifference >= 7) {
+        refund = 0.75 * booking.price;
+    }
+    else if (daysDifference >= 2 && daysDifference < 7) {
+        refund = 0.5 * booking.price;
+    }
+    else {
+        refund = 0;
+    }
 
-  console.log(booking.price);
-  //deducting the booking fee
-  if (refund !== 0){
-    refund = refund - booking.price * 0.03;
-  }
+    console.log(booking.price);
+    console.log(refund);
+    //deducting the booking fee
+    if (refund !== 0) {
+        refund = refund - booking.price * 0.03;
+    }
   
 
-  console.log(refund);
+    console.log(refund);
 
 
-  console.log(`The difference in days is: ${daysDifference}`);
+    console.log(`The difference in days is: ${daysDifference}`);
     
-  const response = { refund: refund, daysRemaining: daysDifference, booking: booking };
+    const response = { refund: refund, daysRemaining: daysDifference, booking: booking };
 
-   res.status(200).send(response);
-  //res.send({ response });
+    res.status(200).send(response);
+    //res.send({ response });
 }
 
 );
