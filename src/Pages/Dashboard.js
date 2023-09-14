@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 import { Button } from '@mui/joy';
 
 
-const ClassMenus = ({ trainName, trainNo, classes, priceList, seatsAvailability, trainID }) => {
-  const {handleTrainID, handleTrainName, handleClassIndex, handleTrainNo, handleClassPrice} = useContext(AppContext);
+const ClassMenus = ({ trainName, trainNo, classes, priceList, seatsAvailability, trainID, trainDepartTime, trainArrivalTime }) => {
+  const {handleTrainID, handleTrainName, handleClassIndex, handleTrainNo, handleClassPrice, handleDepartTime, handleArrivalTime} = useContext(AppContext);
   return (
     <div>
       {classes.map((className, index) => (
@@ -22,6 +22,8 @@ const ClassMenus = ({ trainName, trainNo, classes, priceList, seatsAvailability,
               handleTrainName(trainName);
               handleTrainNo(trainNo);
               handleClassPrice(priceList[index]);
+              handleDepartTime(trainDepartTime);
+              handleArrivalTime(trainArrivalTime);
               if (className === "First class") handleClassIndex(0);
               else if (className === "Second class") handleClassIndex(1);
               else if (className === "Third class") handleClassIndex(2);
@@ -55,7 +57,7 @@ const Dashboard = () => {
           <p>Origin: {train.origin}</p>
           <p>Destination: {train.destination}</p>
           <p>Dates: {train.dates}</p>
-          <ClassMenus trainName={train.trainName} trainNo={train.trainNo} classes={train.class} priceList={priceList} seatsAvailability={train.seatsAvailability} trainID = {train._id}/>
+          <ClassMenus trainName={train.trainName} trainNo={train.trainNo} classes={train.class} priceList={priceList} seatsAvailability={train.seatsAvailability} trainID = {train._id} trainDepartTime={train.departureTimes[train.stations.indexOf(from)]} trainArrivalTime={train.arrivalTimes[train.stations.indexOf(to)]}/>
           {/* <Link to={`/seatview`}>
             <Button onClick={() => handleTrainNo(train._id)}>Search</Button>
           </Link> */}

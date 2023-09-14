@@ -10,10 +10,11 @@ import { AppContext } from '../context';
 import { useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Summary from '../Components/Summary';
 
 const Payment = () => {
   const [selectedCard, setSelectedCard] = useState(null);
-  const {classPrice, passengerCount, fullArray, clickedSeats, classIndex, seatingData, trainID, handleClickedSeats} = useContext(AppContext);
+  const {classPrice, passengerCount, fullArray, clickedSeats, classIndex, seatingData, trainID, handleClickedSeats, handlePopup} = useContext(AppContext);
   const navigate = useNavigate();
   const handleCardSelect = (cardType) => {
     setSelectedCard(cardType);
@@ -37,6 +38,7 @@ const Payment = () => {
       .catch((error) => {
         console.error('Error updating data:', error);
       });
+      handlePopup(true);
   };
 
   return (
@@ -109,6 +111,7 @@ const Payment = () => {
                 Cancel
               </Button>
       </form>
+      <Summary />
       </div>
     </section>
   )
