@@ -14,7 +14,7 @@ const router3 = require('./Routes/trains');
 const router4 = require('./Routes/search');
 const router5 = require('./Routes/popupform');
 const router6 = require('./Routes/booking');
-const router7 = require('./Routes/refund');
+const router7 = require('./Routes/cancel');
 
 // Connect to monogoDB
 mongoose.connect('mongodb+srv://adeesha:gkp7ljvUc4uGCNCv@cluster0.dpisc3q.mongodb.net/train-ticket-bookings?retryWrites=true&w=majority');
