@@ -14,6 +14,7 @@ const router3 = require('./Routes/trains');
 const router4 = require('./Routes/search');
 const router5 = require('./Routes/popupform');
 const router6 = require('./Routes/booking');
+const router7 = require('./Routes/refund');
 
 // Connect to monogoDB
 mongoose.connect('mongodb+srv://adeesha:gkp7ljvUc4uGCNCv@cluster0.dpisc3q.mongodb.net/train-ticket-bookings?retryWrites=true&w=majority');
@@ -26,7 +27,8 @@ app.use('/login', router2);
 app.use('/trains', router3);
 app.use('/search', router4)
 app.use('/popupform', router5)
-app.use('/booking', router6)
+app.use('/booking', router6) 
+app.use('/refund', router7)
 
 app.listen(4000, () => {
     console.log('Server is running on port 4000');
