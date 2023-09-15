@@ -10,16 +10,19 @@ const {Token} = require('../Models/Token');
 const sendEmail = require('../Utils/SendEmails');
 
 router.post('/sendOTP', async (req, res) => {
-    try{
+    try {
+        console.log(req.body);
         // Find the user by their email address
         let user = await User.findOne({ email: req.body.recipient_email });
-        if (!user) {
+        /*if (!user) {
             return res.status(400).json({ error: 'User is not registered.' });
         } else{
             await sendEmail(req.body.recipient_email, 'Password Reset', req.body.OTP);
             res.status(200).send('OTP sent successfully!');
-            
-        }
+
+        }*/
+        await sendEmail(req.body.recipient_email, 'Password Reset', req.body.OTP);
+            res.status(200).send('OTP sent successfully!');
     } catch(error) {
         res.status(500).json({ error: 'Something went wrong!' });
     }

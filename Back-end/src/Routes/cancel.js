@@ -1,7 +1,9 @@
 const express = require('express');
 const Joi = require('joi');
 const router = express.Router();
-const { Booking } = require('../Models/Booking'); // Import your Booking model
+const { Booking } = require('../Models/Booking'); 
+const { Train } = require('../Models/Train');
+const { result } = require('lodash');
 
 
 router.post('/', async (req, res) => {
@@ -81,27 +83,64 @@ router.post('/', async (req, res) => {
 
 // update the status with cancelled when user hit the cancel confirmation button
 router.post('/cancel-booking', async (req, res) => {
-  const { referenceNo } = req.body.ReferenceNo;
 
-  // Update the document based on the referenceNo
-  const result = await Booking.findOneAndUpdate(
-    {ReferenceNo: referenceNo},
-    { $set: { Status: 'Cancelled' } },
-    { new: true }
-  );
-  res.json({ success: true, message: 'Booking cancelled successfully.' });
-  // if (result.matchedCount === 1 && result.modifiedCount === 1) {
-  //   res.json({ success: true, message: 'Booking cancelled successfully.' });
-  // } else {
-  //   res.status(500).json({ success: false, message: 'An error occurred while cancelling the booking.' });
-  // }
+    console.log(req.body);
+    const referenceNo = req.body.ReferenceNo; // Access ReferenceNo directly
+ 
 
-  console.error('Error cancelling booking:');
+    try {
+        // Update the Status based on the referenceNo
+        const result_1 = await Booking.findOneAndUpdate(
+            { ReferenceNo: referenceNo },
+            { $set: { Status: 'Cancelled' } },
+            { new: true }
+        );
+      
+        //update the seat availability
+        const trainName = req.body.TrainName;
+        const seatNumbers = req.body.seats;
 
+        // Convert className to index (assuming you have a mapping of class names to indexes)
+        const classIndex = getClassIndexByName(req.body.className);
+        
+        // update query
+    const updateQuery = {};
 
+    // Set the specific array element values to 0 (available) based on seatNumbers
+    for (const seatNumber of seatNumbers) {
+      updateQuery[`$set.seatsArrangement.${classIndex}.${seatNumber}`] = 0;
+        };
+
+        // Update the document in the trains collection
+    const result_2 = await Train.updateOne(
+      { trainName: trainName },
+      updateQuery
+        );
+        
+      
+    if (result_1 && result_2) {
+            res.json({ success: true, message: 'Booking cancelled successfully.' });
+        } else {
+            res.status(500).json({ success: false, message: 'Booking not found or could not be cancelled.' });
+        }
+
+        
+    } catch (error) {
+        console.error('Error cancelling booking:', error);
+        res.status(500).json({ success: false, message: 'An error occurred while cancelling the booking.' });
+    }
+    
+    // Helper function to get class index by name (replace with your actual mapping)
+    function getClassIndexByName(className) {
+        const classMappings = {
+            'First class': 1,
+            'Second class': 2,
+            'Third class': 3,
+    
+        };
+        return classMappings[className];
+    }
   
 });
-
-
 
 module.exports = router;
