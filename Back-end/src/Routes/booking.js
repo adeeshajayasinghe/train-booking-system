@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
     let Ref_no = generateRef();
     req.body.ReferenceNo = Ref_no;
     // let booking = new Booking(_.pick(req.body, ['firstName', 'lastName', 'mobile', 'email', 'NIC','passengerCount','trainName','from','to','date']));
-    let booking = new Booking(_.pick(req.body, ['ReferenceNo','firstName', 'lastName', 'mobile', 'email', 'NIC', 'passengerCount', 'trainName', 'trainNo', 'from', 'to', 'date', 'price', 'seat_numbers', 'class', 'timeFrom', 'timeTo','Status']));
+    let booking = new Booking(_.pick(req.body, ['ReferenceNo','firstName', 'lastName', 'mobile', 'email', 'NIC', 'passengerCount', 'trainName', 'from', 'to', 'date', 'price', 'seat_numbers', 'class', 'timeFrom', 'timeTo','Status']));
     await booking.save();
     // res.status(200).send("successfully booked!");
     res.status(200).send(Ref_no);

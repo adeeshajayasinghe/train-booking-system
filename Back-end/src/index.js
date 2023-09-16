@@ -15,6 +15,7 @@ const router4 = require('./Routes/search');
 const router5 = require('./Routes/popupform');
 const router6 = require('./Routes/booking');
 const router7 = require('./Routes/cancel');
+const router8 = require('./Routes/qrcode');
 
 // Connect to monogoDB
 mongoose.connect('mongodb+srv://adeesha:gkp7ljvUc4uGCNCv@cluster0.dpisc3q.mongodb.net/train-ticket-bookings?retryWrites=true&w=majority');
@@ -29,6 +30,7 @@ app.use('/search', router4)
 app.use('/popupform', router5)
 app.use('/booking', router6) 
 app.use('/refund', router7)
+app.use('/qrcode', router8)
 
 
 app.listen(4000, () => {
