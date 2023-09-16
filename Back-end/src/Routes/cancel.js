@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
 
     const booking = await Booking.findOne({ ReferenceNo: referenceNo });  //find the booking by reference number
 
-    if (booking.length === 0) {
+    if (!booking) {
         return res.status(404).json({ message: 'Booking not found! Enter a valid ref.no' });
     }
     if (booking.Status === "Cancelled") {
