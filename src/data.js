@@ -21,7 +21,7 @@ const sublinks = [
   {
     page: 'Services',
     links: [
-      { label: 'about', icon: <FaBriefcase />, url: '/products' },
+      { label: 'cancel', icon: <FaBriefcase />, url: '/cancel' },
       { label: 'customers', icon: <FaBriefcase />, url: '/products' },
     ],
   },

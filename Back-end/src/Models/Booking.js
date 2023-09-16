@@ -6,7 +6,6 @@ const BookingSchema = new mongoose.Schema({
     ReferenceNo: {
         type: String,
         default: "",
-        require: true,
     },
     firstName: {
         type: String,
@@ -40,46 +39,49 @@ const BookingSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    // trainNo: {
+    //     tryp: Number,
+    //     required: true
+    // },
     trainName:{
         type:String,
-        require:true
+        required:true
     },
     from:{
         type:String,
-        require:true 
+        required:true 
     },
     to:{
         type:String,
-        require:true
+        required:true
     },
     date:{
         type: String,
-        require:true
+        required:true
     },
     price:{
         type: String,
-        require:true
+        required:true
     },
     seat_numbers: {
         type: Array,
-        require:true
+        required:true
     },
     class: {
         type: String,
-        require:true
+        required:true
     },
     timeFrom: {
         type: String,
-        require:true
+        required:true
     },
     timeTo: {
         type: String,
-        require:true
+        required:true
     },
     Status: { 
         type: String,
         default: "Pending",
-        require: true
     }
 
 });

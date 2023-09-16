@@ -6,25 +6,23 @@ const { Booking } = require('../Models/Booking'); // Import your Booking model
 
 router.post('/', async (req, res) => {
   
-  console.log(req.body);
   const referenceNo = req.body.ReferenceNo;
-  console.log(referenceNo);
         
   if (!referenceNo) {
-    return res.status(400).json({ message: 'ReferenceNo is required in the request body' });
+    return res.status(400).json({ error: 'ReferenceNo is required in the request body' });
   }
 
   const booking = await Booking.findOne({ ReferenceNo: referenceNo });  //find the booking by reference number
 
-  if (booking.length === 0) {
-    return res.status(404).json({ message: 'Booking not found! Enter a valid ref.no' });
+  if (!booking) {
+    return res.status(404).json({ error: 'Booking not found! Enter a valid ref.no' });
   }
   if (booking.Status === "Cancelled") {
-    return res.status(400).json({ message: 'Booking already cancelled' });
+    return res.status(400).json({ error: 'Booking already cancelled' });
   }
 
   if (booking.Status === 'Completed') {
-    return res.status(400).json({ message: 'Booking already completed' });
+    return res.status(400).json({ error: 'Booking already completed' });
   }
 
 
@@ -55,18 +53,11 @@ router.post('/', async (req, res) => {
     refund = 0;
   }
 
-  console.log(booking.price);
   //deducting the booking fee
   if (refund !== 0){
     refund = refund - booking.price * 0.03;
   }
-  
-
-  console.log(refund);
-
-
-  console.log(`The difference in days is: ${daysDifference}`);
-    
+      
   const response = { refund: refund, daysRemaining: daysDifference, booking: booking };
 
    res.status(200).send(response);

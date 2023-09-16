@@ -53,7 +53,7 @@ const Register = () => {
           </article>
          
         </article>
-        
+            
         <form className="review-reg" onSubmit={handleSubmit}>
             <h2>Register</h2>
             <div className='route'>

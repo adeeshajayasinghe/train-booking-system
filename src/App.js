@@ -17,6 +17,7 @@ import ForgotPassword from './Pages/ForgotPassword';
 import ResetPassword from './Pages/ResetPassword';
 import ModifySchedule from './Pages/ModifySchedule';
 import Payment from './Pages/Payment';
+import Cancel from './Pages/Cancel';
 import './index.css';
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path='/resetpassword' element={<ResetPassword/>}></Route>
         <Route path='/modify-schedules' element={<ModifySchedule/>}></Route>
         <Route path='/payment' element={<Payment/>}></Route>
+        <Route path='/cancel' element={<Cancel/>}></Route>
       </Routes>
     </Router>
   )
