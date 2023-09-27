@@ -51,7 +51,7 @@ router.post('/', async (req, res) => {
   else if (daysDifference >= 2 && daysDifference < 7) {
     refund = 0.5 * booking[0].price;
   }
-  else {
+  else if(daysDifference<=2){
     refund = 0;
   }
 
