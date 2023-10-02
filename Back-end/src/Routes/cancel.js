@@ -5,6 +5,7 @@ const { Booking } = require('../Models/Booking'); // Import your Booking model
 
 
 router.post('/', async (req, res) => {
+
   
   const referenceNo = req.body.ReferenceNo;
         
@@ -39,7 +40,7 @@ router.post('/', async (req, res) => {
   const millisecondsDefference = date1 - date2;  //find the difference between two dates
 
   //convert milliseconds to days
-  const daysDifference = Math.floor(millisecondsDefference / (1000 * 60 * 60 * 24)); //convert milliseconds to days
+  let daysDifference = Math.floor(millisecondsDefference / (1000 * 60 * 60 * 24)); //convert milliseconds to days
           
 
   let refund = 0;
@@ -50,6 +51,7 @@ router.post('/', async (req, res) => {
     refund = 0.5 * booking.price;
   }
   else {
+    daysDifference = 0
     refund = 0;
   }
 
@@ -71,23 +73,61 @@ router.post('/cancel-booking', async (req, res) => {
   const { referenceNo } = req.body.ReferenceNo;
 
   // Update the document based on the referenceNo
-  const result = await Booking.findOneAndUpdate(
+  const result_1 = await Booking.findOneAndUpdate(
     {ReferenceNo: referenceNo},
     { $set: { Status: 'Cancelled' } },
     { new: true }
   );
+
+  const trainName = "Train 3";
+  const classToUpdate = "First class";
+  const indexesToUpdate = [2, 6, 13];
+
+  const result_2 = await Booking.updateOne(
+    { trainName: trainName, class: classToUpdate },
+    {
+      $set: {
+        "seatsArrangement.0": {
+          $map: {
+            input: "$seatsArrangement.0",
+            as: "seat",
+            in: {
+              $cond: {
+                if: { $in: ["$$seat", indexesToUpdate] },
+                then: 0,
+                else: "$$seat"
+              }
+            }
+          }
+        }
+      }
+    }
+  );
+
+  const seatUpdation = 
   res.json({ success: true, message: 'Booking cancelled successfully.' });
-  // if (result.matchedCount === 1 && result.modifiedCount === 1) {
-  //   res.json({ success: true, message: 'Booking cancelled successfully.' });
-  // } else {
-  //   res.status(500).json({ success: false, message: 'An error occurred while cancelling the booking.' });
-  // }
-
-  console.error('Error cancelling booking:');
-
-
+  //console.error('Error cancelling booking:');
   
 });
+
+
+//this router is to print QR code when the user entere the Reference no for later concerns.
+router.post('/mobile-Qr', async (req, res) => {
+  const referenceNo = req.body.ReferenceNo;
+        
+  if (!referenceNo) {
+    return res.status(400).json({ error: 'ReferenceNo is required in the request body' });
+  }
+
+  const booking = await Booking.findOne({ ReferenceNo: referenceNo });  //find the booking by reference number
+
+  if (!booking) {
+    return res.status(404).json({ error: 'Booking not found! Enter a valid ref.no' });
+  }
+
+  console.log(booking);
+  res.status(200).send(booking);
+})
 
 
 
