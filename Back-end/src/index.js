@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const config = require('config');
+require('dotenv').config();
 
 const app = express();
 
@@ -18,7 +19,7 @@ const router7 = require('./Routes/cancel');
 const router8 = require('./Routes/qrcode');
 
 // Connect to monogoDB
-mongoose.connect('mongodb+srv://adeesha:gkp7ljvUc4uGCNCv@cluster0.dpisc3q.mongodb.net/train-ticket-bookings?retryWrites=true&w=majority');
+mongoose.connect(process.env.DATABASE_CONNECTION_STRING);
 
 // Middlewares
 app.use(express.json());
