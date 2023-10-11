@@ -19,7 +19,7 @@ const router8 = require('./Routes/qrcode');
 
 // Connect to monogoDB
 mongoose.connect('mongodb+srv://adeesha:gkp7ljvUc4uGCNCv@cluster0.dpisc3q.mongodb.net/train-ticket-bookings?retryWrites=true&w=majority');
-
+//mongoose.connect("mongodb+srv://KMjanith:Mj1229@cluster0.9zvqo1m.mongodb.net/Train-Booking-App");
 // Middlewares
 app.use(express.json());
 app.use(cors());

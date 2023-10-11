@@ -23,6 +23,7 @@ const StationSchema = new mongoose.Schema({
 
 const Station = mongoose.model('stations', StationSchema);
 
+
 function validateStation(station){
     const schema = Joi.object({
         _id: Joi.number().required(),
