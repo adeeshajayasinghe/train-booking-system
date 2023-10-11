@@ -53,8 +53,26 @@ const TrainSchema = new mongoose.Schema({
         required: true
     }
 });
+const BookingHistoriesSchema = new mongoose.Schema({
+    seat_numbers: {
+        type: [Number],
+        required: true
+    },
+    trainName: {
+        type: String,
+        required: true
+    },
+    class: {
+        type: String,
+        required: true
+    },
+    
+
+});
+
 
 const Train = mongoose.model('Trains', TrainSchema);
+const BookingHistory = mongoose.model('bookinghistories', BookingHistoriesSchema);
 
 
 function validateTrain(train){
@@ -76,4 +94,5 @@ function validateTrain(train){
 };
 
 module.exports.Train = Train;
+module.exports.BookingHistory = BookingHistory;
 module.exports.validate = validateTrain;

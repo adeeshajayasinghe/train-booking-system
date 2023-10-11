@@ -37,7 +37,7 @@ const Search = () => {
                 passengers,
                 returnDate
             });
-            // console.log(response.data);
+            console.log(response.data);
             getTrainList(response.data);
             navigate('/dashboard');
         }catch(error) {
