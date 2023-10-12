@@ -24,6 +24,7 @@ const SeatView = () => {
         const response = await axios.get(`http://localhost:4000/trains/${trainID}`);
         handleFullArray(response.data.seatsArrangement);
         setOriginalSeatingData(response.data.seatsArrangement[classIndex]);
+        console.log(response.data.seatsArrangement[classIndex]);
         handleSeatingData(response.data.seatsArrangement[classIndex]);
         setLoading(false);
       } catch (error) {
