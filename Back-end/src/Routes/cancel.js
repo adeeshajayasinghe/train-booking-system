@@ -68,7 +68,7 @@ router.post('/', async (req, res) => {
 
 // update the status with cancelled when user hit the cancel confirmation button
 router.post('/cancel-booking', async (req, res) => {
-  const { referenceNo } = req.body.ReferenceNo;
+  const referenceNo = req.body.ReferenceNo;
 
   // Update the document based on the referenceNo
   const result = await Booking.findOneAndUpdate(

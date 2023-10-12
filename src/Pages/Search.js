@@ -10,7 +10,6 @@ import axios from 'axios';
 import { AppContext } from '../context'
 import Alert from '@mui/material/Alert';
 
-
 const Search = () => {
     const inputRef = React.useRef(null);
     const [from, setFrom] = React.useState(stations[0]);
@@ -27,6 +26,15 @@ const Search = () => {
     const {date, getTrainList, handlePassengerCount, handleDate, handleFrom, handleTo} = React.useContext(AppContext);
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (!from || !to) {
+            if (!from) {
+                setErrorMessage('Please select a value for the "From" field.');
+            }
+            if (!to) {
+                setErrorMessage('Please select a value for the "To" field.');
+            }
+            return;
+        }
         handleFrom(from.label);
         handleTo(to.label);
         try {
@@ -118,6 +126,7 @@ const Search = () => {
                 <Input
                 type="date"
                 
+                
                     slotProps={{
                     input: {
                         min: '2018-06-07T00:00',
@@ -153,7 +162,7 @@ const Search = () => {
             <div className='dest'>
             <FormControl sx={{ width: 240 }}>
                 <FormLabel id="select-field-demo-label" htmlFor="select-field-demo-button" size="sm">
-                    Return date(optional)
+                    Return date
                 </FormLabel>
             <Input
                 type="date"

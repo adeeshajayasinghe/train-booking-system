@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const {Token} = require('../Models/Token');
 const sendEmail = require('../Utils/SendEmails');
 
+
 // This is for get the user details for logged in user which has valid token. Password won't get.
 // router.get('/me', auth, async (req, res) => {
 //     const user = await User.findById(req.user._id).select('-password');

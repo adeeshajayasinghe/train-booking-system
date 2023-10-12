@@ -51,10 +51,30 @@ const User = mongoose.model('Users', UserSchema);
 
 function validateGenre(user){
     const schema = Joi.object({
-        firstName: Joi.string().min(5).max(255).required(),
-        lastName: Joi.string().min(5).max(255).required(),
-        mobile: Joi.string().min(10).max(10).required(),
-        NIC: Joi.string().min(10).max(10).required(),
+        firstName: Joi.string().min(1).max(255).required(),
+        lastName: Joi.string().min(1).max(255).required(),
+        // mobile: Joi.string().min(10).max(10).required(),
+        mobile: Joi.string()
+            .min(10)
+            .max(10)
+            .required()
+            .custom((value, helpers) => {
+                // Check if the value is a numeric string
+                if (!/^\d+$/.test(value)) {
+                    return helpers.message('Mobile must be a numeric string of 10 digits');
+                }
+                return value;
+        }),
+        // NIC: Joi.string().min(10).max(10).required(),
+        NIC: Joi.string()
+            .required()
+            .custom((value, helpers) => {
+                // Check if the value is either 10 digits or 9 digits with the last character as 'v'
+                if (!/^\d{9}(\d|v)$/i.test(value)) {
+                    return helpers.message('Please enter a valid NIC');
+                }
+                return value;
+            }),
         email: Joi.string().required().email(),
         password: Joi.string().min(8).max(255).required()
     });
