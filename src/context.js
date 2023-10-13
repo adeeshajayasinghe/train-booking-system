@@ -38,6 +38,7 @@ const AppProvider = ({children}) => {
     const [refNumber, setRefNumber] = useState('');
     const [className, setClassName] = useState('');
     const [cancelRef, setCancelRef] = useState('');
+    const [seatArrangement, setSeatArrangement] = useState([]);
     function handleFirstName(first){
         setFirstName(first);
     }
@@ -138,9 +139,12 @@ const AppProvider = ({children}) => {
     function handleCancelRef(ref){
         setCancelRef(ref);
     }
+    function handleSeatArrangement(arrangement){
+        setSeatArrangement(arrangement);
+    }
     return(
         <AppContext.Provider value={{
-            isSidebarOpen, isSubMenuOpen, openSidebar, openSubMenu, closeSidebar, closeSubMenu, cancelRef, location, page, firstName, lastName, mobile, NIC, email, password, trainList, priceList, trainID, classIndex, trainName, trainNo, passengerCount, OTP, adminEnable, openPopup, date, from, to, classPrice, fullArray, clickedSeats, seatingData, seatNumbers, timeFrom, timeTo, refNumber, className, handleFirstName, handleLastName, handleMobile, handleNIC, handleEmail, handlePassword, getTrainList, handleTrainID, handleClassIndex, handleTrainName, handleTrainNo, handlePassengerCount, handleOTP, handleAdmin, handlePopup, handleDate, handleFrom, handleTo, handleClassPrice, handleFullArray, handleClickedSeats, handleSeatingData, handleSeatNumbers, handleDepartTime, handleArrivalTime, handleRefNumber, handleClassName, handleCancelRef
+            isSidebarOpen, isSubMenuOpen, openSidebar, openSubMenu, closeSidebar, closeSubMenu, cancelRef, location, page, firstName, lastName, mobile, NIC, email, password, trainList, priceList, trainID, classIndex, trainName, trainNo, passengerCount, OTP, adminEnable, openPopup, date, from, to, classPrice, fullArray, clickedSeats, seatingData, seatNumbers, timeFrom, timeTo, refNumber, className, seatArrangement, handleFirstName, handleLastName, handleMobile, handleNIC, handleEmail, handlePassword, getTrainList, handleTrainID, handleClassIndex, handleTrainName, handleTrainNo, handlePassengerCount, handleOTP, handleAdmin, handlePopup, handleDate, handleFrom, handleTo, handleClassPrice, handleFullArray, handleClickedSeats, handleSeatingData, handleSeatNumbers, handleDepartTime, handleArrivalTime, handleRefNumber, handleClassName, handleCancelRef, handleSeatArrangement
         }}>{children}</AppContext.Provider>
     );
 }
