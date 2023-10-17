@@ -98,9 +98,7 @@ const Register = () => {
                     </FormControl>
                 </div>
             </div>
-            {/* {errorMessage && <p className='error-msg'>{errorMessage}</p>} */}
             {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
-            {/* {message && <p className='success-msg'>{message}</p>} */}
             {message && <Alert severity="success">{message}</Alert>}
             <div className='submit-btn'>
                 <Button type="submit">Submit</Button>
