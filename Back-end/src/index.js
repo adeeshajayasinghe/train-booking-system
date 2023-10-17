@@ -17,6 +17,7 @@ const router5 = require('./Routes/popupform');
 const router6 = require('./Routes/booking');
 const router7 = require('./Routes/cancel');
 const router8 = require('./Routes/qrcode');
+const router9 = require('./Routes/ticket');
 
 
 // Connect to monogoDB
@@ -28,11 +29,12 @@ app.use(cors());
 app.use('/register', router1);
 app.use('/login', router2);
 app.use('/trains', router3);
-app.use('/search', router4)
-app.use('/popupform', router5)
-app.use('/booking', router6) 
-app.use('/refund', router7)
-app.use('/qrcode', router8)
+app.use('/search', router4);
+app.use('/popupform', router5);
+app.use('/booking', router6);
+app.use('/refund', router7);
+app.use('/qrcode', router8);
+app.use('/sendTicket', router9);
 
 
 app.listen(4000, () => {
