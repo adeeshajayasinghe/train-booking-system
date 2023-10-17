@@ -7,9 +7,23 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import axios from 'axios';
+import Alert from '@mui/material/Alert';
 const CancellationForm = ({cancelRef, refund, remainingDates}) => {
-
-
+    const [errorMessage, setErrorMessage] = useState('');
+    const [message, setMessage] = useState('');
+  const cancelBooking = async () => {
+    try {
+        await axios.post('http://localhost:4000/refund/cancel-booking', 
+            {ReferenceNo: cancelRef},
+        );
+        setMessage('Booking cancelled successfully.');
+    } catch (error) {
+        if (error.response && error.response.data && error.response.data.error) {
+            handlePopup(false);
+            setErrorMessage(error.response.data.error);
+        }
+    }
+  }
   const {openPopup, handlePopup} = useContext(AppContext);
   return (
     <Dialog open={openPopup}>
@@ -23,78 +37,6 @@ const CancellationForm = ({cancelRef, refund, remainingDates}) => {
                     <p className='summary-txt'>{cancelRef}</p>
                 </div>
             </div>
-            {/* <div className='summary-wrapper'>
-                <div>
-                    <p>Train Name</p>
-                </div>
-                <div>
-                    <p className='summary-txt'>{bookingData.trainName}</p>
-                </div>
-            </div>
-            <div className='summary-wrapper'>
-                <div>
-                    <p>Start Station</p>
-                </div>
-                <div>
-                    <p className='summary-txt'>{bookingData.from}</p>
-                </div>
-            </div>
-            <div className='summary-wrapper'>
-                <div>
-                    <p>End Station</p>
-                </div>
-                <div>
-                    <p className='summary-txt'>{bookingData.to}</p>
-                </div>
-            </div>
-            <div className='summary-wrapper'>
-                <div>
-                    <p>Daparture Date</p>
-                </div>
-                <div>
-                    <p className='summary-txt'>{bookingData.date}</p>
-                </div>
-            </div>
-            <div className='summary-wrapper'>
-                <div>
-                    <p>Departs & Arrival</p>
-                </div>
-                <div>
-                    <p className='summary-txt'>{bookingData.timeFrom} & {bookingData.timeTo}</p>
-                </div>
-            </div>
-            <div className='summary-wrapper'>
-                <div>
-                    <p>Passengers</p>
-                </div>
-                <div>
-                    <p className='summary-txt'>{bookingData.passengerCount}</p>
-                </div>
-            </div>
-            <div className='summary-wrapper'>
-                <div>
-                    <p>Train Class</p>
-                </div>
-                <div>
-                    <p className='summary-txt'>{bookingData.class}</p>
-                </div>
-            </div>
-            <div className='summary-wrapper'>
-                <div>
-                    <p>Booked Seats</p>
-                </div>
-                <div>
-                    <p className='summary-txt'>{seats}</p>
-                </div>
-            </div>
-            <div className='summary-wrapper'>
-                <div>
-                    <p>Price</p>
-                </div>
-                <div>
-                    <p className='summary-txt'>LKR {parseInt(bookingData.classPrice) * bookingData.passengerCount}</p>
-                </div>
-            </div> */}
             <div className='summary-wrapper'>
                 <div>
                     <p>Remaining Days</p>
@@ -111,9 +53,16 @@ const CancellationForm = ({cancelRef, refund, remainingDates}) => {
                     <p className='summary-txt'>LKR {refund}</p>
                 </div>
             </div>
+            {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
+            {message && <Alert severity="success">{message}</Alert>}
             <div className='sumary-submit-btn'>
                 <DialogActions>
-                    <Button onClick={()=>{handlePopup(false)}}>Cancel</Button>
+                    <Button onClick={()=>{
+                        cancelBooking();
+                    }}>Confirm</Button>
+                    <Button onClick={()=>{
+                        handlePopup(false)
+                    }}>Close</Button>
                 </DialogActions>
             </div>
         </DialogContent>
