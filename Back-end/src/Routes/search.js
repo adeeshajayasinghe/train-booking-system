@@ -82,19 +82,12 @@ router.post("/", async (req, res) => {
     });
 
     console.log(filteredTrainsByDate);
-
- 
-
-    
     
     //taking bookes seets from booking history
     const result = await BookingHistory.find({ date: req.body.date, Status: "Pending" }, { seat_numbers: 1, class: 1, _id: 0, trainName: 1 })
     console.log(result);
 
-    
-
-
-    const resultObject = {};
+    const resultObject = {};  //to store the booking information of trains that have bookings for given date
 
     result.forEach(item => {
         const { trainName, class: className, seat_numbers } = item;
@@ -146,7 +139,6 @@ router.post("/", async (req, res) => {
         }
         return index;
     }
-  
     //this loop is for generate arrays with all 0s
     for (let i = 0; i < filteredTrainsByDate.length; i++) {
         console.log(filteredTrainsByDate[i].seatsAvailability); 

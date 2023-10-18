@@ -100,32 +100,6 @@ router.post('/cancel-booking', async (req, res) => {
     { new: true }
   );
 
-  const trainName = "Train 3";
-  const classToUpdate = "First class";
-  const indexesToUpdate = [2, 6, 13];
-
-  const result_2 = await Booking.updateOne(
-    { trainName: trainName, class: classToUpdate },
-    {
-      $set: {
-        "seatsArrangement.0": {
-          $map: {
-            input: "$seatsArrangement.0",
-            as: "seat",
-            in: {
-              $cond: {
-                if: { $in: ["$$seat", indexesToUpdate] },
-                then: 0,
-                else: "$$seat"
-              }
-            }
-          }
-        }
-      }
-    }
-  );
-
-  const seatUpdation = 
   res.json({ success: true, message: 'Booking cancelled successfully.' });
   //console.error('Error cancelling booking:');
   
