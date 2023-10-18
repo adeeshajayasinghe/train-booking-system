@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {Booking, validate} = require('../Models/Booking');
+const { Booking, validate } = require('../Models/Booking');
 const _ = require('lodash');
 
 function generateRef() {

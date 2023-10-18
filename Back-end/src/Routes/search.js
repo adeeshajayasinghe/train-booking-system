@@ -81,18 +81,13 @@ router.post("/", async (req, res) => {
         }
     });
 
- 
-
-    
+    console.log(filteredTrainsByDate);
     
     //taking bookes seets from booking history
     const result = await BookingHistory.find({ date: req.body.date, Status: "Pending" }, { seat_numbers: 1, class: 1, _id: 0, trainName: 1 })
     console.log(result);
 
-    
-
-
-    const resultObject = {};
+    const resultObject = {};  //to store the booking information of trains that have bookings for given date
 
     result.forEach(item => {
         const { trainName, class: className, seat_numbers } = item;
@@ -117,46 +112,76 @@ router.post("/", async (req, res) => {
     //modify the seatsArrangement array
     function modifySeatsArrangement(seatsArrangement, indexArray) {
         for (let k = 0; k < indexArray.length; k++) {
-            seatsArrangement[indexArray[k]] = 1;
+            let index_to_change = indexArray[k];
+            //console.log(index_to_change);
+            //console.log(seatsArrangement);
+            seatsArrangement[index_to_change] = 1;
+            //seatsArrangement[indexArray[k]] = 1;
+            //console.log(seatsArrangement[index_to_change]);
         }
         return seatsArrangement;
     }
-  
+
+    //sometimes train will have only one class. if it is third class following code's indexes may be mis matched.
+    //this method is to filter the right class name with the right class index
+    function gettingIndex(classArray, class_name) {
+        let index = 0;
+        let length_of_classArray = classArray.length;
+        if (length_of_classArray === 1) {
+            index = 0;   
+        } else {
+             for (let i = 1;i<length_of_classArray;i++) {
+                if (classArray[i] === class_name) {
+                    index = i;
+                }
+        }
+       
+        }
+        return index;
+    }
     //this loop is for generate arrays with all 0s
     for (let i = 0; i < filteredTrainsByDate.length; i++) {
-        //console.log(filteredTrainsByDate[i].seatsAvailability); 
+        console.log(filteredTrainsByDate[i].seatsAvailability); 
         filteredTrainsByDate[i].seatsAvailability.forEach((numberOfSeats) => {
             const zerosArray = Array.from({ length: numberOfSeats }, () => 0);
+            //console.log(zerosArray);
             filteredTrainsByDate[i].seatsArrangement.push(zerosArray);
+            //console.log(filteredTrainsByDate[i].seatsArrangement);
         });
-       
-        //console.log(filteredTrainsByDate[i].seatsArrangement);
+       console.log(filteredTrainsByDate[i].seatsArrangement);
         const trainName_temp = filteredTrainsByDate[i].trainName;
+        console.log(trainName_temp);
         
         if (resultObject[trainName_temp]) {
             const len = resultObject[trainName_temp].length;
             for (let j = 0; j < len; j++) { 
                
                 const className = Object.keys(resultObject[trainName_temp][j]);
+                //console.log(className[0]);
                 const indexArray = resultObject[trainName_temp][j][className[0]];
+                //console.log(indexArray);
 
                 if (className[0] === "First Class") {
-                    const seatView = filteredTrainsByDate[i].seatsArrangement[0];
+                    const index = gettingIndex(filteredTrainsByDate[i].seatsAvailability, "Second Class");
+                    const seatView = filteredTrainsByDate[i].seatsArrangement[index];
                     const modifiedSeatView = modifySeatsArrangement(seatView, indexArray);
-                    console.log(modifiedSeatView);
+                    //console.log(modifiedSeatView);
 
                 
                 }
                 else if (className[0] === "Second Class") {
-                    const seatView = filteredTrainsByDate[i].seatsArrangement[1];
+                    const index = gettingIndex(filteredTrainsByDate[i].seatsAvailability, "Second Class");
+                    const seatView = filteredTrainsByDate[i].seatsArrangement[index];
                     const modifiedSeatView = modifySeatsArrangement(seatView, indexArray);
-                    console.log(modifiedSeatView);
+                    //console.log(modifiedSeatView);
 
                 
                 } else if (className[0] === "Third Class") {
-                    const seatView = filteredTrainsByDate[i].seatsArrangement[2];
+                    const index = gettingIndex(filteredTrainsByDate[i].seatsAvailability, "Third Class");
+                    const seatView = filteredTrainsByDate[i].seatsArrangement[index];
+                    console.log(seatView);
                     const modifiedSeatView = modifySeatsArrangement(seatView, indexArray);
-                    console.log(modifiedSeatView);
+                    //console.log(modifiedSeatView);
                 }
             };
             
