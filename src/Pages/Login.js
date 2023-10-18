@@ -30,6 +30,7 @@ const Login = () => {
       const userType = response.data.isAdmin;
       setCookies('access_token', response.data.token);;
       window.localStorage.setItem("userID", response.data.userID);
+      window.localStorage.setItem("userEmail", email);
       if (userType) {
         handleAdmin(true);
         navigate('/admin');

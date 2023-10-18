@@ -18,6 +18,7 @@ const router6 = require('./Routes/booking');
 const router7 = require('./Routes/cancel');
 const router8 = require('./Routes/qrcode');
 const router9 = require('./Routes/ticket');
+const router10 = require('./Routes/profile');
 
 
 // Connect to monogoDB
@@ -35,6 +36,7 @@ app.use('/booking', router6);
 app.use('/refund', router7);
 app.use('/qrcode', router8);
 app.use('/sendTicket', router9);
+app.use('/profile', router10);
 
 
 app.listen(4000, () => {
