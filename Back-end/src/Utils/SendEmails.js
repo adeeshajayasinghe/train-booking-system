@@ -23,7 +23,12 @@ const sendEmail = async (email, subject, text) => {
         from:process.env.EMAIL_USERNAME,
         to:email,
         subject:subject,
-        text:text
+        text:'Thank you for registering with our system!',
+        html: `
+        <h2>Thank you for registering with our system!</h2>
+        <p>Please click the link below to verify your email address.</p>
+        <a href="${text}">Click here</a>
+        `
     });
     console.log('Email sent successfully');
     }catch(error){
