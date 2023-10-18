@@ -7,6 +7,7 @@ const config = require('config');
 const jwt = require('jsonwebtoken');
 const {Token} = require('../Models/Token');
 const sendEmail = require('../Utils/SendEmails');
+const {verifyEmail} = require('../Controllers/users');
 
 // This is for get the user details for logged in user which has valid token. Password won't get.
 // router.get('/me', auth, async (req, res) => {
@@ -14,25 +15,7 @@ const sendEmail = require('../Utils/SendEmails');
 //     res.send(user);
 // })
 //https:localhost:4000/register//:id/verify/:emailToken
-router.get('/:id/verify/:emailToken', async (req, res) => {
-    try{
-        const user = await User.findById(req.params.id);
-        if (!user) {
-            // return res.status(400).send('Invalid link!');
-            return res.status(400).json({ error: 'Invalid link!' });
-        }
-        const emailToken = await Token.findOne({userId: user._id, emailToken: req.params.emailToken});
-        if (!emailToken) {
-            // return res.status(400).send('Invalid link!');
-            return res.status(400).json({ error: 'Invalid link!' });
-        }
-        await User.updateOne({_id: user._id}, {verified: true});
-        await Token.deleteOne({_userId: user._id, emailToken: req.params.emailToken});
-        res.status(200).send('Email verified successfully!');
-    } catch(error){
-        res.status(500).send('Something went wrong!');
-    }
-});
+router.get('/:id/verify/:emailToken', verifyEmail);
 
 router.post('/', async (req, res) => {
     const {error} = validate(req.body);

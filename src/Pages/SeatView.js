@@ -12,7 +12,7 @@ const SeatView = () => {
   const [loading, setLoading] = useState(true);
   // const [clickedSeats, setClickedSeats] = useState([]);
   const [submitted, setSubmitted] = useState(false); // Track form submission
-  const {trainNo, classIndex, trainID, handlePopup, passengerCount, trainName, seatNumbers, handleFullArray, handleClickedSeats, handleSeatingData, handleSeatNumbers, fullArray, clickedSeats, seatingData} = useContext(AppContext);
+  const {trainNo, classIndex, trainID, handlePopup, passengerCount, trainName, seatNumbers, handleFullArray, handleClickedSeats, handleSeatingData, handleSeatNumbers, fullArray, clickedSeats, seatingData, seatArrangement} = useContext(AppContext);
   // const [fullArray, setFullArray] = useState([]); 
   const [originalSeatingData, setOriginalSeatingData] = useState([]);
   const navigate = useNavigate();
@@ -22,10 +22,10 @@ const SeatView = () => {
     const fetchSeats = async () => {
       try {
         const response = await axios.get(`http://localhost:4000/trains/${trainID}`);
-        handleFullArray(response.data.seatsArrangement);
-        setOriginalSeatingData(response.data.seatsArrangement[classIndex]);
-        console.log(response.data.seatsArrangement[classIndex]);
-        handleSeatingData(response.data.seatsArrangement[classIndex]);
+        handleFullArray(seatArrangement);
+        setOriginalSeatingData(seatArrangement);
+        // console.log(response.data.seatsArrangement[classIndex]);
+        handleSeatingData(seatArrangement);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching seats:', error);

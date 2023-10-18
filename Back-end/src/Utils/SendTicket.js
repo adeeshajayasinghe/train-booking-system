@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 require('dotenv').config();
-const sendEmail = async (email, subject, text) => {
+const SendTicket = async (email, qrCodeUrl, summary) => {
     try{
         const transporter = nodemailer.createTransport({
             host:process.env.EMAIL_HOST,
@@ -22,13 +22,28 @@ const sendEmail = async (email, subject, text) => {
     await transporter.sendMail({
         from:process.env.EMAIL_USERNAME,
         to:email,
-        subject:subject,
-        text:'Thank you for registering with our system!',
+        subject:'Train Booking Confirmation',
+        text:'Thank you for booking your train!',
+        attachments: [
+            {
+              filename: 'QRCode.png',
+              path: qrCodeUrl
+            }
+        ],
         html: `
-        <h2>Thank you for registering with our system!</h2>
-        <p>Please click the link below to verify your email address.</p>
-        <a href="${text}">Click here</a>
-        `
+      <h2>Thank you for booking your train!</h2>
+      <h3>Summary:</h3>
+      <p>Reference No: ${summary.refNumber}</p>
+      <p>Train No & Name: ${summary.trainNo} ${summary.trainName}</p>
+      <p>Start Station: ${summary.from}</p>
+      <p>End Station: ${summary.to}</p>
+      <p>Departure Date: ${summary.date}</p>
+      <p>Departs & Arrival: ${summary.timeFrom} & ${summary.timeTo}</p>
+      <p>Passengers: ${summary.passengerCount}</p>
+      <p>Train Class: ${summary.className}</p>
+      <p>Booked Seats: ${summary.seats}</p>
+      <p>Price: LKR ${summary.classPrice * summary.passengerCount}</p>
+    `
     });
     console.log('Email sent successfully');
     }catch(error){
@@ -36,4 +51,4 @@ const sendEmail = async (email, subject, text) => {
     }
 };
 
-module.exports = sendEmail;
+module.exports = SendTicket;
