@@ -45,6 +45,7 @@ const Navbar = () => {
           <Link to={'/services'} className={adminEnable?'admin-link-btn':'link-btn'} onMouseOver={dispalySubMenu}>Services</Link>
           <Link to={'/journey'} className={adminEnable?'admin-link-btn':'link-btn'} onMouseOver={dispalySubMenu}>Journey</Link>
           <Link to={'/about'} className={adminEnable?'admin-link-btn':'link-btn'} onMouseOver={dispalySubMenu}>About</Link>
+          {cookies.access_token && !adminEnable?(<Link to={'/profile'} className='link-btn' onMouseOver={dispalySubMenu}>Profile</Link>):(null)}
           {adminEnable?(<Link to={'/admin'} className={adminEnable?'admin-link-btn':'link-btn'}>Admin</Link>):(null)}
           {/* <li>
             <a className='link-btn' onMouseOver={dispalySubMenu} href='#home'>Home</a>
