@@ -24,7 +24,7 @@ export default function Gallery() {
   return (
     <section className='hero2'>
       <div className='gallery-content-center'>
-          <Card sx={{ maxWidth: 345 }} data-aos="fade-up" data-aos-offset="200">
+          <Card sx={{ maxWidth: 345 }} data-aos="fade-right" data-aos-offset="200" style={{marginTop: '5rem'}}>
             <CardMedia
               component="img"
               alt="green iguana"
@@ -60,7 +60,7 @@ export default function Gallery() {
             </CardActions>
           </Card>
 
-          <Card sx={{ maxWidth: 345 }} data-aos="fade-up" data-aos-offset="200">
+          <Card sx={{ maxWidth: 345 }} data-aos="fade-right" data-aos-offset="200" style={{marginTop: '5rem'}}>
             <CardMedia
               component="img"
               alt="green iguana"
@@ -96,7 +96,42 @@ export default function Gallery() {
             </CardActions>
           </Card>
 
-          <Card sx={{ maxWidth: 345 }} data-aos="fade-up" data-aos-offset="200">
+          <Card sx={{ maxWidth: 345 }} data-aos="fade-left" data-aos-offset="200" style={{marginTop: '5rem'}}>
+            <CardMedia
+              component="img"
+              alt="green iguana"
+              height="140"
+              image={image3}
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                Lizard
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Lizards are a widespread group of squamate reptiles, with over 6,000
+                species, ranging across all continents except Antarctica
+              </Typography>
+              <Box
+              sx={{
+                '& > legend': { mt: 2 },
+              }}
+            >
+              <Typography component="legend">Controlled</Typography>
+              <Rating
+                name="simple-controlled"
+                value={value}
+                onChange={(event, newValue) => {
+                  setValue(newValue);
+                }}
+              />
+              </Box>
+            </CardContent>
+            <CardActions>
+              <Button size="small">Share</Button>
+              <Button size="small">Learn More</Button>
+            </CardActions>
+          </Card>
+          <Card sx={{ maxWidth: 345 }} data-aos="fade-left" data-aos-offset="200" style={{marginTop: '5rem'}}>
             <CardMedia
               component="img"
               alt="green iguana"

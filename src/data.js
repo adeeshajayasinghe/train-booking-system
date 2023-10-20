@@ -26,7 +26,7 @@ const sublinks = [
     ],
   },
   {
-    page: 'Journey',
+    page: 'FAQs',
     links: [
       { label: 'about', icon: <FaBriefcase />, url: '/products' },
       { label: 'customers', icon: <FaBriefcase />, url: '/products' },
