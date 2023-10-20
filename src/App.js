@@ -20,6 +20,7 @@ import Payment from './Pages/Payment';
 import Cancel from './Pages/Cancel';
 import Profile from './Pages/Profile';
 import ViewHistory from './Pages/ViewHistory';
+import Footer from './Components/Footer';
 import './index.css';
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route path='/profile' element={<Profile/>}></Route>
         <Route path='/viewhistory' element={<ViewHistory/>}></Route>
       </Routes>
+      <Footer/>
     </Router>
   )
 }
