@@ -987,3 +987,19 @@ div#main {
   width: 80px;
   height: 80px;
 }
+.service-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  /* border-radius: 8px; */
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  margin: 0.5rem;
+}
+.payment-img {
+  width: 200px;
+  height: 200px;
+}
