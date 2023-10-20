@@ -44,6 +44,7 @@ const Dashboard = () => {
     <section className='hero'>
       <div className='content-center'>
       <div className="train-cards">
+      {trainList.length === 0 && <h2>No trains found</h2>}
       {trainList.map((train) => (
         <div key={train._id} className="train-card">
           <h2>{train.trainName}</h2>
@@ -59,6 +60,7 @@ const Dashboard = () => {
           <p>Destination: {train.destination}</p>
           <p>Dates: {train.dates}</p>
           <ClassMenus trainName={train.trainName} trainNo={train.trainNo} classes={train.class} priceList={priceList} seatsAvailability={train.seatsAvailability} seatsArrangement={train.seatsArrangement} trainID = {train._id} trainDepartTime={train.departureTimes[train.stations.indexOf(from)]} trainArrivalTime={train.arrivalTimes[train.stations.indexOf(to)]}/>
+          
           {/* <Link to={`/seatview`}>
             <Button onClick={() => handleTrainNo(train._id)}>Search</Button>
           </Link> */}

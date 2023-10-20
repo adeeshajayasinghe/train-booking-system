@@ -134,7 +134,7 @@ const UserDetailsForm = () => {
                         <Input placeholder="Enter here" variant="soft" type='email' value={email} onChange={(event) => handleEmail(event.target.value)}/>
                     </FormControl>
                 </div>
-                <div className='dest'>
+                {/* <div className='dest'>
                 <FormControl>
                         <FormLabel>passenger count</FormLabel>
                         
@@ -152,7 +152,7 @@ const UserDetailsForm = () => {
             value={passengerCount} onChange={(event) => handlePassengerCount(event.target.value)}
             />
                     </FormControl>
-                </div>
+                </div> */}
             </div>
             {/* {errorMessage && <p className='error-msg'>{errorMessage}</p>} */}
             {errorMessage && <Alert severity="error">{errorMessage}</Alert>}

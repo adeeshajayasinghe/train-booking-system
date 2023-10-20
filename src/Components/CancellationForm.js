@@ -8,10 +8,23 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import axios from 'axios';
 import Alert from '@mui/material/Alert';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+
 const CancellationForm = ({cancelRef, refund, remainingDates}) => {
     const [errorMessage, setErrorMessage] = useState('');
     const [message, setMessage] = useState('');
+    const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+        if(message){
+            setErrorMessage(false);
+            setOpen(false);
+        }
+    }, [message]);
+
   const cancelBooking = async () => {
+    setOpen(true);
     try {
         await axios.post('http://localhost:4000/refund/cancel-booking', 
             {ReferenceNo: cancelRef},
@@ -60,6 +73,12 @@ const CancellationForm = ({cancelRef, refund, remainingDates}) => {
                     <Button onClick={()=>{
                         cancelBooking();
                     }}>Confirm</Button>
+                     <Backdrop
+                        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                        open={open}
+                    >
+                        <CircularProgress color="inherit" />
+                    </Backdrop>
                     <Button onClick={()=>{
                         handlePopup(false)
                     }}>Close</Button>
