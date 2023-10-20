@@ -21,7 +21,10 @@ const CancellationForm = ({cancelRef, refund, remainingDates}) => {
             setErrorMessage(false);
             setOpen(false);
         }
-    }, [message]);
+        if(errorMessage){
+            setOpen(false);
+        }
+      }, [message, errorMessage]);
 
   const cancelBooking = async () => {
     setOpen(true);

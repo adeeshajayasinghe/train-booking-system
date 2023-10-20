@@ -24,7 +24,10 @@ const Register = () => {
             setErrorMessage(false);
             setOpen(false);
         }
-    }, [message]);
+        if(errorMessage){
+            setOpen(false);
+        }
+      }, [message, errorMessage]);
 
     const handleOpen = () => {
         setOpen(true);
