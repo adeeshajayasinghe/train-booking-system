@@ -41,6 +41,10 @@ const Payment = () => {
       handlePopup(true);
   };
 
+  const handleCancel = () => {
+    navigate('/seatview');
+  }
+
   return (
     <section className='hero'>
       <div className='hero-center'>
@@ -106,7 +110,7 @@ const Payment = () => {
                     margin: '0 10px 10px 0', 
                   }}
                   variant='outlined' 
-                  onClick={() => navigate('/seatview')}
+                  onClick={handleCancel}
                   >
                 Cancel
               </Button>
