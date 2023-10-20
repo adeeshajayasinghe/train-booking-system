@@ -38,7 +38,10 @@ const Summary = () => {
             setErrorMessage(false);
             setOpen(false);
         }
-    }, [message]);
+        if(errorMessage){
+            setOpen(false);
+        }
+      }, [message, errorMessage]);
 
     const sendTicket = async () => {
         setOpen(true);
