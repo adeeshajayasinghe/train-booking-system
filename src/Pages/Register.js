@@ -9,20 +9,29 @@ import axios from 'axios';
 import { AppContext } from '../context'
 import Alert from '@mui/material/Alert';
 import { useEffect } from 'react';
-// import { response } from 'express';
-// import { useNavigate } from 'react-router-dom';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+
 const Register = () => {
 
     const {firstName, lastName, mobile, NIC, email, password, handleFirstName, handleLastName, handleMobile, handleNIC, handleEmail, handlePassword} = useContext(AppContext);
     const [errorMessage, setErrorMessage] = useState('');
     const [message, setMessage] = useState('');
-    // const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         if(message){
             setErrorMessage(false);
+            setOpen(false);
         }
-    }, [message]);
+        if(errorMessage){
+            setOpen(false);
+        }
+      }, [message, errorMessage]);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -101,7 +110,13 @@ const Register = () => {
             {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
             {message && <Alert severity="success">{message}</Alert>}
             <div className='submit-btn'>
-                <Button type="submit">Submit</Button>
+                <Button type="submit" onClick={handleOpen}>Submit</Button>
+                <Backdrop
+                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    open={open}
+                >
+                    <CircularProgress color="inherit" />
+                </Backdrop>
             </div>
         </form>
       </div>

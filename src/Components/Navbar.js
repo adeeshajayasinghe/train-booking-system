@@ -41,10 +41,10 @@ const Navbar = () => {
         </div>
         <ul className='nav-links'>
           <Link to={'/'} className={adminEnable?'admin-link-btn':'link-btn'} onMouseOver={dispalySubMenu}>Home</Link>
-          <Link to={'/gallery'} className={adminEnable?'admin-link-btn':'link-btn'} onMouseOver={dispalySubMenu}>Gallery</Link>
+          <Link to={'/gallery'} className={adminEnable?'admin-link-btn':'link-btn'} >Gallery</Link>
           <Link to={'/services'} className={adminEnable?'admin-link-btn':'link-btn'} onMouseOver={dispalySubMenu}>Services</Link>
-          <Link to={'/journey'} className={adminEnable?'admin-link-btn':'link-btn'} onMouseOver={dispalySubMenu}>Journey</Link>
-          <Link to={'/about'} className={adminEnable?'admin-link-btn':'link-btn'} onMouseOver={dispalySubMenu}>About</Link>
+          <Link to={'/journey'} className={adminEnable?'admin-link-btn':'link-btn'} >FAQs</Link>
+          <Link to={'/about'} className={adminEnable?'admin-link-btn':'link-btn'} >Contact</Link>
           {cookies.access_token && !adminEnable?(<Link to={'/profile'} className='link-btn' onMouseOver={dispalySubMenu}>Profile</Link>):(null)}
           {adminEnable?(<Link to={'/admin'} className={adminEnable?'admin-link-btn':'link-btn'}>Admin</Link>):(null)}
           {/* <li>

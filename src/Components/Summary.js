@@ -8,6 +8,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Alert from '@mui/material/Alert';
 import axios from 'axios';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Summary = () => {
     const {refNumber, openPopup, handlePopup, trainName, trainNo, from, to, date, timeFrom, timeTo, passengerCount, className, classPrice, seatNumbers, email} = useContext(AppContext);
@@ -15,6 +17,7 @@ const Summary = () => {
     const seats = seatNumbers.join(', ');
     const [errorMessage, setErrorMessage] = useState('');
     const [message, setMessage] = useState('');
+    const [open, setOpen] = useState(false);
 
     // fetch the qr code
     useEffect(() => {
@@ -30,7 +33,18 @@ const Summary = () => {
         generateQRCode();
     }, []);
 
+    useEffect(() => {
+        if(message){
+            setErrorMessage(false);
+            setOpen(false);
+        }
+        if(errorMessage){
+            setOpen(false);
+        }
+      }, [message, errorMessage]);
+
     const sendTicket = async () => {
+        setOpen(true);
         try {
           const response = await axios.post('http://localhost:4000/sendTicket', {
             email: email, // User's email
@@ -153,6 +167,12 @@ const Summary = () => {
                 <DialogActions>
                     <Button onClick={sendTicket}>Get E-Ticket</Button>
                 </DialogActions>
+                <Backdrop
+                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    open={open}
+                >
+                    <CircularProgress color="inherit" />
+                </Backdrop>
                 <DialogActions>
                     <Button onClick={()=>{handlePopup(false)}}>Cancel</Button>
                 </DialogActions>

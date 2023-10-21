@@ -1,14 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
+import data from '../services-data'
+import SingleQuestion from '../Questions'
 
 const Journey = () => {
+  const [questions, setQuestions] = useState(data)
   return (
-    // <div className='journey'>
-    //   <h1>Journey</h1>
-    // </div>
     <section className='hero2'>
     <div className='content-center'>
-     <div className='review'>
-      <h2>Journey</h2>
+     <div className='services-main'>
+      <div className='services-container'>
+        <h3>FAQs</h3>
+        <div className='info'>
+          {questions.map((question) => {
+              return (
+                <SingleQuestion key={question.id} {...question}></SingleQuestion>
+              );
+          })}
+        </div>
+      </div>
      </div>
     </div>  
   </section>

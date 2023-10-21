@@ -72,13 +72,20 @@ router.post("/", async (req, res) => {
     const dayName = dayNames[inputDate.getDay()];
 
 
-    const filteredTrainsByDate = filteredTrains.filter((train) => {
+    let filteredTrainsByDate = filteredTrains.filter((train) => {
       
         if (dayName === "Saturday" || dayName === "Sunday") {
             return train.dates.includes("Daily") || train.dates.includes("Weekends");
         } else {
             return train.dates.includes("Daily") || train.dates.includes("Weekdays");
         }
+    });
+
+    filteredTrainsByDate = filteredTrainsByDate.filter((train) => {
+        const originIndex = train.stations.indexOf(req.body.from);
+        const destinationIndex = train.stations.indexOf(req.body.to);
+        
+        return originIndex < destinationIndex;
     });
 
     console.log(filteredTrainsByDate);
