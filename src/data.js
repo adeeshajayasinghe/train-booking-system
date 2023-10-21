@@ -1,49 +1,31 @@
-import { FaCreditCard, FaBook, FaBriefcase } from 'react-icons/fa';
+import { MdMiscellaneousServices } from 'react-icons/md';
 import React from 'react';
+import { RiGalleryFill, RiFileSearchFill } from 'react-icons/ri';
+import { BsFillQuestionSquareFill } from 'react-icons/bs';
+import { MdContactPage, MdFreeCancellation, MdWorkHistory } from 'react-icons/md';
+import { AiFillProfile } from 'react-icons/ai';
 const sublinks = [
   {
     page: 'Home',
     links: [
-      { label: 'payment', icon: <FaCreditCard />, url: '/products' },
-      { label: 'terminal', icon: <FaCreditCard />, url: '/products' },
-      { label: 'connect', icon: <FaCreditCard />, url: '/products' },
-    ],
-  },
-  {
-    page: 'Gallery',
-    links: [
-      { label: 'plugins', icon: <FaBook />, url: '/products' },
-      { label: 'libraries', icon: <FaBook />, url: '/products' },
-      { label: 'help', icon: <FaBook />, url: '/products' },
-      { label: 'billing', icon: <FaBook />, url: '/products' },
+      { label: 'gallery', icon: <RiGalleryFill size={20} />, url: '/gallery' },
+      { label: 'services', icon: <MdMiscellaneousServices size={20} />, url: '/services' },
+      { label: 'FAQs', icon: <BsFillQuestionSquareFill size={15} />, url: '/journey' },
+      { label: 'about', icon: <MdContactPage size={20} />, url: '/about' }
     ],
   },
   {
     page: 'Services',
     links: [
-      { label: 'cancel', icon: <FaBriefcase />, url: '/cancel' },
-      { label: 'customers', icon: <FaBriefcase />, url: '/products' },
-    ],
-  },
-  {
-    page: 'FAQs',
-    links: [
-      { label: 'about', icon: <FaBriefcase />, url: '/products' },
-      { label: 'customers', icon: <FaBriefcase />, url: '/products' },
-    ],
-  },
-  {
-    page: 'About',
-    links: [
-      { label: 'about', icon: <FaBriefcase />, url: '/products' },
-      { label: 'customers', icon: <FaBriefcase />, url: '/products' },
+      { label: 'cancel', icon: <MdFreeCancellation size={20} />, url: '/cancel' },
+      { label: 'Search Trains', icon: <RiFileSearchFill size={20} />, url: '/search' },
     ],
   },
   {
     page: 'Profile',
     links: [
-      { label: 'View Profile', icon: <FaBriefcase />, url: '/profile' },
-      { label: 'View History', icon: <FaBriefcase />, url: '/viewhistory' },
+      { label: 'View Profile', icon: <AiFillProfile size={20} />, url: '/profile' },
+      { label: 'View History', icon: <MdWorkHistory size={20} />, url: '/viewhistory' },
     ],
   },
 ];

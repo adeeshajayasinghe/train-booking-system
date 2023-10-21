@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
     const routeNumbers = await Station.find({
         station: { $in: [req.body.from, req.body.to] },
     });
-    // Get the class prices that belongs to origin and destinatio
+    // Get the class prices that belongs to origin and destination
     const originClassPrices = routeNumbers[0].prices;
     const destinationClassPrices = routeNumbers[1].prices;
     // Get the route that belongs to origin and destination
@@ -72,13 +72,20 @@ router.post("/", async (req, res) => {
     const dayName = dayNames[inputDate.getDay()];
 
 
-    const filteredTrainsByDate = filteredTrains.filter((train) => {
+    let filteredTrainsByDate = filteredTrains.filter((train) => {
       
         if (dayName === "Saturday" || dayName === "Sunday") {
             return train.dates.includes("Daily") || train.dates.includes("Weekends");
         } else {
             return train.dates.includes("Daily") || train.dates.includes("Weekdays");
         }
+    });
+
+    filteredTrainsByDate = filteredTrainsByDate.filter((train) => {
+        const originIndex = train.stations.indexOf(req.body.from);
+        const destinationIndex = train.stations.indexOf(req.body.to);
+        
+        return originIndex < destinationIndex;
     });
 
     console.log(filteredTrainsByDate);
