@@ -42,3 +42,15 @@ app.use('/profile', router10);
 app.listen(4000, () => {
     console.log('Server is running on port 4000');
 });
+
+const schedule = require('node-schedule');
+
+function performTask() {
+    // Your task logic (e.g., updating database records)
+    console.log('Task executed.');
+}
+
+// Schedule the task to run every day at a specific time (e.g., 2:00 AM)
+const job = schedule.scheduleJob('0 2 * * *', function() {
+    performTask();
+});

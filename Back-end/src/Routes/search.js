@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
     const routeNumbers = await Station.find({
         station: { $in: [req.body.from, req.body.to] },
     });
-    // Get the class prices that belongs to origin and destinatio
+    // Get the class prices that belongs to origin and destination
     const originClassPrices = routeNumbers[0].prices;
     const destinationClassPrices = routeNumbers[1].prices;
     // Get the route that belongs to origin and destination
