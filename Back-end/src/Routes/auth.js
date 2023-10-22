@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const {Token} = require('../Models/Token');
-const sendEmail = require('../Utils/SendEmails');
+const sendOTP = require('../Utils/SendOTP');
 
 router.post('/sendOTP', async (req, res) => {
     try{
@@ -16,7 +16,7 @@ router.post('/sendOTP', async (req, res) => {
         if (!user) {
             return res.status(400).json({ error: 'User is not registered.' });
         } else{
-            await sendEmail(req.body.recipient_email, 'Password Reset', req.body.OTP);
+            await sendOTP(req.body.recipient_email, 'Password Reset', req.body.OTP);
             res.status(200).send('OTP sent successfully!');
             
         }
