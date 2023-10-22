@@ -1,13 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const config = require('config');
 require('dotenv').config();
 
 const app = express();
 
 const configFile = require('./startup/config');
-configFile.checkConfig(config.get('privateKey'));
+configFile.checkConfig(process.env.JWT_PRIVATE_KEY);
 
 const router1 = require('./Routes/users');
 const router2 = require('./Routes/auth');

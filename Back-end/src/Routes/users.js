@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const {Token} = require('../Models/Token');
 const sendEmail = require('../Utils/SendEmails');
 const {verifyEmail} = require('../Controllers/users');
+require('dotenv').config();
 
 // This is for get the user details for logged in user which has valid token. Password won't get.
 // router.get('/me', auth, async (req, res) => {
@@ -39,7 +40,7 @@ router.post('/', async (req, res) => {
 
     //  lodash is used to get specific items to the user as a response. Pick method is usefull for that purpose. 
     // Send the logged in token through a http header.
-    const token = jwt.sign({_id:user._id, email:user.email}, config.get('privateKey'));
+    const token = jwt.sign({_id:user._id, email:user.email}, process.env.JWT_PRIVATE_KEY);
     // res.header('x-author-token', token).send(_.pick(user, ['name', 'email']));
     const emailToken = new Token({
         userId: user._id,

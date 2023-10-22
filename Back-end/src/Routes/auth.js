@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const {Token} = require('../Models/Token');
 const sendOTP = require('../Utils/SendOTP');
+require('dotenv').config();
 
 router.post('/sendOTP', async (req, res) => {
     try{
@@ -94,7 +95,7 @@ router.post('/', async (req, res) => {
         First para: payload, second para: Private key(shouldn't be hard coded in the source code like this. This use to identify the user by 
         the server from the token)*/
     // In powershell use $env:variablename = "value" to set environment variables. 'set' will not work.
-   const token = jwt.sign({_id:user._id, isAdmin:user.isAdmin}, config.get('privateKey'));
+   const token = jwt.sign({_id:user._id, isAdmin:user.isAdmin}, process.env.JWT_PRIVATE_KEY);
    res.send({token: token, isAdmin: user.isAdmin, userID: user._id });
 });
 
