@@ -34,7 +34,7 @@ const Navbar = () => {
           <div>
             <span style={{ display: 'flex', alignItems: 'center' }}>
               <FaTrain style={{ marginRight: '8px' }} />
-                Sri Lanka Railways
+                Stage Pilot
             </span>
           </div>
           <button className='btn toggle-btn' onClick={openSidebar}><FaBars/></button>

@@ -218,8 +218,8 @@ function validate(train) {
     from: Joi.string().required(),
     to: Joi.string().required(),
     date: Joi.string().required(),
-    passengers: Joi.number().required(),
-    returnDate: Joi.string().optional(),
+    passengers: Joi.number().required()
+    // returnDate: Joi.string().optional(),
   });
     return schema.validate(train);
 }

@@ -87,7 +87,7 @@ const Payment = () => {
                 <div className='dest'>
                     <FormControl>
                         <FormLabel>CVC</FormLabel>
-                        <Input placeholder="CVC" variant="soft"/>
+                        <Input placeholder="CVC" variant="soft" type='password'/>
                     </FormControl>
                 </div>
             </div>
