@@ -24,7 +24,7 @@ const Summary = () => {
         const generateQRCode = async () => {
             try {
               const data = [refNumber, trainName, trainNo, from, to, date, timeFrom, timeTo, passengerCount, className, classPrice, seats]
-              const response = await axios.post('http://localhost:4000/qrcode', { data });
+              const response = await axios.post('https://stage-pilot-train-booking-system.onrender.com/qrcode', { data });
               setQRCodeUrl(response.data.qrCode);
             } catch (error) {
               console.error('Error generating QR code:', error);
@@ -46,7 +46,7 @@ const Summary = () => {
     const sendTicket = async () => {
         setOpen(true);
         try {
-          const response = await axios.post('http://localhost:4000/sendTicket', {
+          const response = await axios.post('https://stage-pilot-train-booking-system.onrender.com/sendTicket', {
             email: email, // User's email
             qrCodeUrl: qrCodeUrl, // URL to the QR code
             summary: {

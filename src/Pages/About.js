@@ -25,7 +25,7 @@ const About = () => {
     e.preventDefault();
   
     try {
-      await axios.post('http://localhost:4000/contact/send-email', formData);
+      await axios.post('https://stage-pilot-train-booking-system.onrender.com/contact/send-email', formData);
       setMessage("Email sent successfully");
     } catch (error) {
       if (error.response && error.response.data && error.response.data.error) {

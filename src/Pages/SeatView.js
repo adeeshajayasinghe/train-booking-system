@@ -18,7 +18,7 @@ const SeatView = () => {
   useEffect(() => {
     const fetchSeats = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/trains/${trainID}`);
+        const response = await axios.get(`https://stage-pilot-train-booking-system.onrender.com/trains/${trainID}`);
         handleFullArray(seatArrangement);
         setOriginalSeatingData(seatArrangement);
         handleSeatingData(seatArrangement);

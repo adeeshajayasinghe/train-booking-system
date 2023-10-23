@@ -29,7 +29,7 @@ const Payment = () => {
     const updatedFullArray = fullArray;
     updatedFullArray[classIndex] = seatingData;
     axios
-      .put(`http://localhost:4000/trains/${trainID}`, { updatedData: updatedFullArray })
+      .put(`https://stage-pilot-train-booking-system.onrender.com/trains/${trainID}`, { updatedData: updatedFullArray })
       .then((response) => {
         console.log('Data updated successfully:', response.data);
         handleClickedSeats([]); // Clear clicked seats

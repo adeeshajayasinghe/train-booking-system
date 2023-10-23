@@ -21,7 +21,7 @@ const Cancel = () => {
   useEffect(() => {
     const fetchData = async () => {
         try {
-            const res = await axios.post('http://localhost:4000/refund', 
+            const res = await axios.post('https://stage-pilot-train-booking-system.onrender.com/refund', 
                 {ReferenceNo: cancelRef},
             );
             setRefund(res.data.refund);

@@ -30,7 +30,7 @@ const Search = () => {
         handleFrom(from.label);
         handleTo(to.label);
         try {
-            const response = await axios.post('http://localhost:4000/search', {
+            const response = await axios.post('https://stage-pilot-train-booking-system.onrender.com/search', {
                 from: from.label,
                 to: to.label,
                 date,
