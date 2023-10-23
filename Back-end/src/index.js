@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const config = require('config');
 require('dotenv').config();
+const { Booking } = require('./Models/Booking');
 
 const app = express();
 
@@ -61,16 +62,19 @@ async function performTask() {
 
     // Output the date of yesterday in the format YYYY-MM-DD
     const formattedDate = `${year}-${month}-${day}`;
-    console.log(formattedDate);
+    //console.log(formattedDate);
     
 
-    const result = await Booking.find({ date: { $lt: "2023-10-21" }, Status: "Pending" });
-    
+  const result = await Booking.updateMany(
+   { date: { $lt: formattedDate }, Status: "Pending" }, // Query to match documents
+   { $set: { Status: "Canceled" } } // Update to set the Status field to "Canceled"
+);
+      
     console.log(result);
   console.log("Task executed.");
 }
 
 // Schedule the task to run every day at a specific time (e.g., 2:00 AM)
-const job = schedule.scheduleJob("41 6 * * *", function () {
+const job = schedule.scheduleJob("01 2 * * *", function () {
    performTask();
 });

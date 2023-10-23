@@ -8,9 +8,14 @@ const { Train,BookingHistory } = require("../Models/Train");
 router.post("/", async (req, res) => {
     console.log(req.body);
     const { error } = validate(req.body);
+ 
     if (error) {
+        console.log("awa");
         return res.status(400).json({ error: error.details[0].message });
+        
     }
+
+    console.log("awa");
 
     // const routeNumbers = db.stations.find(
     //     { station: { $in: [routeFrom, routeTo] } },
@@ -21,11 +26,13 @@ router.post("/", async (req, res) => {
     const routeNumbers = await Station.find({
         station: { $in: [req.body.from, req.body.to] },
     });
+    console.log(routeNumbers);
     // Get the class prices that belongs to origin and destination
     const originClassPrices = routeNumbers[0].prices;
     const destinationClassPrices = routeNumbers[1].prices;
     // Get the route that belongs to origin and destination
     const route = routeNumbers[0].route_id;
+    console.log(route);
     // Fetch the route from the database
     // Calculate the prices of three classes
     const routeDetails = await Route.findOne({ routeNo: route });
@@ -45,15 +52,30 @@ router.post("/", async (req, res) => {
     const secondClassPrice = routeDetails.prices[1][secondClassPriceIndex];
     const thirdClassPrice = routeDetails.prices[2][thirdClassPriceIndex];
     const classPrices = [firstClassPrice, secondClassPrice, thirdClassPrice];
+
+    //new rule for colombo fort
+    if (req.body.from === "Colombo Fort") {
+        routeNumbers[0].route_id = routeNumbers[1].route_id;
+    }
+
+    //new rule for colombo fort
+    if (req.body.to === "Colombo Fort") {
+        routeNumbers[1].route_id = routeNumbers[0].route_id;
+    }
+
     // Filter Trains by Route
     const trains = await Train.find({
         routes: { $all: [routeNumbers[0].route_id, routeNumbers[1].route_id] },
     });
+    //console.log(routeNumbers[0].route_id, routeNumbers[1].route_id)
+    //console.log(trains);
     const filteredTrains = trains.filter(
         (train) =>
             train.stations.includes(req.body.from) &&
             train.stations.includes(req.body.to)
     );
+
+    //console.log(filteredTrains);
    
     // Filter Trains by Date and Type
     const dayNames = [
@@ -78,6 +100,8 @@ router.post("/", async (req, res) => {
             return train.dates.includes("Daily") || train.dates.includes("Weekdays");
         }
     });
+
+    console.log(filteredTrainsByDate);
 
     filteredTrainsByDate = filteredTrainsByDate.filter((train) => {
         const originIndex = train.stations.indexOf(req.body.from);
