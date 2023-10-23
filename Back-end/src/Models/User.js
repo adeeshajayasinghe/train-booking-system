@@ -5,13 +5,13 @@ const UserSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: true,
-        minlength: 5,
+        minlength: 1,
         maxlenght: 255
     },
     lastName: {
         type: String,
         required: true,
-        minlength: 5,
+        minlength: 1,
         maxlenght: 255
     },
     mobile: {
@@ -51,8 +51,8 @@ const User = mongoose.model('Users', UserSchema);
 
 function validateGenre(user){
     const schema = Joi.object({
-        firstName: Joi.string().min(5).max(255).required(),
-        lastName: Joi.string().min(5).max(255).required(),
+        firstName: Joi.string().min(1).max(255).required(),
+        lastName: Joi.string().min(1).max(255).required(),
         mobile: Joi.string().min(10).max(10).required(),
         NIC: Joi.string().min(10).max(10).required(),
         email: Joi.string().required().email(),
