@@ -13,7 +13,7 @@ const EmailVerify = () => {
             try {
                 console.log('params.id:', params.id);
                 console.log('params.emailToken:', params.emailToken);
-                const url = `${process.env.BASE_URL}register/${params.id}/verify/${params.emailToken}`;
+                const url = `https://stage-pilot-train-booking-system.onrender.com/register/${params.id}/verify/${params.emailToken}`;
                 const {data} = await axios.get(url);
                 console.log(data);
                 setValidUrl(true);
