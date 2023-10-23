@@ -27,7 +27,7 @@ const UserDetailsForm = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.post('http://localhost:4000/popupForm', 
+                const res = await axios.post('https://stage-pilot-train-booking-system.onrender.com/popupForm', 
                     data,
                 );
                 if(res){
@@ -63,7 +63,7 @@ const UserDetailsForm = () => {
                 className = 'Third Class';
             }
             handleClassName(className);
-            const response = await axios.post('http://localhost:4000/booking', {
+            const response = await axios.post('https://stage-pilot-train-booking-system.onrender.com/booking', {
                 firstName,
                 lastName,
                 mobile,

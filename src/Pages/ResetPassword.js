@@ -21,7 +21,7 @@ const ResetPassword = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-          const response = await axios.post('http://localhost:4000/login/resetpassword', {
+          const response = await axios.post('https://stage-pilot-train-booking-system.onrender.com/login/resetpassword', {
             newpassword,
             confirmpassword,
             email

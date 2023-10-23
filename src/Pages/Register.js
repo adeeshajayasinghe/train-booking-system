@@ -36,7 +36,7 @@ const Register = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.post('http://localhost:4000/register', {
+            await axios.post('https://stage-pilot-train-booking-system.onrender.com/register', {
                 firstName,
                 lastName,
                 mobile,

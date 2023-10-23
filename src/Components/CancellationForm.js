@@ -29,7 +29,7 @@ const CancellationForm = ({cancelRef, refund, remainingDates}) => {
   const cancelBooking = async () => {
     setOpen(true);
     try {
-        await axios.post('http://localhost:4000/refund/cancel-booking', 
+        await axios.post('https://stage-pilot-train-booking-system.onrender.com/refund/cancel-booking', 
             {ReferenceNo: cancelRef},
         );
         setMessage('Booking cancelled successfully.');

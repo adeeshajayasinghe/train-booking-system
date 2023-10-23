@@ -32,7 +32,7 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:4000/login', {
+      const response = await axios.post('https://stage-pilot-train-booking-system.onrender.com/login', {
         email,
         password
       })
@@ -61,7 +61,7 @@ const Login = () => {
       const OTP = (Math.floor(Math.random() * 9000 + 1000)).toString();
       handleOTP(OTP);
       try{
-        await axios.post('http://localhost:4000/login/sendOTP', {
+        await axios.post('https://stage-pilot-train-booking-system.onrender.com/login/sendOTP', {
           OTP,
           recipient_email: email,
         });

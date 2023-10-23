@@ -11,7 +11,7 @@ const ViewHistory = () => {
     if (userEmail) {
       const fetchBookingHistories = async () => {
         try {
-          const response = await axios.get(`http://localhost:4000/profile/history/${userEmail}`);
+          const response = await axios.get(`https://stage-pilot-train-booking-system.onrender.com/profile/history/${userEmail}`);
           setBookingHistories(response.data);
         } catch (error) {
           console.error(error);

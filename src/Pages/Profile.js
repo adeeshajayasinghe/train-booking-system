@@ -14,7 +14,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       const userEmail = window.localStorage.getItem("userEmail");
-      const response = await axios.get(`http://localhost:4000/profile/${userEmail}`);
+      const response = await axios.get(`https://stage-pilot-train-booking-system.onrender.com/profile/${userEmail}`);
       const user = response.data;
       setFirstName(user.firstName);
       setLastName(user.lastName);
@@ -28,7 +28,7 @@ const Profile = () => {
     event.preventDefault();
     try {
       const userEmail = window.localStorage.getItem("userEmail");
-      await axios.put(`http://localhost:4000/profile/update/${userEmail}`, {
+      await axios.put(`https://stage-pilot-train-booking-system.onrender.com/profile/update/${userEmail}`, {
         firstName,
         lastName,
         mobile,
