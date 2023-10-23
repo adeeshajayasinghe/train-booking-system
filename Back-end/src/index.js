@@ -8,7 +8,7 @@ const { Booking } = require('./Models/Booking');
 const app = express();
 
 const configFile = require('./startup/config');
-configFile.checkConfig(config.get('privateKey'));
+configFile.checkConfig(process.env.JWT_PRIVATE_KEY);
 
 const router1 = require("./Routes/users");
 const router2 = require("./Routes/auth");

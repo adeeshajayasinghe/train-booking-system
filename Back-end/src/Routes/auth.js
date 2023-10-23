@@ -49,7 +49,7 @@ router.post('/resetPassword', async (req, res) => {
     user.password = await bcrypt.hash(newpassword, salt);
     await user.save();
 
-    const token = jwt.sign({_id:user._id, isAdmin:user.isAdmin}, config.get('privateKey'));
+    const token = jwt.sign({_id:user._id, isAdmin:user.isAdmin}, process.env.JWT_PRIVATE_KEY);
     res.send({token: token, isAdmin: user.isAdmin});
 });
 
