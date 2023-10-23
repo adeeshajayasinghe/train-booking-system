@@ -108,13 +108,14 @@ router.post('/cancel-booking', async (req, res) => {
 //this router is to print QR code when the user entere the Reference no for later concerns.
 router.post('/mobile-Qr', async (req, res) => {
   const referenceNo = req.body.ReferenceNo;
+
         
   if (!referenceNo) {
     return res.status(400).json({ error: 'ReferenceNo is required in the request body' });
   }
 
   const booking = await Booking.findOne({ ReferenceNo: referenceNo });  //find the booking by reference number
-
+  console.log(booking);
   if (!booking) {
     return res.status(404).json({ error: 'Booking not found! Enter a valid ref.no' });
   }
