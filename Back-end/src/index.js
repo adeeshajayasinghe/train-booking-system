@@ -1,14 +1,13 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const config = require("config");
-require("dotenv").config();
-const {Booking} = require ('./Models/Booking');
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const config = require('config');
+require('dotenv').config();
 
 const app = express();
 
-const configFile = require("./startup/config");
-configFile.checkConfig(config.get("privateKey"));
+const configFile = require('./startup/config');
+configFile.checkConfig(config.get('privateKey'));
 
 const router1 = require("./Routes/users");
 const router2 = require("./Routes/auth");

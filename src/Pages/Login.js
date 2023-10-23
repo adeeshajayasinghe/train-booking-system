@@ -11,6 +11,8 @@ import { AppContext } from '../context'
 import { useContext, useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
 import Alert from '@mui/material/Alert';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 const Login = () => {
@@ -18,12 +20,19 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [cookies, setCookies] = useCookies(['access_token']);
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if(errorMessage){
+        setOpen(false);
+    }
+  }, [errorMessage]);
 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:4000/login', {
+      const response = await axios.post('https://stage-pilot-train-booking-system.onrender.com/login', {
         email,
         password
       })
@@ -47,15 +56,16 @@ const Login = () => {
   };
 
   const navigateToOtp = async () => {
-    console.log(email);
+    setOpen(true);
     if (email){
       const OTP = (Math.floor(Math.random() * 9000 + 1000)).toString();
       handleOTP(OTP);
       try{
-        await axios.post('http://localhost:4000/login/sendOTP', {
+        await axios.post('https://stage-pilot-train-booking-system.onrender.com/login/sendOTP', {
           OTP,
           recipient_email: email,
         });
+        setOpen(false);
         navigate('/forgotpassword');
       } catch(error) {
         if (error.response && error.response.data && error.response.data.error) {
@@ -111,6 +121,12 @@ const Login = () => {
             <div>
               <p className='account'>Don't have an account?<span><Link to='/register' >Sign up</Link></span></p>
               <Link className='forgot-pass' onClick={() => navigateToOtp()}>Forgot password?</Link>
+              <Backdrop
+                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    open={open}
+                >
+                    <CircularProgress color="inherit" />
+                </Backdrop>
             </div>
         </form>
       </div>

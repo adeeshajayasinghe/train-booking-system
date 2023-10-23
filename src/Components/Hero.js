@@ -15,7 +15,7 @@ const Hero = () => {
           <br />
           <h1 className='welcome-text'>
             Welocome to <br />
-            Sri Lanka Railways
+            Stage Pilot Bookings 
           </h1>
           <p className='sub-text'>
             Adventure awaits! Hop aboard and let the journey begin.

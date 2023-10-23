@@ -20,7 +20,7 @@ const Search = () => {
     const [dest, setDest] = React.useState('');
     // const [date, setDate] = React.useState('');
     const [passengers, setPassengers] = React.useState('');
-    const [returnDate, setReturnDate] = React.useState('');
+    // const [returnDate, setReturnDate] = React.useState('');
     const [errorMessage, setErrorMessage] = React.useState('');
     const navigate = useNavigate();
 
@@ -30,12 +30,12 @@ const Search = () => {
         handleFrom(from.label);
         handleTo(to.label);
         try {
-            const response = await axios.post('http://localhost:4000/search', {
+            const response = await axios.post('https://stage-pilot-train-booking-system.onrender.com/search', {
                 from: from.label,
                 to: to.label,
                 date,
-                passengers,
-                returnDate
+                passengers
+                // returnDate
             });
             console.log(response.data);
             getTrainList(response.data);
@@ -150,7 +150,7 @@ const Search = () => {
             />
             </FormControl>
             </div>
-            <div className='dest'>
+            {/* <div className='dest'>
             <FormControl sx={{ width: 240 }}>
                 <FormLabel id="select-field-demo-label" htmlFor="select-field-demo-button" size="sm">
                     Return date(optional)
@@ -166,7 +166,7 @@ const Search = () => {
                     value={returnDate} onChange={(event) => setReturnDate(event.target.value)}
             />
             </FormControl>
-            </div>
+            </div> */}
             </div>
             {/* {errorMessage && <p className='error-msg'>{errorMessage}</p>} */}
             {errorMessage && <Alert severity="error">{errorMessage}</Alert>}

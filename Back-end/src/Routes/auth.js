@@ -7,7 +7,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const {Token} = require('../Models/Token');
-const sendEmail = require('../Utils/SendEmails');
+const sendOTP = require('../Utils/SendOTP');
+require('dotenv').config();
 
 router.post('/sendOTP', async (req, res) => {
     try{
@@ -16,7 +17,7 @@ router.post('/sendOTP', async (req, res) => {
         if (!user) {
             return res.status(400).json({ error: 'User is not registered.' });
         } else{
-            await sendEmail(req.body.recipient_email, 'Password Reset', req.body.OTP);
+            await sendOTP(req.body.recipient_email, 'Password Reset', req.body.OTP);
             res.status(200).send('OTP sent successfully!');
             
         }
@@ -94,7 +95,7 @@ router.post('/', async (req, res) => {
         First para: payload, second para: Private key(shouldn't be hard coded in the source code like this. This use to identify the user by 
         the server from the token)*/
     // In powershell use $env:variablename = "value" to set environment variables. 'set' will not work.
-   const token = jwt.sign({_id:user._id, isAdmin:user.isAdmin}, config.get('privateKey'));
+   const token = jwt.sign({_id:user._id, isAdmin:user.isAdmin}, process.env.JWT_PRIVATE_KEY);
    res.send({token: token, isAdmin: user.isAdmin, userID: user._id });
 });
 

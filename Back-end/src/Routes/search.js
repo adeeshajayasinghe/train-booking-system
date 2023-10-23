@@ -4,8 +4,6 @@ const router = express.Router();
 const { Station } = require("../Models/Station");
 const { Route } = require("../Models/Route");
 const { Train,BookingHistory } = require("../Models/Train");
-const { get } = require("lodash");
-const { type } = require("@testing-library/user-event/dist/type");
 
 router.post("/", async (req, res) => {
     console.log(req.body);
@@ -218,8 +216,8 @@ function validate(train) {
     from: Joi.string().required(),
     to: Joi.string().required(),
     date: Joi.string().required(),
-    passengers: Joi.number().required(),
-    returnDate: Joi.string().optional(),
+    passengers: Joi.number().required()
+    // returnDate: Joi.string().optional(),
   });
     return schema.validate(train);
 }
