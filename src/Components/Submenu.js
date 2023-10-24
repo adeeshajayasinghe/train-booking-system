@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useContext } from 'react'
 import { AppContext } from '../context'
+import {Link} from 'react-router-dom'
 const Submenu = () => {
   const {isSubMenuOpen, location, page:{page, links}} = useContext(AppContext);
   const container = useRef(null);
@@ -16,7 +17,8 @@ const Submenu = () => {
         {links.map((link, index) => {
           const {label, icon, url} = link;
           return (
-            <a href={url} key={index}>{icon}{label}</a>
+            // <a href={url} key={index}>{icon}{label}</a>
+            <Link to={url} key={index}>{icon}{label}</Link>
           );
         })}
       </div>
