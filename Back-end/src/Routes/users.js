@@ -46,7 +46,7 @@ router.post('/', async (req, res) => {
         userId: user._id,
         emailToken: token
     }).save();
-    const url = `${process.env.BASE_URL}register/${user._id}/verify/${token}`;
+    const url = `${process.env.BASE_URL}#/register/${user._id}/verify/${token}`;
     await sendEmail(user.email, 'Email Verification', url);
     res.send(token);
 });
