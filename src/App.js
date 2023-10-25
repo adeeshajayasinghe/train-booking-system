@@ -8,7 +8,7 @@ import About from './Pages/About';
 import Search from './Pages/Search';
 import Dashboard from './Pages/Dashboard';
 import Admin from './Pages/Admin';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
 import SeatView from './Pages/SeatView';
