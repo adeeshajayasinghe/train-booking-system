@@ -40,13 +40,13 @@ app.use("/sendTicket", router9);
 app.use("/profile", router10);
 app.use("/contact", router11);
 
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, '../../public/index.html'), function(err) {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
-})
+// app.get('/*', function(req, res) {
+//   res.sendFile(path.join(__dirname, '../../public/index.html'), function(err) {
+//     if (err) {
+//       res.status(500).send(err)
+//     }
+//   })
+// })
 
 const schedule = require("node-schedule");
 
