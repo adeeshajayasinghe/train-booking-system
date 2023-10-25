@@ -82,3 +82,7 @@ async function performTask() {
 const job = schedule.scheduleJob("01 2 * * *", function () {
    performTask();
 });
+
+app.listen(4000, () => {
+  console.log('Server is running on port 4000');
+});
