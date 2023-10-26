@@ -10,6 +10,10 @@ const RouteSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    name:{
+        type:String,
+        required:true
+    }
 });
 
 const Route = mongoose.model('Routes', RouteSchema);
@@ -17,7 +21,8 @@ const Route = mongoose.model('Routes', RouteSchema);
 function validateRoute(route){
     const schema = Joi.object({
         prices: Joi.array().items(Joi.array().items(Joi.number())).required(),
-        routeNo: Joi.number().required()
+        routeNo: Joi.number().required(),
+        name:Joi.string().required()
     });
     return schema.validate(route);
 };

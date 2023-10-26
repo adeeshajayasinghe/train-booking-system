@@ -21,6 +21,7 @@ const router8 = require("./Routes/qrcode");
 const router9 = require("./Routes/ticket");
 const router10 = require("./Routes/profile");
 const router11 = require("./Routes/contact");
+const router12= require('./Routes/trainroutes')
 
 // Connect to monogoDB
 mongoose.connect(process.env.DATABASE_CONNECTION_STRING);
@@ -39,6 +40,7 @@ app.use("/qrcode", router8);
 app.use("/sendTicket", router9);
 app.use("/profile", router10);
 app.use("/contact", router11);
+app.use('/routes',router12)
 
 // app.get('/*', function(req, res) {
 //   res.sendFile(path.join(__dirname, '../../public/index.html'), function(err) {

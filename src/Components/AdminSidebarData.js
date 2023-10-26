@@ -7,17 +7,14 @@ export const AdminSidebarData = [
         title:'Change Schedule',
         icon: <WatchLaterIcon fontSize='small'/>,
         children:[
+           
             {
-                title:'Add Trains',
-                path: '/admin'
-            },
-            {
-                title:'Modify Schedules',
+                title:'Train Details',
                 path: '/modify-schedules'
             },
             {
-                title:'Remove Trains',
-                path: '/remove-trains'
+                title:'Routes Details',
+                path: '/routedetails'
             }
         ]
     },
@@ -33,11 +30,11 @@ export const AdminSidebarData = [
                 title:'Ticket Analytics',
                 path: '/ticket-analytics'
             },
+            {
+                title:'Booking History',
+                path:'/booking-history'
+            }
         ]
     },
-    {
-        title:'User Settings',
-        icon: <SettingsIcon />,
-        path: '/user-settings'
-    }
+    
 ]
