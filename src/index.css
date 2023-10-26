@@ -841,11 +841,11 @@ div#main {
 }
 
 .admin-sidebar {
-  height: 100%;
+  height: 300%;
   width: 300px;
   background-color: #005F73;
   overflow: auto;
-  position: fixed;
+  position: relative;
 }
 .icon-text {
   display: flex;
