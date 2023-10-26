@@ -71,7 +71,7 @@ async function performTask() {
 
   const result = await Booking.updateMany(
    { date: { $lt: formattedDate }, Status: "Pending" }, // Query to match documents
-   { $set: { Status: "Canceled" } } // Update to set the Status field to "Canceled"
+   { $set: { Status: "Completed" } } // Update to set the Status field to "Canceled"
 );
       
     console.log(result);
