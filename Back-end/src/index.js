@@ -70,8 +70,8 @@ async function performTask() {
     
 
   const result = await Booking.updateMany(
-   { date: { $lt: formattedDate }, Status: "Pending" }, // Query to match documents
-   { $set: { Status: "Canceled" } } // Update to set the Status field to "Canceled"
+   { date: { $lt: formattedDate }, Status: "Canceled" }, // Query to match documents
+   { $set: { Status: "Completed" } } // Update to set the Status field to "Canceled"
 );
       
     console.log(result);
@@ -79,7 +79,7 @@ async function performTask() {
 }
 
 // Schedule the task to run every day at a specific time (e.g., 2:00 AM)
-const job = schedule.scheduleJob("01 2 * * *", function () {
+const job = schedule.scheduleJob("53 10 * * *", function () {
    performTask();
 });
 
