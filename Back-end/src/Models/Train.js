@@ -41,7 +41,7 @@ const TrainSchema = new mongoose.Schema({
     },
     class: {
         type: [String],
-        enum: ["First class", "Second class", "Third class"],
+        enum: ["First Class", "Second Class", "Third Class"],
         required: true,
     },
     seatsAvailability: {

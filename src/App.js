@@ -15,12 +15,17 @@ import SeatView from './Pages/SeatView';
 import EmailVerify from './Pages/EmailVerify';
 import ForgotPassword from './Pages/ForgotPassword';
 import ResetPassword from './Pages/ResetPassword';
-import ModifySchedule from './Pages/ModifySchedule';
 import Payment from './Pages/Payment';
 import Cancel from './Pages/Cancel';
 import Profile from './Pages/Profile';
 import ViewHistory from './Pages/ViewHistory';
 import Footer from './Components/Footer';
+
+import PaymentAnalitics from './Pages/PaymentAnalitics';
+import TicketAnalysis from './Pages/TicketAnalysis';
+import RouteDetails from './Pages/RouteDetails';
+import BookingHistory from './Pages/BookingHistory';
+import AdminTrains from './Pages/AdminTrains';
 import './index.css';
 function App() {
   return (
@@ -41,11 +46,15 @@ function App() {
         <Route path='/register/:id/verify/:emailToken' element={<EmailVerify/>}></Route>
         <Route path='/forgotpassword' element={<ForgotPassword/>}></Route>
         <Route path='/resetpassword' element={<ResetPassword/>}></Route>
-        <Route path='/modify-schedules' element={<ModifySchedule/>}></Route>
         <Route path='/payment' element={<Payment/>}></Route>
         <Route path='/cancel' element={<Cancel/>}></Route>
         <Route path='/profile' element={<Profile/>}></Route>
         <Route path='/viewhistory' element={<ViewHistory/>}></Route>
+        <Route path='/routedetails' element={<RouteDetails></RouteDetails>}></Route>
+        <Route path='/booking-history' element={<BookingHistory></BookingHistory>}></Route>
+        <Route path='/modify-schedules' element={<AdminTrains/>}></Route>
+        <Route path='/payment-analytics' element={<PaymentAnalitics/>}></Route>
+        <Route path='/ticket-analytics' element={<TicketAnalysis/>}></Route>
       </Routes>
       <Footer/>
     </Router>
