@@ -27,6 +27,17 @@ const Search = () => {
     const {date, getTrainList, handlePassengerCount, handleDate, handleFrom, handleTo} = React.useContext(AppContext);
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        // Validate "From" and "To" fields
+        if (!from || !to) {
+            if (!from) {
+                setErrorMessage('Please select your origin station.');
+            }
+            if (!to) {
+                setErrorMessage('Please select your destination station.');
+            }
+            return;
+        }
         handleFrom(from.label);
         handleTo(to.label);
         try {
