@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 10,
-        maxlenght: 10
+        maxlenght: 12
     },
     email: {
         type: String,
@@ -53,8 +53,26 @@ function validateGenre(user){
     const schema = Joi.object({
         firstName: Joi.string().min(1).max(255).required(),
         lastName: Joi.string().min(1).max(255).required(),
-        mobile: Joi.string().min(10).max(10).required(),
-        NIC: Joi.string().min(10).max(10).required(),
+        mobile: Joi.string()
+            .min(10)
+            .max(10)
+            .required()
+            .custom((value, helpers) => {
+                if (!/^\d+$/.test(value)) {
+                    return helpers.message('Mobile number must be 10 digits long');
+                }
+                return value;
+        }),
+        NIC: Joi.string()
+            .custom((value, helpers) => {
+                if (!/^([5-9][0-9][0-1,3,5-8][0-9]{6}[vVxX])|([1-2][0,9][0-9]{2}[0,1,2,3,5,6,7,8][0-9]{7})$/.test(value)) {
+                    return helpers.error('any.custom');
+                }
+                return value;
+            })
+            .messages({
+                'any.custom': 'Enter a valid NIC number'
+        }),
         email: Joi.string().required().email(),
         password: Joi.string().min(8).max(255).required()
     });

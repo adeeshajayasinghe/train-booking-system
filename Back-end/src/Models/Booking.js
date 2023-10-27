@@ -87,7 +87,6 @@ const BookingSchema = new mongoose.Schema({
 });
 
 const Booking = mongoose.model('BookingHistory', BookingSchema);
-
 function validateBooking(booking){
     const schema = Joi.object({
         firstName: Joi.string().min(5).max(255).required(),

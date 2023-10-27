@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const config = require('config');
 require('dotenv').config();
 const { Booking } = require('./Models/Booking');
 
@@ -88,3 +87,5 @@ const job = schedule.scheduleJob("01 2 * * *", function () {
 app.listen(4000, () => {
   console.log('Server is running on port 4000');
 });
+
+module.exports = app;
