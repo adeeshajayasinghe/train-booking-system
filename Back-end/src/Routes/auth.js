@@ -5,7 +5,6 @@ const {User} = require('../Models/User');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const config = require('config');
 const {Token} = require('../Models/Token');
 const sendOTP = require('../Utils/SendOTP');
 require('dotenv').config();
