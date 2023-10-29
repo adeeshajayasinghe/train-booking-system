@@ -61,6 +61,14 @@ export default function Footer() {
                 <Twitter />
               </Link>
             </Grid>
+             <Grid item xs={12} sm={4}>
+              <Typography variant="h6" color="text.primary" gutterBottom>
+                Download our app now!
+              </Typography>
+              <Link href="https://dms.uom.lk/s/zPsKPYbsAAw5Tmr" color="inherit">
+                <MobileFriendlyIcon />
+              </Link>
+            </Grid>
           </Grid>
           <Box mt={5}>
             <Typography variant="body2" color="text.secondary" align="center">
