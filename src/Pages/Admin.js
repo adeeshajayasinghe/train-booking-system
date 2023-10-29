@@ -1,6 +1,7 @@
 import React from 'react'
 import AdminSidebar from '../Components/AdminSidebar';
-import AddTrain from './AddTrain';
+import adminImg from '../images/admin_staff.jpg';
+
 
 const Admin= () => {
  
@@ -10,7 +11,9 @@ const Admin= () => {
         <AdminSidebar />
       </div>
       <div>
-        <AddTrain />
+      
+          <img src={adminImg} className='admin-img' alt='admin-img'/>
+        
       </div>
     </div>
     

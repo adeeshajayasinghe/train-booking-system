@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const config = require('config');
 require('dotenv').config();
 const { Booking } = require('./Models/Booking');
 
@@ -21,6 +20,7 @@ const router8 = require("./Routes/qrcode");
 const router9 = require("./Routes/ticket");
 const router10 = require("./Routes/profile");
 const router11 = require("./Routes/contact");
+const router12= require('./Routes/trainroutes')
 
 // Connect to monogoDB
 mongoose.connect(process.env.DATABASE_CONNECTION_STRING);
@@ -39,6 +39,7 @@ app.use("/qrcode", router8);
 app.use("/sendTicket", router9);
 app.use("/profile", router10);
 app.use("/contact", router11);
+app.use('/routes',router12)
 
 // app.get('/*', function(req, res) {
 //   res.sendFile(path.join(__dirname, '../../public/index.html'), function(err) {
@@ -70,8 +71,8 @@ async function performTask() {
     
 
   const result = await Booking.updateMany(
-   { date: { $lt: formattedDate }, Status: "Canceled" }, // Query to match documents
-   { $set: { Status: "Completed" } } // Update to set the Status field to "Canceled"
+   { date: { $lt: formattedDate }, Status: "Pending" }, // Query to match documents
+   { $set: { Status: "Canceled" } } // Update to set the Status field to "Canceled"
 );
       
     console.log(result);
@@ -86,3 +87,5 @@ const job = schedule.scheduleJob("53 10 * * *", function () {
 app.listen(4000, () => {
   console.log('Server is running on port 4000');
 });
+
+module.exports = app;

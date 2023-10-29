@@ -10,13 +10,13 @@ const BookingSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: true,
-        minlength: 5,
+        minlength: 1,
         maxlenght: 255
     },
     lastName: {
         type: String,
         required: true,
-        minlength: 5,
+        minlength: 1,
         maxlenght: 255
     },
     mobile: {
@@ -33,7 +33,7 @@ const BookingSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength:10,
-        maxlength: 10
+        maxlength: 12
     },
     passengerCount: {
         type: Number,
@@ -87,14 +87,31 @@ const BookingSchema = new mongoose.Schema({
 });
 
 const Booking = mongoose.model('BookingHistory', BookingSchema);
-
 function validateBooking(booking){
     const schema = Joi.object({
-        firstName: Joi.string().min(5).max(255).required(),
-        lastName: Joi.string().min(5).max(255).required(),
-        mobile: Joi.string().min(10).max(10).required(),
+        firstName: Joi.string().min(1).max(255).required(),
+        lastName: Joi.string().min(1).max(255).required(),
+        mobile: Joi.string()
+            .min(10)
+            .max(10)
+            .required()
+            .custom((value, helpers) => {
+                if (!/^\d+$/.test(value)) {
+                    return helpers.message('Mobile number must be 10 digits long');
+                }
+                return value;
+        }),
         email: Joi.string().required().email(),
-        NIC:Joi.string().required().min(10).max(10),
+        NIC: Joi.string()
+            .custom((value, helpers) => {
+                if (!/^([5-9][0-9][0-1,3,5-8][0-9]{6}[vVxX])|([1-2][0,9][0-9]{2}[0,1,2,3,5,6,7,8][0-9]{7})$/.test(value)) {
+                    return helpers.error('any.custom');
+                }
+                return value;
+            })
+            .messages({
+                'any.custom': 'Enter a valid NIC number'
+        }),
         passengerCount:Joi.required(),
         trainName:Joi.string().required(),
         from:Joi.string().required(),

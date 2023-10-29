@@ -25,7 +25,7 @@ export default function Footer() {
                 About Us
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                We are XYZ company, dedicated to providing the best service to our
+                We are Stage Pilot, dedicated to providing the best service to our
                 customers.
               </Typography>
             </Grid>
@@ -34,7 +34,7 @@ export default function Footer() {
                 Contact Us
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                123 Main Street, Anytown, USA
+                123 Main Street, Anytown, Colombo
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 Email: trainseatbooking.20@gmail.com

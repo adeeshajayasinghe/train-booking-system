@@ -10,10 +10,10 @@ router.post("/", async (req, res) => {
     const { error } = validate(req.body);
  
     if (error) {
-        console.log("awa");
         return res.status(400).json({ error: error.details[0].message });
         
     }
+
 
 
     // Get Route Numbers for From and To Stations
@@ -233,7 +233,21 @@ function validate(train) {
   const schema = Joi.object({
     from: Joi.string().required(),
     to: Joi.string().required(),
-    date: Joi.string().required(),
+    date: Joi.string()
+      .required()
+      .custom((value, helpers) => {
+        const selectedDate = new Date(value);
+        const currentDate = new Date();
+
+        if (selectedDate < currentDate) {
+          return helpers.error('date.invalid');
+        }
+
+        return value;
+      })
+      .messages({
+        'date.invalid': 'Please select a valid date',
+    }),
     passengers: Joi.number().required()
     // returnDate: Joi.string().optional(),
   });
