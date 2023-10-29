@@ -185,9 +185,9 @@ const Search = () => {
             <div className='submit-btn'>
                 <Button type="submit">Search</Button>
             </div>
-            <div className='submit-btn'>
-                <Button>Reset</Button>
-            </div>
+            // <div className='submit-btn'>
+            //     <Button>Reset</Button>
+            // </div>
             </div>
             
         </form>
