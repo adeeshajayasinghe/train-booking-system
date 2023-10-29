@@ -15,12 +15,6 @@ router.post("/", async (req, res) => {
         
     }
 
-    console.log("awa");
-
-    // const routeNumbers = db.stations.find(
-    //     { station: { $in: [routeFrom, routeTo] } },
-    //     { route: 1 }
-    //   ).toArray();
 
     // Get Route Numbers for From and To Stations
     const routeNumbers = await Station.find({
