@@ -21,7 +21,7 @@ export default function Footer() {
       >
         <Container maxWidth="lg">
           <Grid container spacing={5}>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={3}>
               <Typography variant="h6" color="text.primary" gutterBottom>
                 About Us
               </Typography>
@@ -30,7 +30,7 @@ export default function Footer() {
                 customers.
               </Typography>
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={3}>
               <Typography variant="h6" color="text.primary" gutterBottom>
                 Contact Us
               </Typography>
@@ -44,7 +44,7 @@ export default function Footer() {
                 Phone: +1 234 567 8901
               </Typography>
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} sm={3}>
               <Typography variant="h6" color="text.primary" gutterBottom>
                 Follow Us
               </Typography>
@@ -62,7 +62,7 @@ export default function Footer() {
                 <Twitter />
               </Link>
             </Grid>
-             <Grid item xs={12} sm={4}>
+             <Grid item xs={12} sm={3}>
               <Typography variant="h6" color="text.primary" gutterBottom>
                 Download our app now!
               </Typography>
