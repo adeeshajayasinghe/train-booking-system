@@ -19,8 +19,8 @@ router.post("/", async (req, res) => {
     //     { station: { $in: [routeFrom, routeTo] } },
     //     { route: 1 }
     //   ).toArray();
-
-    // Get Route Numbers for From and To Stations
+    try{
+        // Get Route Numbers for From and To Stations
     const routeNumbers = await Station.find({
         station: { $in: [req.body.from, req.body.to] },
     });
@@ -230,6 +230,10 @@ router.post("/", async (req, res) => {
     console.log(filteredTrainsByDate);
     
     res.json([filteredTrainsByDate, classPrices]);
+    }catch(err){
+        return res.status(400).json({ error: "Sorry! There are no avaialable trains." });
+    }
+    
   
 });
 
