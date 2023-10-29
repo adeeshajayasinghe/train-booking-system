@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import { Facebook, Instagram, Twitter } from "@mui/icons-material";
+import MobileFriendlyIcon from '@mui/icons-material/MobileFriendly';
 import { Box } from "@mui/material";
 
 export default function Footer() {
