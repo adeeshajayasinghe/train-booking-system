@@ -231,7 +231,7 @@ router.post("/", async (req, res) => {
     
     res.json([filteredTrainsByDate, classPrices]);
     }catch(err){
-        return res.status(400).json({ error: "Sorry! There are no avaialable trains." });
+        return res.status(400).json({ error: "Sorry! There are no trains available." });
     }
     
   
