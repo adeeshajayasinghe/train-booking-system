@@ -181,13 +181,8 @@ const Search = () => {
             </div>
             {/* {errorMessage && <p className='error-msg'>{errorMessage}</p>} */}
             {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
-            <div className='route'>
             <div className='submit-btn'>
                 <Button type="submit">Search</Button>
-            </div>
-            // <div className='submit-btn'>
-            //     <Button>Reset</Button>
-            // </div>
             </div>
             
         </form>
