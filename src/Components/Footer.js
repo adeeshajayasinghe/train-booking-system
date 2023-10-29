@@ -48,17 +48,18 @@ export default function Footer() {
               <Typography variant="h6" color="text.primary" gutterBottom>
                 Follow Us
               </Typography>
-              <Link href="https://www.facebook.com/" color="inherit">
+              <Link href="https://www.facebook.com/" color="inherit" target="_blank">
                 <Facebook />
               </Link>
               <Link
                 href="https://www.instagram.com/"
                 color="inherit"
+                target="_blank"
                 sx={{ pl: 1, pr: 1 }}
               >
                 <Instagram />
               </Link>
-              <Link href="https://www.twitter.com/" color="inherit">
+              <Link href="https://www.twitter.com/" color="inherit" target="_blank">
                 <Twitter />
               </Link>
             </Grid>
@@ -66,7 +67,7 @@ export default function Footer() {
               <Typography variant="h6" color="text.primary" gutterBottom>
                 Download our app now!
               </Typography>
-              <Link href="https://dms.uom.lk/s/zPsKPYbsAAw5Tmr" color="inherit">
+              <Link href="https://dms.uom.lk/s/zPsKPYbsAAw5Tmr" color="inherit" target="_blank">
                 <MobileFriendlyIcon />
               </Link>
             </Grid>
