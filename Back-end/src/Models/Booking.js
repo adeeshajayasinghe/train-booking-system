@@ -104,13 +104,13 @@ function validateBooking(booking){
         email: Joi.string().required().email(),
         NIC: Joi.string()
             .custom((value, helpers) => {
-                if (!/^([5-9][0-9][0-1,3,5-8][0-9]{6}[vVxX])|([1-2][0,9][0-9]{2}[0,1,2,3,5,6,7,8][0-9]{7})$/.test(value)) {
+                if (!/^(\d{9}v|\d{12})$/i.test(value)) {
                     return helpers.error('any.custom');
                 }
                 return value;
             })
             .messages({
-                'any.custom': 'Enter a valid NIC number'
+                'any.custom': 'Please enter a valid NIC number.'
         }),
         passengerCount:Joi.required(),
         trainName:Joi.string().required(),
