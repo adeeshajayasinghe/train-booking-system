@@ -207,7 +207,7 @@ const stations = [
     { label: "Badulla" },
     { label: "Bandarawela" },
     { label: "Batticaloa" },
-    { label: "Beliatta" },
+    { label: "Beliaththa" },
     { label: "Bentota" },
     { label: "Beruwala" },
     { label: "China bay" },
